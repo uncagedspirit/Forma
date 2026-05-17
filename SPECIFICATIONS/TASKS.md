@@ -118,9 +118,9 @@ Status key: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 - [x] Commit: `feat(mood/data): MoodModel with Hive adapter`
 
 ### T-016 · UserPreferencesModel (Hive adapter)
-- [ ] Fields: `isPremium`, `premiumReceiptData` (nullable), `hasCompletedOnboarding`, `themeIndex`, `name` (user's name), `joinDate`
-- [ ] `@HiveType(typeId: 4)`, build_runner
-- [ ] Commit: `feat(prefs): UserPreferencesModel`
+- [x] Fields: `isPremium`, `premiumReceiptData` (nullable), `hasCompletedOnboarding`, `themeIndex`, `name` (user's name), `joinDate`
+- [x] `@HiveType(typeId: 4)`, build_runner
+- [x] Commit: `feat(prefs): UserPreferencesModel`
 
 ---
 

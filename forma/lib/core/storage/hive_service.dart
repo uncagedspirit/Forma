@@ -1,3 +1,8 @@
+import 'package:forma/core/storage/user_preferences_model.dart';
+import 'package:forma/features/goals/data/models/goal_model.dart';
+import 'package:forma/features/habits/data/models/habit_log_model.dart';
+import 'package:forma/features/habits/data/models/habit_model.dart';
+import 'package:forma/features/mood/data/models/mood_model.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:logging/logging.dart';
 
@@ -23,11 +28,11 @@ class HiveService {
   static const String prefsBoxName = 'prefsBox';
 
   // Box instances (initialized after init())
-  static late final Box<Map<dynamic, dynamic>> habitsBox;
-  static late final Box<Map<dynamic, dynamic>> goalsBox;
-  static late final Box<Map<dynamic, dynamic>> logsBox;
-  static late final Box<Map<dynamic, dynamic>> moodBox;
-  static late final Box<Map<dynamic, dynamic>> prefsBox;
+  static late final Box<HabitModel> habitsBox;
+  static late final Box<GoalModel> goalsBox;
+  static late final Box<HabitLogModel> logsBox;
+  static late final Box<MoodModel> moodBox;
+  static late final Box<UserPreferencesModel> prefsBox;
 
   /// Initializes Hive and opens all required boxes.
   ///
@@ -38,19 +43,19 @@ class HiveService {
     // Initialize Hive
     await Hive.initFlutter();
 
-    // Register adapters - will be uncommented as models are created
-    // Hive.registerAdapter(HabitModelAdapter());
-    // Hive.registerAdapter(HabitLogModelAdapter());
-    // Hive.registerAdapter(GoalModelAdapter());
-    // Hive.registerAdapter(MoodModelAdapter());
-    // Hive.registerAdapter(UserPreferencesModelAdapter());
+    // Register adapters
+    Hive.registerAdapter(HabitModelAdapter());
+    Hive.registerAdapter(HabitLogModelAdapter());
+    Hive.registerAdapter(GoalModelAdapter());
+    Hive.registerAdapter(MoodModelAdapter());
+    Hive.registerAdapter(UserPreferencesModelAdapter());
 
     // Open all boxes
-    habitsBox = await Hive.openBox<Map<dynamic, dynamic>>(habitsBoxName);
-    goalsBox = await Hive.openBox<Map<dynamic, dynamic>>(goalsBoxName);
-    logsBox = await Hive.openBox<Map<dynamic, dynamic>>(logsBoxName);
-    moodBox = await Hive.openBox<Map<dynamic, dynamic>>(moodBoxName);
-    prefsBox = await Hive.openBox<Map<dynamic, dynamic>>(prefsBoxName);
+    habitsBox = await Hive.openBox<HabitModel>(habitsBoxName);
+    goalsBox = await Hive.openBox<GoalModel>(goalsBoxName);
+    logsBox = await Hive.openBox<HabitLogModel>(logsBoxName);
+    moodBox = await Hive.openBox<MoodModel>(moodBoxName);
+    prefsBox = await Hive.openBox<UserPreferencesModel>(prefsBoxName);
 
     _logger.info('Hive initialized successfully');
   }
