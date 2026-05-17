@@ -54,10 +54,10 @@ Status key: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 - [x] Commit: `feat(core): add AppColors`
 
 ### T-007 · AppTextStyles + AppTypography
-- [ ] Create `lib/core/constants/app_text_styles.dart`
-- [ ] Define full type scale from `DESIGN_SYSTEM.md §3`
-- [ ] Create `lib/core/theme/app_typography.dart` returning a `TextTheme`
-- [ ] Commit: `feat(core): add AppTextStyles and AppTypography`
+- [x] Create `lib/core/constants/app_text_styles.dart`
+- [x] Define full type scale from `DESIGN_SYSTEM.md §3`
+- [x] Create `lib/core/theme/app_typography.dart` returning a `TextTheme`
+- [x] Commit: `feat(core): add AppTextStyles and AppTypography`
 
 ### T-008 · AppSpacing + AppDurations + AppBorderRadius
 - [ ] Create `lib/core/constants/app_spacing.dart`
