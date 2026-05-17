@@ -35,12 +35,12 @@ Status key: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 - [x] Commit: `chore: configure analysis_options and linting`
 
 ### T-005 · Asset setup
-- [ ] Download Fraunces variable font (Google Fonts) — add to `assets/fonts/`
-- [ ] Download Instrument Sans (Google Fonts) — add to `assets/fonts/`
-- [ ] Declare fonts in `pubspec.yaml`
-- [ ] Create placeholder `assets/lottie/` and `assets/images/` directories
-- [ ] Run `flutter pub get`; verify fonts load with a test screen
-- [ ] Commit: `feat: add Fraunces and Instrument Sans fonts`
+- [x] Download Fraunces variable font (Google Fonts) — add to `assets/fonts/`
+- [x] Download Instrument Sans (Google Fonts) — add to `assets/fonts/`
+- [x] Declare fonts in `pubspec.yaml`
+- [x] Create placeholder `assets/lottie/` and `assets/images/` directories
+- [x] Run `flutter pub get`; verify fonts load with a test screen
+- [x] Commit: `feat: add Fraunces and Instrument Sans fonts`
 
 ---
 
