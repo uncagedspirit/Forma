@@ -73,10 +73,10 @@ Status key: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 - [x] Commit: `feat(core): light theme`
 
 ### T-010 · AppTheme (dark)
-- [ ] Add dark color tokens per `DESIGN_SYSTEM.md §10`
-- [ ] Build `ThemeData.dark()` with parchment night palette
-- [ ] Wire `platformBrightness` detection in `main.dart`
-- [ ] Commit: `feat(core): dark theme (parchment night)`
+- [x] Add dark color tokens per `DESIGN_SYSTEM.md §10`
+- [x] Build `ThemeData.dark()` with parchment night palette
+- [x] Wire `platformBrightness` detection in `main.dart`
+- [x] Commit: `feat(core): dark theme (parchment night)`
 
 ---
 

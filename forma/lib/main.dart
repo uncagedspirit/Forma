@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:forma/core/storage/hive_service.dart';
 import 'package:forma/core/theme/app_theme.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Initialize Hive storage before running the app
+  await HiveService.init();
+
   runApp(const FormaApp());
 }
 
