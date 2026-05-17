@@ -60,10 +60,10 @@ Status key: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 - [x] Commit: `feat(core): add AppTextStyles and AppTypography`
 
 ### T-008 · AppSpacing + AppDurations + AppBorderRadius
-- [ ] Create `lib/core/constants/app_spacing.dart`
-- [ ] Create `lib/core/constants/app_durations.dart`
-- [ ] Create `lib/core/constants/app_border_radius.dart`
-- [ ] Commit: `feat(core): add spacing, durations, and border radius constants`
+- [x] Create `lib/core/constants/app_spacing.dart`
+- [x] Create `lib/core/constants/app_durations.dart`
+- [x] Create `lib/core/constants/app_border_radius.dart`
+- [x] Commit: `feat(core): add spacing, durations, and border radius constants`
 
 ### T-009 · AppTheme (light)
 - [ ] Create `lib/core/theme/app_theme.dart`

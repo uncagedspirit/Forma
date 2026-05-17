@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:forma/core/theme/app_theme.dart';
 
 void main() {
   runApp(const FormaApp());
@@ -9,10 +10,11 @@ class FormaApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: 'Forma',
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
+      theme: AppTheme.light,
+      home: const Scaffold(
         body: Center(
           child: Text('Forma'),
         ),
