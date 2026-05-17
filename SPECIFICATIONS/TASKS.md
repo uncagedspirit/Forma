@@ -89,13 +89,13 @@ Status key: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 - [x] Commit: `feat(storage): Hive service initialization`
 
 ### T-012 · HabitModel (Hive adapter)
-- [ ] Create `lib/features/habits/data/models/habit_model.dart`
-- [ ] Fields: `id`, `name`, `icon`, `goalId` (nullable), `color`, `sortOrder`, `reminderTime` (nullable), `reminderMessage` (nullable), `createdAt`, `isArchived`
-- [ ] Add `@HiveType(typeId: 0)` + `@HiveField` annotations
-- [ ] Run `build_runner` — verify adapter generated
-- [ ] `toEntity()` and `fromEntity()` methods
-- [ ] Unit test: roundtrip (model → entity → model), verify all fields preserved
-- [ ] Commit: `feat(habits/data): HabitModel with Hive adapter`
+- [x] Create `lib/features/habits/data/models/habit_model.dart`
+- [x] Fields: `id`, `name`, `icon`, `goalId` (nullable), `color`, `sortOrder`, `reminderTime` (nullable), `reminderMessage` (nullable), `createdAt`, `isArchived`
+- [x] Add `@HiveType(typeId: 0)` + `@HiveField` annotations
+- [x] Run `build_runner` — verify adapter generated
+- [x] `toEntity()` and `fromEntity()` methods
+- [x] Unit test: roundtrip (model → entity → model), verify all fields preserved
+- [x] Commit: `feat(habits/data): HabitModel with Hive adapter`
 
 ### T-013 · HabitLogModel (Hive adapter)
 - [ ] Create `lib/features/habits/data/models/habit_log_model.dart`
