@@ -18,9 +18,9 @@ Status key: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 - [x] Commit: `chore: initial Flutter project setup`
 
 ### T-002 · Folder structure
-- [ ] Create all folders per `ARCHITECTURE.md §2` (features/, core/, shared/)
-- [ ] Add `.gitkeep` to empty leaf directories
-- [ ] Commit: `chore: create feature-first folder structure`
+- [x] Create all folders per `ARCHITECTURE.md §2` (features/, core/, shared/)
+- [x] Add `.gitkeep` to empty leaf directories
+- [x] Commit: `chore: create feature-first folder structure`
 
 ### T-003 · Dependency installation
 - [ ] Add all Phase 1 dependencies from `SYSTEM_SPECS.md §9` to `pubspec.yaml`
