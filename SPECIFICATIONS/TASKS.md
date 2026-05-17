@@ -112,10 +112,10 @@ Status key: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 - [x] Commit: `feat(goals/data): GoalModel with Hive adapter`
 
 ### T-015 · MoodModel (Hive adapter)
-- [ ] `MoodModel` — `date` (DateTime), `value` (1–5 int), `note` (nullable String)
-- [ ] `@HiveType(typeId: 3)`, build_runner
-- [ ] Unit test
-- [ ] Commit: `feat(mood/data): MoodModel with Hive adapter`
+- [x] `MoodModel` — `date` (DateTime), `value` (1–5 int), `note` (nullable String)
+- [x] `@HiveType(typeId: 3)`, build_runner
+- [x] Unit test
+- [x] Commit: `feat(mood/data): MoodModel with Hive adapter`
 
 ### T-016 · UserPreferencesModel (Hive adapter)
 - [ ] Fields: `isPremium`, `premiumReceiptData` (nullable), `hasCompletedOnboarding`, `themeIndex`, `name` (user's name), `joinDate`
