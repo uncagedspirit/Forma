@@ -83,10 +83,10 @@ Status key: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 ## Phase 2 — Storage Layer
 
 ### T-011 · Hive initialization
-- [ ] Create `lib/core/storage/hive_service.dart`
-- [ ] `HiveService.init()` — opens all boxes, registers all adapters
-- [ ] Call `HiveService.init()` before `runApp` in all entry points
-- [ ] Commit: `feat(storage): Hive service initialization`
+- [x] Create `lib/core/storage/hive_service.dart`
+- [x] `HiveService.init()` — opens all boxes, registers all adapters
+- [x] Call `HiveService.init()` before `runApp` in all entry points
+- [x] Commit: `feat(storage): Hive service initialization`
 
 ### T-012 · HabitModel (Hive adapter)
 - [ ] Create `lib/features/habits/data/models/habit_model.dart`

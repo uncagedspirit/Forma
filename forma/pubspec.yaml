@@ -36,6 +36,7 @@ dependencies:
   intl: ^0.19.0
   collection: ^1.18.0
   logging: ^1.2.0
+  equatable: ^2.0.5
 
   # Charts (activity graph)
   fl_chart: ^0.68.0
