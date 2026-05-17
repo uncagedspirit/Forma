@@ -23,10 +23,10 @@ Status key: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 - [x] Commit: `chore: create feature-first folder structure`
 
 ### T-003 · Dependency installation
-- [ ] Add all Phase 1 dependencies from `SYSTEM_SPECS.md §9` to `pubspec.yaml`
-- [ ] Run `flutter pub get`
-- [ ] Run `dart pub run build_runner build` — confirm code gen runs clean
-- [ ] Commit: `chore: add Phase 1 dependencies`
+- [x] Add all Phase 1 dependencies from `SYSTEM_SPECS.md §9` to `pubspec.yaml`
+- [x] Run `flutter pub get`
+- [x] Run `dart pub run build_runner build` — confirm code gen runs clean
+- [x] Commit: `chore: add Phase 1 dependencies`
 
 ### T-004 · Linting & code style
 - [ ] Configure `analysis_options.yaml` per `CODING_STYLE.md §1`
