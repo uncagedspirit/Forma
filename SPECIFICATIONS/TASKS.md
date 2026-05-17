@@ -98,12 +98,12 @@ Status key: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 - [x] Commit: `feat(habits/data): HabitModel with Hive adapter`
 
 ### T-013 · HabitLogModel (Hive adapter)
-- [ ] Create `lib/features/habits/data/models/habit_log_model.dart`
-- [ ] Fields: `id`, `habitId`, `date`, `completedAt`, `photoPath` (nullable), `note` (nullable)
-- [ ] `@HiveType(typeId: 1)`, run build_runner
-- [ ] `toEntity()` / `fromEntity()`
-- [ ] Unit test: roundtrip + date serialization edge cases (midnight UTC)
-- [ ] Commit: `feat(habits/data): HabitLogModel with Hive adapter`
+- [x] Create `lib/features/habits/data/models/habit_log_model.dart`
+- [x] Fields: `id`, `habitId`, `date`, `completedAt`, `photoPath` (nullable), `note` (nullable)
+- [x] `@HiveType(typeId: 1)`, run build_runner
+- [x] `toEntity()` / `fromEntity()`
+- [x] Unit test: roundtrip + date serialization edge cases (midnight UTC)
+- [x] Commit: `feat(habits/data): HabitLogModel with Hive adapter`
 
 ### T-014 · GoalModel (Hive adapter)
 - [ ] `GoalModel` — `id`, `name`, `color` (hex string), `sortOrder`, `createdAt`, `isArchived`
