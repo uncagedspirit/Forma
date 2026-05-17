@@ -1,6 +1,6 @@
 ---
 description: Fast read-only codebase explorer. Use when you need to find where something is defined, check if a file exists, or answer "does X already exist" questions. Completely free. Never writes anything.
-model: opencode/qwen-3-6-plus-free
+model: opencode/deepseek-v4-flash-free
 temperature: 0
 mode: subagent
 permissions:

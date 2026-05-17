@@ -1,6 +1,6 @@
 ---
 description: Standard Flutter implementation. Writing widgets, providers, repositories, use-cases, Hive models. The default for most tasks in SPECIFICATIONS/TASKS.md.
-model: opencode/kimi-k2-5
+model: opencode-go/kimi-k2.5
 temperature: 0
 mode: primary
 ---

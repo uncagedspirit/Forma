@@ -9,13 +9,13 @@ Status key: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 ## Phase 0 — Project Bootstrap
 
 ### T-001 · Flutter project setup
-- [ ] Run `flutter create forma --org com.forma --platforms ios,android`
-- [ ] Set minimum iOS to 16.0 in `ios/Podfile` and `Info.plist`
-- [ ] Set `minSdkVersion 29`, `targetSdkVersion 35` in `android/app/build.gradle`
-- [ ] Enable edge-to-edge in `MainActivity.kt` (`WindowCompat.setDecorFitsSystemWindows(window, false)`)
-- [ ] Set portrait-only in `AndroidManifest.xml` and `Info.plist`
-- [ ] Delete boilerplate counter code from `main.dart`
-- [ ] Commit: `chore: initial Flutter project setup`
+- [x] Run `flutter create forma --org com.forma --platforms ios,android`
+- [x] Set minimum iOS to 16.0 in `ios/Podfile` and `Info.plist`
+- [x] Set `minSdkVersion 29`, `targetSdkVersion 35` in `android/app/build.gradle`
+- [x] Enable edge-to-edge in `MainActivity.kt` (`WindowCompat.setDecorFitsSystemWindows(window, false)`)
+- [x] Set portrait-only in `AndroidManifest.xml` and `Info.plist`
+- [x] Delete boilerplate counter code from `main.dart`
+- [x] Commit: `chore: initial Flutter project setup`
 
 ### T-002 · Folder structure
 - [ ] Create all folders per `ARCHITECTURE.md §2` (features/, core/, shared/)

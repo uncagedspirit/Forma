@@ -1,6 +1,6 @@
 ---
 description: Use for complex multi-file work: new feature architecture, hard debugging across layers, refactoring that touches domain+data+presentation at once, or any task that requires reasoning about the whole system. Do NOT use for single-file widget work.
-model: opencode/kimi-k2-6
+model: opencode-go/kimi-k2.6
 temperature: 0
 mode: primary
 ---
