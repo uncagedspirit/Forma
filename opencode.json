@@ -1,0 +1,5 @@
+{
+  "model": "opencode/kimi-k2-5",
+  "default_agent": "build",
+  "autoupdate": true
+}
