@@ -29,10 +29,10 @@ Status key: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 - [x] Commit: `chore: add Phase 1 dependencies`
 
 ### T-004 · Linting & code style
-- [ ] Configure `analysis_options.yaml` per `CODING_STYLE.md §1`
-- [ ] Run `flutter analyze` — fix any existing warnings
-- [ ] Add `import_sorter` to dev deps; configure in `pubspec.yaml`
-- [ ] Commit: `chore: configure analysis_options and linting`
+- [x] Configure `analysis_options.yaml` per `CODING_STYLE.md §1`
+- [x] Run `flutter analyze` — fix any existing warnings
+- [x] Add `import_sorter` to dev deps; configure in `pubspec.yaml`
+- [x] Commit: `chore: configure analysis_options and linting`
 
 ### T-005 · Asset setup
 - [ ] Download Fraunces variable font (Google Fonts) — add to `assets/fonts/`
