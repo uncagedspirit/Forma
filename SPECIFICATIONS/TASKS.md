@@ -47,11 +47,11 @@ Status key: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 ## Phase 1 — Core & Theme
 
 ### T-006 · AppColors
-- [ ] Create `lib/core/constants/app_colors.dart`
-- [ ] Define all color tokens from `DESIGN_SYSTEM.md §2` as `static const Color`
-- [ ] Include activity graph color set (`graphNone` → `graphFull`)
-- [ ] Write unit test: verify no color values are duplicated
-- [ ] Commit: `feat(core): add AppColors`
+- [x] Create `lib/core/constants/app_colors.dart`
+- [x] Define all color tokens from `DESIGN_SYSTEM.md §2` as `static const Color`
+- [x] Include activity graph color set (`graphNone` → `graphFull`)
+- [x] Write unit test: verify no color values are duplicated
+- [x] Commit: `feat(core): add AppColors`
 
 ### T-007 · AppTextStyles + AppTypography
 - [ ] Create `lib/core/constants/app_text_styles.dart`
