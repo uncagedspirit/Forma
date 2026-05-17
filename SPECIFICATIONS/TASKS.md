@@ -106,10 +106,10 @@ Status key: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 - [x] Commit: `feat(habits/data): HabitLogModel with Hive adapter`
 
 ### T-014 · GoalModel (Hive adapter)
-- [ ] `GoalModel` — `id`, `name`, `color` (hex string), `sortOrder`, `createdAt`, `isArchived`
-- [ ] `@HiveType(typeId: 2)`, build_runner
-- [ ] Unit test: roundtrip
-- [ ] Commit: `feat(goals/data): GoalModel with Hive adapter`
+- [x] `GoalModel` — `id`, `name`, `color` (hex string), `sortOrder`, `createdAt`, `isArchived`
+- [x] `@HiveType(typeId: 2)`, build_runner
+- [x] Unit test: roundtrip
+- [x] Commit: `feat(goals/data): GoalModel with Hive adapter`
 
 ### T-015 · MoodModel (Hive adapter)
 - [ ] `MoodModel` — `date` (DateTime), `value` (1–5 int), `note` (nullable String)
