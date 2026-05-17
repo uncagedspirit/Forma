@@ -66,11 +66,11 @@ Status key: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 - [x] Commit: `feat(core): add spacing, durations, and border radius constants`
 
 ### T-009 · AppTheme (light)
-- [ ] Create `lib/core/theme/app_theme.dart`
-- [ ] Build `ThemeData.light()` using all color + typography constants
-- [ ] Set `ColorScheme.fromSeed` with `paper` as seed surface
-- [ ] Verify in a test screen that colors render correctly
-- [ ] Commit: `feat(core): light theme`
+- [x] Create `lib/core/theme/app_theme.dart`
+- [x] Build `ThemeData.light()` using all color + typography constants
+- [x] Set `ColorScheme.fromSeed` with `paper` as seed surface
+- [x] Verify in a test screen that colors render correctly
+- [x] Commit: `feat(core): light theme`
 
 ### T-010 · AppTheme (dark)
 - [ ] Add dark color tokens per `DESIGN_SYSTEM.md §10`

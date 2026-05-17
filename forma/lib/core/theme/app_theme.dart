@@ -159,4 +159,156 @@ class AppTheme {
       ),
     );
   }
+
+  /// Dark theme using the Forma "parchment night" design system.
+  static ThemeData get dark {
+    return ThemeData(
+      useMaterial3: true,
+      brightness: Brightness.dark,
+      colorScheme: const ColorScheme.dark(
+        // Primary colors (same as light)
+        primary: AppColors.terra,
+        onPrimary: AppColors.paperDark,
+        primaryContainer: AppColors.terraDim,
+        onPrimaryContainer: AppColors.terra,
+
+        // Secondary colors (same as light)
+        secondary: AppColors.sage,
+        onSecondary: AppColors.paperDark,
+        secondaryContainer: AppColors.sageDim,
+        onSecondaryContainer: AppColors.sage,
+
+        // Tertiary colors (same as light)
+        tertiary: AppColors.gold,
+        onTertiary: AppColors.paperDark,
+        tertiaryContainer: AppColors.paper2Dark,
+        onTertiaryContainer: AppColors.gold,
+
+        // Surface colors (dark paper tones)
+        surface: AppColors.paperDark,
+        onSurface: AppColors.inkDark,
+        surfaceContainerHighest: AppColors.paper2Dark,
+        onSurfaceVariant: AppColors.ink2Dark,
+
+        // Background colors
+        surfaceContainerLowest: AppColors.paperDark,
+        surfaceContainerLow: AppColors.paperDark,
+        surfaceContainer: AppColors.paper2Dark,
+        surfaceContainerHigh: AppColors.paper3Dark,
+
+        // Error colors (same as light)
+        error: AppColors.terra,
+        onError: AppColors.paperDark,
+        errorContainer: AppColors.terraDim,
+        onErrorContainer: AppColors.terra,
+
+        // Outline (inverted for dark mode)
+        outline: AppColors.ink3Dark,
+        outlineVariant: Color(0x806A6258), // ink3Dark with 50% opacity
+
+        // Inverse (inverted from light)
+        inverseSurface: AppColors.paper,
+        onInverseSurface: AppColors.ink,
+        inversePrimary: AppColors.terra,
+
+        // Shadow
+        shadow: AppColors.inkDark,
+        scrim: AppColors.inkDark,
+      ),
+      textTheme: AppTypography.darkTextTheme,
+      scaffoldBackgroundColor: AppColors.paperDark,
+      appBarTheme: const AppBarTheme(
+        backgroundColor: AppColors.paperDark,
+        foregroundColor: AppColors.inkDark,
+        elevation: 0,
+        centerTitle: false,
+      ),
+      cardTheme: const CardThemeData(
+        color: AppColors.paperDark,
+        elevation: 0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(14)),
+          side: BorderSide(color: AppColors.ink3Dark),
+        ),
+      ),
+      bottomSheetTheme: const BottomSheetThemeData(
+        backgroundColor: AppColors.paperDark,
+        surfaceTintColor: Colors.transparent,
+        elevation: 0,
+      ),
+      dividerTheme: DividerThemeData(
+        color: AppColors.ink3Dark.withAlpha(128),
+        thickness: 1,
+        space: 1,
+      ),
+      inputDecorationTheme: InputDecorationTheme(
+        filled: true,
+        fillColor: AppColors.paper2Dark,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: const BorderSide(color: AppColors.ink3Dark),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: const BorderSide(color: AppColors.ink3Dark),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: const BorderSide(color: AppColors.ink2Dark),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: const BorderSide(color: AppColors.terra),
+        ),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 16,
+          vertical: 12,
+        ),
+      ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: AppColors.terra,
+          foregroundColor: AppColors.paperDark,
+          elevation: 0,
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8),
+          ),
+          textStyle: const TextStyle(
+            fontFamily: 'Instrument Sans',
+            fontWeight: FontWeight.w600,
+            fontSize: 12,
+          ),
+        ),
+      ),
+      textButtonTheme: TextButtonThemeData(
+        style: TextButton.styleFrom(
+          foregroundColor: AppColors.ink2Dark,
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          textStyle: const TextStyle(
+            fontFamily: 'Instrument Sans',
+            fontWeight: FontWeight.w500,
+            fontSize: 14,
+          ),
+        ),
+      ),
+      iconTheme: const IconThemeData(
+        color: AppColors.inkDark,
+        size: 24,
+      ),
+      checkboxTheme: CheckboxThemeData(
+        fillColor: WidgetStateProperty.resolveWith((states) {
+          if (states.contains(WidgetState.selected)) {
+            return AppColors.sage;
+          }
+          return AppColors.paper3Dark;
+        }),
+        checkColor: const WidgetStatePropertyAll(AppColors.paperDark),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(4),
+        ),
+        side: const BorderSide(color: AppColors.ink3Dark),
+      ),
+    );
+  }
 }

@@ -80,6 +80,27 @@ class AppColors {
   /// Sage border tint — rgba(90,122,92,0.20)
   static const Color sageMid = Color(0x335A7A5C);
 
+  // Dark Mode Colors (Parchment Night)
+  // See DESIGN_SYSTEM.md §10
+  
+  /// Dark mode: Primary background — aged parchment at night
+  static const Color paperDark = Color(0xFF1A1714);
+  
+  /// Dark mode: Secondary surface
+  static const Color paper2Dark = Color(0xFF221F1B);
+  
+  /// Dark mode: Tertiary surface
+  static const Color paper3Dark = Color(0xFF2A2620);
+  
+  /// Dark mode: Primary text
+  static const Color inkDark = Color(0xFFEDE8DF);
+  
+  /// Dark mode: Secondary text
+  static const Color ink2Dark = Color(0xFFA09890);
+  
+  /// Dark mode: Tertiary text
+  static const Color ink3Dark = Color(0xFF6A6258);
+
   /// Returns all colors defined in this class.
   /// Used for testing to verify no duplicates.
   static List<Color> get allColors => const [
