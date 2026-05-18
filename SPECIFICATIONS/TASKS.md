@@ -404,12 +404,12 @@ Status key: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 - [x] Commit: `feat(profile): ProfileScreen`
 
 ### T-054 · Paywall screen
-- [ ] Full-screen sheet from `paywallRoute`
-- [ ] Per `DESIGN_SYSTEM.md §11` and `PREMIUM_FEATURES.md`
-- [ ] Feature list, pricing toggle (monthly/annual), CTA
-- [ ] Restore purchases text link
-- [ ] No IAP integration yet — CTA shows "Coming soon" toast in v1
-- [ ] Commit: `feat(premium): PaywallScreen`
+- [x] Full-screen sheet from `paywallRoute`
+- [x] Per `DESIGN_SYSTEM.md §11` and `PREMIUM_FEATURES.md`
+- [x] Feature list, pricing toggle (monthly/annual), CTA
+- [x] Restore purchases text link
+- [x] No IAP integration yet — CTA shows "Coming soon" toast in v1
+- [x] Commit: `feat(premium): PaywallScreen`
 
 ---
 
