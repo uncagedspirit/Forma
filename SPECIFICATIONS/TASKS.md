@@ -451,9 +451,9 @@ Status key: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 - [x] Commit: `feat(a11y): semantics and touch targets`
 
 ### T-059 · Dynamic Type / text scaling
-- [ ] Test with system font size at max on iOS (Accessibility > Larger Text)
-- [ ] Fix any overflow issues in HabitRow, GoalBlock, Stat tiles
-- [ ] Commit: `fix(a11y): text scaling fixes`
+- [x] Test with system font size at max on iOS (Accessibility > Larger Text)
+- [x] Fix any overflow issues in HabitRow, GoalBlock, Stat tiles
+- [x] Commit: `fix(a11y): text scaling fixes`
 
 ### T-060 · Performance profiling
 - [ ] Profile home screen with 20 habits on a mid-range Android device

@@ -147,22 +147,29 @@ class _RingCenterText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-            '$completed',
-            style: AppTextStyles.headlineLarge.copyWith(
-              color: AppColors.ink,
-            ),
+      child: SizedBox(
+        width: 100,
+        height: 100,
+        child: FittedBox(
+          fit: BoxFit.scaleDown,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                '$completed',
+                style: AppTextStyles.headlineLarge.copyWith(
+                  color: AppColors.ink,
+                ),
+              ),
+              Text(
+                'OF $total',
+                style: AppTextStyles.labelSmall.copyWith(
+                  color: AppColors.ink3,
+                ),
+              ),
+            ],
           ),
-          Text(
-            'OF $total',
-            style: AppTextStyles.labelSmall.copyWith(
-              color: AppColors.ink3,
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }

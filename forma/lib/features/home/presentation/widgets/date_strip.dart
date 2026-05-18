@@ -107,8 +107,14 @@ class _DateChip extends ConsumerWidget {
       child: GestureDetector(
         onTap: () => ref.read(selectedDateProvider.notifier).select(date),
         child: Container(
-          width: 48,
-          height: 64,
+          constraints: const BoxConstraints(
+            minWidth: 48,
+            minHeight: 64,
+          ),
+          padding: const EdgeInsets.symmetric(
+            horizontal: AppSpacing.xs,
+            vertical: AppSpacing.sm,
+          ),
           decoration: BoxDecoration(
             color: backgroundColor,
             borderRadius: AppBorderRadius.small,

@@ -166,7 +166,7 @@ class _GoalBlockBodyState extends State<_GoalBlockBody> {
                         style: AppTextStyles.titleMedium.copyWith(
                           color: AppColors.ink,
                         ),
-                        maxLines: 1,
+                        maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
@@ -272,9 +272,13 @@ class _GoalHabitRow extends ConsumerWidget {
         ),
         child: Row(
           children: [
-            Text(
-              habit.icon,
-              style: const TextStyle(fontSize: 18),
+            FittedBox(
+              child: Text(
+                habit.icon,
+                style: AppTextStyles.headlineMedium.copyWith(
+                  color: AppColors.ink,
+                ),
+              ),
             ),
             const SizedBox(width: AppSpacing.sm),
             Expanded(
@@ -283,7 +287,7 @@ class _GoalHabitRow extends ConsumerWidget {
                 style: AppTextStyles.bodyMedium.copyWith(
                   color: isCompleted ? AppColors.ink3 : AppColors.ink,
                 ),
-                maxLines: 1,
+                maxLines: 2,
                 overflow: TextOverflow.ellipsis,
               ),
             ),

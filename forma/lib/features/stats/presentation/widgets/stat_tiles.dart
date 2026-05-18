@@ -105,15 +105,22 @@ class _StatTile extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              icon,
-              style: const TextStyle(fontSize: 20),
+            FittedBox(
+              child: Text(
+                icon,
+                style: AppTextStyles.headlineMedium.copyWith(
+                  color: AppColors.ink,
+                ),
+              ),
             ),
             const SizedBox(height: AppSpacing.sm),
-            Text(
-              value,
-              style: AppTextStyles.headlineLarge.copyWith(
-                color: AppColors.ink,
+            FittedBox(
+              fit: BoxFit.scaleDown,
+              child: Text(
+                value,
+                style: AppTextStyles.headlineLarge.copyWith(
+                  color: AppColors.ink,
+                ),
               ),
             ),
             const SizedBox(height: AppSpacing.xs),
@@ -122,6 +129,8 @@ class _StatTile extends StatelessWidget {
               style: AppTextStyles.bodyMedium.copyWith(
                 color: AppColors.ink3,
               ),
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
             ),
           ],
         ),
@@ -205,10 +214,13 @@ class _ErrorTile extends StatelessWidget {
             size: 20,
           ),
           const SizedBox(height: AppSpacing.sm),
-          Text(
-            '--',
-            style: AppTextStyles.headlineLarge.copyWith(
-              color: AppColors.ink,
+          FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Text(
+              '--',
+              style: AppTextStyles.headlineLarge.copyWith(
+                color: AppColors.ink,
+              ),
             ),
           ),
           const SizedBox(height: AppSpacing.xs),
@@ -217,6 +229,8 @@ class _ErrorTile extends StatelessWidget {
             style: AppTextStyles.bodyMedium.copyWith(
               color: AppColors.ink3,
             ),
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
           ),
         ],
       ),

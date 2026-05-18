@@ -190,9 +190,13 @@ class _HabitRowBody extends StatelessWidget {
               width: 32,
               height: 32,
               child: Center(
-                child: Text(
-                  habit.icon,
-                  style: const TextStyle(fontSize: 22),
+                child: FittedBox(
+                  child: Text(
+                    habit.icon,
+                    style: AppTextStyles.headlineLarge.copyWith(
+                      color: AppColors.ink,
+                    ),
+                  ),
                 ),
               ),
             ),
@@ -236,10 +240,12 @@ class _HabitRowBody extends StatelessWidget {
                     children: [
                       MiniHeatRow(completionStatus: heatMap),
                       const SizedBox(width: AppSpacing.sm),
-                      Text(
-                        '$streak ${streak == 1 ? 'day' : 'days'}',
-                        style: AppTextStyles.bodyMedium.copyWith(
-                          color: AppColors.ink3,
+                      Flexible(
+                        child: Text(
+                          '$streak ${streak == 1 ? 'day' : 'days'}',
+                          style: AppTextStyles.bodyMedium.copyWith(
+                            color: AppColors.ink3,
+                          ),
                         ),
                       ),
                     ],
