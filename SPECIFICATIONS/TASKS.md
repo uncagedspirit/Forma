@@ -198,11 +198,11 @@ Status key: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 - [x] Commit: `feat(mood/providers): mood provider`
 
 ### T-027 · Activity graph provider
-- [ ] `activityGraphProvider(start, end)` — returns `Map<DateTime, ActivityLevel>`
-- [ ] Maps `ComputeDailyCompletionScores` output → `ActivityLevel` enum
-- [ ] Thresholds per `ARCHITECTURE.md §5`
-- [ ] Unit tests: verify threshold boundaries (0%, 1%, 25%, 26%, 60%, 61%, 100%)
-- [ ] Commit: `feat(activity-graph/providers): activity graph provider`
+- [x] `activityGraphProvider(start, end)` — returns `Map<DateTime, ActivityLevel>`
+- [x] Maps `ComputeDailyCompletionScores` output → `ActivityLevel` enum
+- [x] Thresholds per `ARCHITECTURE.md §5`
+- [x] Unit tests: verify threshold boundaries (0%, 1%, 25%, 26%, 60%, 61%, 100%)
+- [x] Commit: `feat(activity-graph/providers): activity graph provider`
 
 ### T-028 · Stats provider
 - [ ] `statsProvider` — computes: best streak, completion %, check-in count, best weekday
