@@ -445,10 +445,10 @@ Status key: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 - [x] Commit: `fix(a11y): respect reduce motion preference`
 
 ### T-058 · Accessibility audit
-- [ ] Add `Semantics` labels to all custom check buttons, mood dots, activity graph cells
-- [ ] Verify 44×44 pt minimum touch target on all interactive elements
-- [ ] Run Flutter accessibility scan in debug mode
-- [ ] Commit: `feat(a11y): semantics and touch targets`
+- [x] Add `Semantics` labels to all custom check buttons, mood dots, activity graph cells
+- [x] Verify 44×44 pt minimum touch target on all interactive elements
+- [x] Run Flutter accessibility scan in debug mode
+- [x] Commit: `feat(a11y): semantics and touch targets`
 
 ### T-059 · Dynamic Type / text scaling
 - [ ] Test with system font size at max on iOS (Accessibility > Larger Text)

@@ -248,9 +248,15 @@ class _HabitRowBody extends StatelessWidget {
               ),
             ),
             const SizedBox(width: AppSpacing.sm),
-            _CheckButton(
-              isCompleted: isCompleted,
-              onTap: isCompleted ? null : onComplete,
+            Semantics(
+              label: isCompleted
+                  ? 'Habit ${habit.name} completed'
+                  : 'Complete habit ${habit.name}',
+              button: true,
+              child: _CheckButton(
+                isCompleted: isCompleted,
+                onTap: isCompleted ? null : onComplete,
+              ),
             ),
           ],
         ),
@@ -331,35 +337,42 @@ class _CheckButtonState extends State<_CheckButton>
 
     return GestureDetector(
       onTap: _onTap,
-      child: AnimatedBuilder(
-        animation: _scaleAnimation,
-        builder: (context, child) {
-          final scale = _controller.status == AnimationStatus.forward
-              ? _scaleAnimation.value
-              : 1.0;
-          return Transform.scale(
-            scale: scale,
-            child: child,
-          );
-        },
-        child: Container(
-          width: 30,
-          height: 30,
-          decoration: BoxDecoration(
-            color: isDone ? AppColors.sage : AppColors.paper2,
-            shape: BoxShape.circle,
-            border: Border.all(
-              color: isDone ? AppColors.sage : AppColors.line2,
-              width: 1.5,
+      behavior: HitTestBehavior.opaque,
+      child: SizedBox(
+        width: 44,
+        height: 44,
+        child: Center(
+          child: AnimatedBuilder(
+            animation: _scaleAnimation,
+            builder: (context, child) {
+              final scale = _controller.status == AnimationStatus.forward
+                  ? _scaleAnimation.value
+                  : 1.0;
+              return Transform.scale(
+                scale: scale,
+                child: child,
+              );
+            },
+            child: Container(
+              width: 30,
+              height: 30,
+              decoration: BoxDecoration(
+                color: isDone ? AppColors.sage : AppColors.paper2,
+                shape: BoxShape.circle,
+                border: Border.all(
+                  color: isDone ? AppColors.sage : AppColors.line2,
+                  width: 1.5,
+                ),
+              ),
+              child: isDone
+                  ? const Icon(
+                      Icons.check,
+                      size: 16,
+                      color: AppColors.paper,
+                    )
+                  : null,
             ),
           ),
-          child: isDone
-              ? const Icon(
-                  Icons.check,
-                  size: 16,
-                  color: AppColors.paper,
-                )
-              : null,
         ),
       ),
     );

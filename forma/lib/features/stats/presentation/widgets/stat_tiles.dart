@@ -93,35 +93,38 @@ class _StatTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: AppColors.paper2,
-        borderRadius: AppBorderRadius.regular,
-      ),
-      padding: const EdgeInsets.all(AppSpacing.md),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            icon,
-            style: const TextStyle(fontSize: 20),
-          ),
-          const SizedBox(height: AppSpacing.sm),
-          Text(
-            value,
-            style: AppTextStyles.headlineLarge.copyWith(
-              color: AppColors.ink,
+    return Semantics(
+      label: '$label: $value',
+      child: Container(
+        decoration: BoxDecoration(
+          color: AppColors.paper2,
+          borderRadius: AppBorderRadius.regular,
+        ),
+        padding: const EdgeInsets.all(AppSpacing.md),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              icon,
+              style: const TextStyle(fontSize: 20),
             ),
-          ),
-          const SizedBox(height: AppSpacing.xs),
-          Text(
-            label,
-            style: AppTextStyles.bodyMedium.copyWith(
-              color: AppColors.ink3,
+            const SizedBox(height: AppSpacing.sm),
+            Text(
+              value,
+              style: AppTextStyles.headlineLarge.copyWith(
+                color: AppColors.ink,
+              ),
             ),
-          ),
-        ],
+            const SizedBox(height: AppSpacing.xs),
+            Text(
+              label,
+              style: AppTextStyles.bodyMedium.copyWith(
+                color: AppColors.ink3,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

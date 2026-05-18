@@ -61,72 +61,75 @@ class _ProgressRingBody extends StatelessWidget {
   Widget build(BuildContext context) {
     final disableAnimations = MediaQuery.of(context).disableAnimations;
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: AppSpacing.screenHorizontal,
-      ),
-      child: Row(
-        children: [
-          SizedBox(
-            width: 120,
-            height: 120,
-            child: disableAnimations
-                ? CustomPaint(
-                    painter: _ProgressRingPainter(progress: progress),
-                    child: _RingCenterText(
-                      completed: completed,
-                      total: total,
+    return Semantics(
+      label: '$completed of $total habits completed',
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: AppSpacing.screenHorizontal,
+        ),
+        child: Row(
+          children: [
+            SizedBox(
+              width: 120,
+              height: 120,
+              child: disableAnimations
+                  ? CustomPaint(
+                      painter: _ProgressRingPainter(progress: progress),
+                      child: _RingCenterText(
+                        completed: completed,
+                        total: total,
+                      ),
+                    )
+                  : TweenAnimationBuilder<double>(
+                      tween: Tween<double>(end: progress),
+                      duration: AppDurations.spring,
+                      curve: const Cubic(0.34, 1.2, 0.64, 1.0),
+                      builder: (context, animatedProgress, child) {
+                        return CustomPaint(
+                          painter: _ProgressRingPainter(
+                            progress: animatedProgress,
+                          ),
+                          child: _RingCenterText(
+                            completed: completed,
+                            total: total,
+                          ),
+                        );
+                      },
                     ),
-                  )
-                : TweenAnimationBuilder<double>(
-                    tween: Tween<double>(end: progress),
-                    duration: AppDurations.spring,
-                    curve: const Cubic(0.34, 1.2, 0.64, 1.0),
-                    builder: (context, animatedProgress, child) {
-                      return CustomPaint(
-                        painter: _ProgressRingPainter(
-                          progress: animatedProgress,
-                        ),
-                        child: _RingCenterText(
-                          completed: completed,
-                          total: total,
-                        ),
-                      );
-                    },
+            ),
+            const SizedBox(width: AppSpacing.lg),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    "Today's Progress",
+                    style: AppTextStyles.titleLarge.copyWith(
+                      color: AppColors.ink,
+                    ),
                   ),
-          ),
-          const SizedBox(width: AppSpacing.lg),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  "Today's Progress",
-                  style: AppTextStyles.titleLarge.copyWith(
-                    color: AppColors.ink,
-                  ),
-                ),
-                const SizedBox(height: AppSpacing.xs),
-                Text(
-                  '$remaining habits left',
-                  style: AppTextStyles.bodyMedium.copyWith(
-                    color: AppColors.ink2,
-                  ),
-                ),
-                if (streak > 0) ...[
                   const SizedBox(height: AppSpacing.xs),
                   Text(
-                    '$streak day streak',
+                    '$remaining habits left',
                     style: AppTextStyles.bodyMedium.copyWith(
-                      color: AppColors.sage,
+                      color: AppColors.ink2,
                     ),
                   ),
+                  if (streak > 0) ...[
+                    const SizedBox(height: AppSpacing.xs),
+                    Text(
+                      '$streak day streak',
+                      style: AppTextStyles.bodyMedium.copyWith(
+                        color: AppColors.sage,
+                      ),
+                    ),
+                  ],
                 ],
-              ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

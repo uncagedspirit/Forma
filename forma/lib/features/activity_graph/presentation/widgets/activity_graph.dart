@@ -329,7 +329,8 @@ class _ActivityCell extends StatelessWidget {
 
     if (isBlurred) {
       return Semantics(
-        label: '${dateFormat.format(date)} — data blurred, upgrade to see',
+        label:
+            '${dateFormat.format(date)}: data blurred, upgrade to see history',
         child: Stack(
           children: <Widget>[
             cell,
@@ -354,7 +355,11 @@ class _ActivityCell extends StatelessWidget {
         borderRadius: BorderRadius.circular(AppBorderRadius.rSm),
       ),
       textStyle: AppTextStyles.labelLarge.copyWith(color: AppColors.paper),
-      child: cell,
+      child: Semantics(
+        label:
+            '${dateFormat.format(date)}: $completed of $total habits completed',
+        child: cell,
+      ),
     );
   }
 }

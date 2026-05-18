@@ -124,6 +124,7 @@ class _MoodSelectorBodyState extends State<_MoodSelectorBody> {
             _MoodDot(
               emoji: '😢',
               label: 'Very bad',
+              value: 1,
               isSelected: activeValue == 1,
               onTap: () => _onMoodTap(1),
             ),
@@ -131,6 +132,7 @@ class _MoodSelectorBodyState extends State<_MoodSelectorBody> {
             _MoodDot(
               emoji: '😟',
               label: 'Bad',
+              value: 2,
               isSelected: activeValue == 2,
               onTap: () => _onMoodTap(2),
             ),
@@ -138,6 +140,7 @@ class _MoodSelectorBodyState extends State<_MoodSelectorBody> {
             _MoodDot(
               emoji: '😐',
               label: 'Okay',
+              value: 3,
               isSelected: activeValue == 3,
               onTap: () => _onMoodTap(3),
             ),
@@ -145,6 +148,7 @@ class _MoodSelectorBodyState extends State<_MoodSelectorBody> {
             _MoodDot(
               emoji: '🙂',
               label: 'Good',
+              value: 4,
               isSelected: activeValue == 4,
               onTap: () => _onMoodTap(4),
             ),
@@ -152,6 +156,7 @@ class _MoodSelectorBodyState extends State<_MoodSelectorBody> {
             _MoodDot(
               emoji: '😄',
               label: 'Great',
+              value: 5,
               isSelected: activeValue == 5,
               onTap: () => _onMoodTap(5),
             ),
@@ -185,19 +190,21 @@ class _MoodDot extends StatelessWidget {
   const _MoodDot({
     required this.emoji,
     required this.label,
+    required this.value,
     required this.isSelected,
     required this.onTap,
   });
 
   final String emoji;
   final String label;
+  final int value;
   final bool isSelected;
   final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     return Semantics(
-      label: label,
+      label: 'Mood $value: $label',
       selected: isSelected,
       button: true,
       child: GestureDetector(
@@ -205,8 +212,8 @@ class _MoodDot extends StatelessWidget {
         behavior: HitTestBehavior.opaque,
         child: AnimatedContainer(
           duration: AppDurations.normal,
-          width: 40,
-          height: 40,
+          width: 44,
+          height: 44,
           decoration: BoxDecoration(
             color: isSelected ? AppColors.paper : AppColors.paper2,
             shape: BoxShape.circle,

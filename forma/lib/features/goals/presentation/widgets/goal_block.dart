@@ -137,51 +137,57 @@ class _GoalBlockBodyState extends State<_GoalBlockBody> {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          InkWell(
-            onTap: _toggleExpand,
-            borderRadius: const BorderRadius.vertical(
-              top: Radius.circular(AppBorderRadius.r),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(AppSpacing.md),
-              child: Row(
-                children: [
-                  Container(
-                    width: 4,
-                    height: 40,
-                    decoration: BoxDecoration(
-                      color: widget.goalColor,
-                      borderRadius: AppBorderRadius.small,
-                    ),
-                  ),
-                  const SizedBox(width: AppSpacing.sm),
-                  Expanded(
-                    child: Text(
-                      widget.goal.name,
-                      style: AppTextStyles.titleMedium.copyWith(
-                        color: AppColors.ink,
+          Semantics(
+            label:
+                'Goal ${widget.goal.name}, ${widget.percentage}% complete',
+            header: true,
+            button: true,
+            child: InkWell(
+              onTap: _toggleExpand,
+              borderRadius: const BorderRadius.vertical(
+                top: Radius.circular(AppBorderRadius.r),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(AppSpacing.md),
+                child: Row(
+                  children: [
+                    Container(
+                      width: 4,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        color: widget.goalColor,
+                        borderRadius: AppBorderRadius.small,
                       ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
                     ),
-                  ),
-                  Text(
-                    '${widget.doneCount}/${widget.totalCount}  ${widget.percentage}%',
-                    style: AppTextStyles.bodyMedium.copyWith(
-                      color: AppColors.ink3,
+                    const SizedBox(width: AppSpacing.sm),
+                    Expanded(
+                      child: Text(
+                        widget.goal.name,
+                        style: AppTextStyles.titleMedium.copyWith(
+                          color: AppColors.ink,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ),
-                  ),
-                  const SizedBox(width: AppSpacing.sm),
-                  AnimatedRotation(
-                    turns: _isExpanded ? 0.25 : 0,
-                    duration: AppDurations.normal,
-                    child: const Icon(
-                      Icons.chevron_right,
-                      size: 20,
-                      color: AppColors.ink3,
+                    Text(
+                      '${widget.doneCount}/${widget.totalCount}  ${widget.percentage}%',
+                      style: AppTextStyles.bodyMedium.copyWith(
+                        color: AppColors.ink3,
+                      ),
                     ),
-                  ),
-                ],
+                    const SizedBox(width: AppSpacing.sm),
+                    AnimatedRotation(
+                      turns: _isExpanded ? 0.25 : 0,
+                      duration: AppDurations.normal,
+                      child: const Icon(
+                        Icons.chevron_right,
+                        size: 20,
+                        color: AppColors.ink3,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -300,24 +306,33 @@ class _CompactCheckButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 24,
-      height: 24,
-      decoration: BoxDecoration(
-        color: isCompleted ? AppColors.sage : AppColors.paper2,
-        shape: BoxShape.circle,
-        border: Border.all(
-          color: isCompleted ? AppColors.sage : AppColors.line2,
-          width: 1.5,
+    return Semantics(
+      label: isCompleted ? 'Completed' : 'Not completed',
+      child: SizedBox(
+        width: 44,
+        height: 44,
+        child: Center(
+          child: Container(
+            width: 24,
+            height: 24,
+            decoration: BoxDecoration(
+              color: isCompleted ? AppColors.sage : AppColors.paper2,
+              shape: BoxShape.circle,
+              border: Border.all(
+                color: isCompleted ? AppColors.sage : AppColors.line2,
+                width: 1.5,
+              ),
+            ),
+            child: isCompleted
+                ? const Icon(
+                    Icons.check,
+                    size: 14,
+                    color: AppColors.paper,
+                  )
+                : null,
+          ),
         ),
       ),
-      child: isCompleted
-          ? const Icon(
-              Icons.check,
-              size: 14,
-              color: AppColors.paper,
-            )
-          : null,
     );
   }
 }
