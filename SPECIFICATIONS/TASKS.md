@@ -205,10 +205,10 @@ Status key: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 - [x] Commit: `feat(activity-graph/providers): activity graph provider`
 
 ### T-028 · Stats provider
-- [ ] `statsProvider` — computes: best streak, completion %, check-in count, best weekday
-- [ ] `habitCompletionRatesProvider` — per-habit % over last 30 days
-- [ ] `moodWeekProvider` — 7-day mood values for chart
-- [ ] Commit: `feat(stats/providers): stats providers`
+- [x] `statsProvider` — computes: best streak, completion %, check-in count, best weekday
+- [x] `habitCompletionRatesProvider` — per-habit % over last 30 days
+- [x] `moodWeekProvider` — 7-day mood values for chart
+- [x] Commit: `feat(stats/providers): stats providers`
 
 ### T-029 · Premium status provider
 - [ ] `premiumStatusProvider` — reads `UserPreferencesModel.isPremium` from Hive
