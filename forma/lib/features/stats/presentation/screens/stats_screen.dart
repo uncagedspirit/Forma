@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:forma/core/constants/app_border_radius.dart';
 import 'package:forma/core/constants/app_colors.dart';
 import 'package:forma/core/constants/app_spacing.dart';
 import 'package:forma/core/constants/app_text_styles.dart';
 import 'package:forma/features/activity_graph/presentation/widgets/activity_graph.dart';
+import 'package:forma/features/stats/presentation/providers/stats_provider.dart';
 import 'package:forma/features/stats/presentation/widgets/habit_completion_bars.dart';
 import 'package:forma/features/stats/presentation/widgets/insights_list.dart';
 import 'package:forma/features/stats/presentation/widgets/mood_week_chart.dart';
@@ -13,17 +15,22 @@ import 'package:forma/features/stats/presentation/widgets/stat_tiles.dart';
 ///
 /// Assembles all stat widgets into a scrollable view with section headers
 /// and loading skeletons for each section.
-class StatsScreen extends StatelessWidget {
+class StatsScreen extends ConsumerWidget {
   const StatsScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final yearLabel = DateTime.now().year.toString();
+    final statsAsync = ref.watch(statsProvider);
+    final bool showEmptyState = statsAsync.hasValue &&
+        statsAsync.value!.checkInCount < 7;
 
     return Scaffold(
       body: SafeArea(
-        child: CustomScrollView(
-          slivers: <Widget>[
+        child: showEmptyState
+            ? const _StatsEmptyState()
+            : CustomScrollView(
+                slivers: <Widget>[
             // Page title
             SliverToBoxAdapter(
               child: Padding(
@@ -208,6 +215,55 @@ class StatsScreen extends StatelessWidget {
             // Bottom breathing room
             const SliverToBoxAdapter(
               child: SizedBox(height: AppSpacing.xl),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _StatsEmptyState extends StatelessWidget {
+  const _StatsEmptyState();
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: AppSpacing.screenHorizontal,
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              width: 120,
+              height: 120,
+              decoration: BoxDecoration(
+                color: AppColors.paper2,
+                borderRadius: AppBorderRadius.regular,
+              ),
+              child: const Icon(
+                Icons.bar_chart,
+                size: 56,
+                color: AppColors.ink3,
+              ),
+            ),
+            const SizedBox(height: AppSpacing.lg),
+            Text(
+              'Check back after a week',
+              style: AppTextStyles.bodyLarge.copyWith(
+                color: AppColors.ink,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: AppSpacing.sm),
+            Text(
+              "We're building your stats...",
+              style: AppTextStyles.bodyMedium.copyWith(
+                color: AppColors.ink3,
+              ),
+              textAlign: TextAlign.center,
             ),
           ],
         ),

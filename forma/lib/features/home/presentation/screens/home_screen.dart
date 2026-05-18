@@ -42,7 +42,7 @@ class HomeScreen extends ConsumerWidget {
     final formattedDate = DateFormat('EEEE, MMMM d').format(selectedDate);
 
     final isLoading = habitsAsync.isLoading || goalsAsync.isLoading;
-    final hasNoContent = habits.isEmpty && goals.isEmpty;
+    final hasNoContent = habits.isEmpty;
 
     return Scaffold(
       body: SafeArea(
@@ -200,7 +200,7 @@ class _EmptyState extends StatelessWidget {
             const SizedBox(height: AppSpacing.lg),
             Text(
               'Start by adding your first habit',
-              style: AppTextStyles.headlineMedium.copyWith(
+              style: AppTextStyles.bodyLarge.copyWith(
                 color: AppColors.ink,
               ),
               textAlign: TextAlign.center,

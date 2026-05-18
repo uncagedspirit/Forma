@@ -462,10 +462,10 @@ Status key: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 - [x] Commit: `perf: const constructors and list performance`
 
 ### T-061 · Empty states
-- [ ] Home screen, no habits: ink illustration (simple SVG line art) + prompt
-- [ ] Stats screen, < 7 days data: "Check back after a week" message
-- [ ] Activity graph, no data: muted cells with "Start building your history" overlay
-- [ ] Commit: `feat(ux): empty state screens`
+- [x] Home screen, no habits: ink illustration (simple SVG line art) + prompt
+- [x] Stats screen, < 7 days data: "Check back after a week" message
+- [x] Activity graph, no data: muted cells with "Start building your history" overlay
+- [x] Commit: `feat(ux): empty state screens`
 
 ### T-062 · Error states
 - [ ] Hive open failure on launch: show a "Storage unavailable" full-screen error with retry

@@ -90,6 +90,9 @@ class _ActivityGraphState extends ConsumerState<ActivityGraph> {
     const double cellSize = 10.0;
     const double gap = 2.0;
     const double dayLabelWidth = 24.0;
+    final bool hasNoData = graphData.values.every(
+      (ActivityGraphData data) => data.level == ActivityLevel.none,
+    );
     final DateFormat dateFormat = DateFormat.yMMMd();
     final List<String> dayLabels = <String>['M', '', 'W', '', 'F', '', ''];
     final List<double> dayLabelHeights = <double>[
@@ -102,7 +105,7 @@ class _ActivityGraphState extends ConsumerState<ActivityGraph> {
       cellSize,
     ];
 
-    return Column(
+    Widget graphContent = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Row(
@@ -205,6 +208,34 @@ class _ActivityGraphState extends ConsumerState<ActivityGraph> {
         ],
       ],
     );
+
+    if (hasNoData) {
+      graphContent = Stack(
+        children: <Widget>[
+          graphContent,
+          Positioned.fill(
+            child: Center(
+              child: Container(
+                padding: const EdgeInsets.all(AppSpacing.lg),
+                decoration: BoxDecoration(
+                  color: AppColors.paper.withValues(alpha: 0.85),
+                  borderRadius: AppBorderRadius.regular,
+                ),
+                child: Text(
+                  'Start building your history',
+                  style: AppTextStyles.bodyLarge.copyWith(
+                    color: AppColors.ink3,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
+          ),
+        ],
+      );
+    }
+
+    return graphContent;
   }
 }
 
