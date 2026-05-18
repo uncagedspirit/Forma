@@ -220,11 +220,11 @@ Status key: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 ## Phase 5 — Navigation
 
 ### T-030 · GoRouter setup
-- [ ] Create `lib/core/router/app_router.dart`
-- [ ] Define all routes from `ARCHITECTURE.md §6`
-- [ ] `ShellRoute` for bottom nav shell
-- [ ] Redirect: if `!hasCompletedOnboarding` → `/onboarding`
-- [ ] Commit: `feat(router): GoRouter with all routes and shell`
+- [x] Create `lib/core/router/app_router.dart`
+- [x] Define all routes from `ARCHITECTURE.md §6`
+- [x] `ShellRoute` for bottom nav shell
+- [x] Redirect: if `!hasCompletedOnboarding` → `/onboarding`
+- [x] Commit: `feat(router): GoRouter with all routes and shell`
 
 ---
 
