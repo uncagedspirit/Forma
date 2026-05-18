@@ -1,0 +1,8 @@
+Feature Graphic Notes:
+- Dimensions: 1024 x 500 pixels (Play Store requirement)
+- Background: warm paper tone (#FAF7F2) matching app theme
+- Center: Forma wordmark in Fraunces italic, ink color (#2D2A26)
+- Right side: preview of the home screen (ProgressRing + habit rows)
+- Subtle sage accent elements
+- Clean, minimal, no text clutter
+- Must look great on both light and dark mode Play Store

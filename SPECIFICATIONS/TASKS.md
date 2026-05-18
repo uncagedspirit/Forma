@@ -493,10 +493,10 @@ Status key: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 - [x] Commit: `chore: release signing configuration`
 
 ### T-066 · Store metadata
-- [ ] App Store: title, subtitle, description, keywords, screenshots (6.5", 5.5")
-- [ ] Play Store: short description, full description, feature graphic, screenshots
-- [ ] Privacy policy URL (required for both stores)
-- [ ] Commit: `chore: store metadata`
+- [x] App Store: title, subtitle, description, keywords, screenshots (6.5", 5.5")
+- [x] Play Store: short description, full description, feature graphic, screenshots
+- [x] Privacy policy URL (required for both stores)
+- [x] Commit: `chore: store metadata`
 
 ---
 
