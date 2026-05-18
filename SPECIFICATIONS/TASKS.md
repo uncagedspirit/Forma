@@ -193,9 +193,9 @@ Status key: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 - [x] Commit: `feat(goals/providers): goals provider`
 
 ### T-026 · Mood provider
-- [ ] `moodForDateProvider(DateTime)` — async
-- [ ] `logMoodProvider` — `AsyncNotifier` wrapping `LogMood` use-case
-- [ ] Commit: `feat(mood/providers): mood provider`
+- [x] `moodForDateProvider(DateTime)` — async
+- [x] `logMoodProvider` — `AsyncNotifier` wrapping `LogMood` use-case
+- [x] Commit: `feat(mood/providers): mood provider`
 
 ### T-027 · Activity graph provider
 - [ ] `activityGraphProvider(start, end)` — returns `Map<DateTime, ActivityLevel>`
