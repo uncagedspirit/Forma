@@ -143,9 +143,9 @@ Status key: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 - [x] Commit: `feat(habits/data): HabitRepositoryImpl`
 
 ### T-019 · GoalRepository implementation
-- [ ] `GoalRepositoryImpl` backed by `goalsBox`
-- [ ] Unit tests
-- [ ] Commit: `feat(goals/data): GoalRepositoryImpl`
+- [x] `GoalRepositoryImpl` backed by `goalsBox`
+- [x] Unit tests
+- [x] Commit: `feat(goals/data): GoalRepositoryImpl`
 
 ### T-020 · MoodRepository implementation
 - [ ] `MoodRepositoryImpl` backed by `moodBox` — one entry per date
