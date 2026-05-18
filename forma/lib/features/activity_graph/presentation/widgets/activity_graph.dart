@@ -10,6 +10,7 @@ import 'package:forma/features/activity_graph/domain/entities/activity_graph_dat
 import 'package:forma/features/activity_graph/domain/entities/activity_level.dart';
 import 'package:forma/features/activity_graph/presentation/providers/activity_graph_provider.dart';
 import 'package:forma/features/premium/presentation/providers/premium_status_provider.dart';
+import 'package:forma/shared/widgets/inline_error.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:logging/logging.dart';
@@ -35,11 +36,15 @@ class _ActivityGraphState extends ConsumerState<ActivityGraph> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (mounted && _scrollController.hasClients) {
-        _scrollController.animateTo(
-          _scrollController.position.maxScrollExtent,
-          duration: AppDurations.normal,
-          curve: Curves.easeOut,
-        );
+        if (!MediaQuery.of(context).disableAnimations) {
+          _scrollController.animateTo(
+            _scrollController.position.maxScrollExtent,
+            duration: AppDurations.normal,
+            curve: Curves.easeOut,
+          );
+        } else {
+          _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
+        }
       }
     });
   }
@@ -68,7 +73,10 @@ class _ActivityGraphState extends ConsumerState<ActivityGraph> {
       loading: () => const _ActivityGraphSkeleton(),
       error: (Object error, StackTrace? stackTrace) {
         _logger.warning('Failed to load activity graph', error, stackTrace);
-        return const _ActivityGraphEmpty();
+        return InlineError(
+          message: 'Failed to load activity graph',
+          onRetry: () => ref.invalidate(activityGraphProvider(gridStart, gridEnd)),
+        );
       },
       data: (Map<DateTime, ActivityGraphData> graphData) => _buildContent(
         context,
@@ -485,11 +493,4 @@ class _ActivityGraphSkeleton extends StatelessWidget {
   }
 }
 
-class _ActivityGraphEmpty extends StatelessWidget {
-  const _ActivityGraphEmpty();
 
-  @override
-  Widget build(BuildContext context) {
-    return const SizedBox.shrink();
-  }
-}

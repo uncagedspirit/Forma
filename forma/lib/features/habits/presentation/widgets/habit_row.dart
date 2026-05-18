@@ -211,6 +211,8 @@ class _HabitRowBody extends StatelessWidget {
                       Expanded(
                         child: Text(
                           habit.name,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
                           style: AppTextStyles.titleLarge.copyWith(
                             color: AppColors.ink,
                           ),

@@ -104,47 +104,52 @@ class _DateChip extends ConsumerWidget {
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: AppSpacing.xs),
-      child: GestureDetector(
-        onTap: () => ref.read(selectedDateProvider.notifier).select(date),
-        child: Container(
-          constraints: const BoxConstraints(
-            minWidth: 48,
-            minHeight: 64,
-          ),
-          padding: const EdgeInsets.symmetric(
-            horizontal: AppSpacing.xs,
-            vertical: AppSpacing.sm,
-          ),
-          decoration: BoxDecoration(
-            color: backgroundColor,
-            borderRadius: AppBorderRadius.small,
-            border: effectiveBorder,
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                dayLetter,
-                style: AppTextStyles.labelSmall.copyWith(color: textColor),
-              ),
-              const SizedBox(height: AppSpacing.xs),
-              Text(
-                dayNumber,
-                style: AppTextStyles.titleLarge.copyWith(color: textColor),
-              ),
-              const SizedBox(height: AppSpacing.xs),
-              if (hasCompletions)
-                Container(
-                  width: 4,
-                  height: 4,
-                  decoration: BoxDecoration(
-                    color: dotColor,
-                    shape: BoxShape.circle,
-                  ),
-                )
-              else
+      child: Semantics(
+        label: 'Select ${DateFormat.yMMMMd().format(date)}',
+        button: true,
+        selected: isSelected,
+        child: GestureDetector(
+          onTap: () => ref.read(selectedDateProvider.notifier).select(date),
+          child: Container(
+            constraints: const BoxConstraints(
+              minWidth: 48,
+              minHeight: 64,
+            ),
+            padding: const EdgeInsets.symmetric(
+              horizontal: AppSpacing.xs,
+              vertical: AppSpacing.sm,
+            ),
+            decoration: BoxDecoration(
+              color: backgroundColor,
+              borderRadius: AppBorderRadius.small,
+              border: effectiveBorder,
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  dayLetter,
+                  style: AppTextStyles.labelSmall.copyWith(color: textColor),
+                ),
                 const SizedBox(height: AppSpacing.xs),
-            ],
+                Text(
+                  dayNumber,
+                  style: AppTextStyles.titleLarge.copyWith(color: textColor),
+                ),
+                const SizedBox(height: AppSpacing.xs),
+                if (hasCompletions)
+                  Container(
+                    width: 4,
+                    height: 4,
+                    decoration: BoxDecoration(
+                      color: dotColor,
+                      shape: BoxShape.circle,
+                    ),
+                  )
+                else
+                  const SizedBox(height: AppSpacing.xs),
+              ],
+            ),
           ),
         ),
       ),
