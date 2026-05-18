@@ -277,12 +277,12 @@ Status key: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 - [x] Commit: `feat(home): DateStrip widget`
 
 ### T-038 · MoodSelector widget
-- [ ] 5 emoji dots, single selection
-- [ ] Selected state: scale animation, shadow
-- [ ] Shows free-text note input after selection
-- [ ] On note dismiss / submit: calls `logMoodProvider`
-- [ ] Watches `moodForDateProvider(selectedDate)` to restore selection
-- [ ] Commit: `feat(home): MoodSelector widget`
+- [x] 5 emoji dots, single selection
+- [x] Selected state: scale animation, shadow
+- [x] Shows free-text note input after selection
+- [x] On note dismiss / submit: calls logMoodProvider
+- [x] Watches moodForDateProvider(selectedDate) to restore selection
+- [x] Commit: `feat(home): MoodSelector widget`
 
 ### T-039 · ProgressRing widget
 - [ ] Animated SVG-equivalent in Flutter (`CustomPainter`)

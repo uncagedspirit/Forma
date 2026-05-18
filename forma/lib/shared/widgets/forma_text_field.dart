@@ -15,18 +15,22 @@ class FormaTextField extends StatelessWidget {
     this.placeholder,
     this.error,
     this.onChanged,
+    this.onSubmitted,
     this.keyboardType,
     this.textInputAction,
     this.autofocus = false,
+    this.focusNode,
   });
 
   final TextEditingController? controller;
   final String? placeholder;
   final String? error;
   final ValueChanged<String>? onChanged;
+  final ValueChanged<String>? onSubmitted;
   final TextInputType? keyboardType;
   final TextInputAction? textInputAction;
   final bool autofocus;
+  final FocusNode? focusNode;
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +53,9 @@ class FormaTextField extends StatelessWidget {
       children: [
         TextField(
           controller: controller,
+          focusNode: focusNode,
           onChanged: onChanged,
+          onSubmitted: onSubmitted,
           keyboardType: keyboardType,
           textInputAction: textInputAction,
           autofocus: autofocus,
