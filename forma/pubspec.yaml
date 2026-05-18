@@ -52,6 +52,14 @@ dev_dependencies:
   mocktail: ^1.0.4
   import_sorter: ^4.6.0
   flutter_launcher_icons: ^0.14.0
+  flutter_native_splash: ^2.4.1
+
+flutter_native_splash:
+  color: "#F5F0E8"
+  image: assets/images/splash.png
+  android_12:
+    image: assets/images/splash.png
+    icon_background_color: "#F5F0E8"
 
 import_sorter:
   emojis: false

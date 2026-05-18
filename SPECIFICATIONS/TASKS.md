@@ -482,9 +482,9 @@ Status key: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 - [x] Commit: `feat(assets): app icons`
 
 ### T-064 · Splash screen
-- [ ] White/paper bg with Forma wordmark centered (Fraunces italic)
-- [ ] Use `flutter_native_splash`
-- [ ] Commit: `feat(assets): splash screen`
+- [x] White/paper bg with Forma wordmark centered (Fraunces italic)
+- [x] Use `flutter_native_splash`
+- [x] Commit: `feat(assets): splash screen`
 
 ### T-065 · Build & sign
 - [ ] iOS: create provisioning profile, configure `ExportOptions.plist`
