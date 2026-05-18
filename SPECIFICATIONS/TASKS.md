@@ -188,9 +188,9 @@ Status key: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 - [x] Commit: `feat(habits/providers): habits for date + completion`
 
 ### T-025 · Goals provider
-- [ ] `goalsProvider` — list of goals with their habits
-- [ ] `goalCompletionRatioProvider(goalId)` — derived provider
-- [ ] Commit: `feat(goals/providers): goals provider`
+- [x] `goalsProvider` — list of goals with their habits
+- [x] `goalCompletionRatioProvider(goalId)` — derived provider
+- [x] Commit: `feat(goals/providers): goals provider`
 
 ### T-026 · Mood provider
 - [ ] `moodForDateProvider(DateTime)` — async
