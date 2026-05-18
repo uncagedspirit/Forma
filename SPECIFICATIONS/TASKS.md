@@ -477,9 +477,9 @@ Status key: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 ## Phase 14 — Release Prep
 
 ### T-063 · App icons
-- [ ] Design Forma icon (simple circle with a subtle pen-stroke F mark, warm paper bg)
-- [ ] Generate all required sizes with `flutter_launcher_icons`
-- [ ] Commit: `feat(assets): app icons`
+- [x] Design Forma icon (simple circle with a subtle pen-stroke F mark, warm paper bg)
+- [x] Generate all required sizes with `flutter_launcher_icons`
+- [x] Commit: `feat(assets): app icons`
 
 ### T-064 · Splash screen
 - [ ] White/paper bg with Forma wordmark centered (Fraunces italic)
