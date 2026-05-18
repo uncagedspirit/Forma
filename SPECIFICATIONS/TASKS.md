@@ -381,10 +381,10 @@ Status key: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 - [x] Commit: `feat(stats): HabitCompletionBars widget`
 
 ### T-051 · InsightsList
-- [ ] 3–5 insight cards (sage/terra/gold dots, text)
-- [ ] Static in v1 (hardcoded insight templates filled with real data)
-- [ ] e.g. "You feel X% better on days you do [best habit]" — computed from mood×habit correlation
-- [ ] Commit: `feat(stats): InsightsList widget`
+- [x] 3–5 insight cards (sage/terra/gold dots, text)
+- [x] Static in v1 (hardcoded insight templates filled with real data)
+- [x] e.g. "You feel X% better on days you do [best habit]" — computed from mood×habit correlation
+- [x] Commit: `feat(stats): InsightsList widget`
 
 ### T-052 · StatsScreen assembly
 - [ ] Assemble all stat widgets in scroll view
