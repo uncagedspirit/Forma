@@ -238,9 +238,9 @@ Status key: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 - [x] Commit: `feat(shared): FormaBottomNav`
 
 ### T-032 · FormaModalSheet
-- [ ] Reusable bottom sheet wrapper (handle bar, padding, spring animation)
-- [ ] Used by: AddHabitSheet, AddGoalSheet, HabitDetailSheet
-- [ ] Commit: `feat(shared): FormaModalSheet`
+- [x] Reusable bottom sheet wrapper (handle bar, padding, spring animation)
+- [x] Used by: AddHabitSheet, AddGoalSheet, HabitDetailSheet
+- [x] Commit: `feat(shared): FormaModalSheet`
 
 ### T-033 · FormaTextField
 - [ ] Styled text input matching design system
