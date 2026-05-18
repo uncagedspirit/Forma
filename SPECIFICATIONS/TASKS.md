@@ -317,12 +317,12 @@ Status key: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 - [x] Commit: `feat(goals): GoalBlock widget`
 
 ### T-043 · AddHabitSheet
-- [ ] FormaModalSheet wrapper
-- [ ] Fields: habit name (FormaTextField), EmojiPicker, time-of-day chip row
-- [ ] Optional: goal assignment dropdown (shows existing goals)
-- [ ] Submit: calls `AddHabit` use-case, invalidates providers, closes sheet
-- [ ] Validation: name cannot be empty
-- [ ] Commit: `feat(habits): AddHabitSheet`
+- [x] FormaModalSheet wrapper
+- [x] Fields: habit name (FormaTextField), EmojiPicker, time-of-day chip row
+- [x] Optional: goal assignment dropdown (shows existing goals)
+- [x] Submit: calls `AddHabit` use-case, invalidates providers, closes sheet
+- [x] Validation: name cannot be empty
+- [x] Commit: `feat(habits): AddHabitSheet`
 
 ### T-044 · AddGoalSheet
 - [ ] FormaModalSheet wrapper

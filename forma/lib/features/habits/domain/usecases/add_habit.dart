@@ -20,12 +20,16 @@ class AddHabit {
   /// [name] - The display name of the habit (required, non-empty).
   /// [icon] - The emoji icon representing the habit (required).
   /// [color] - Optional hex color string. Defaults to sage color if not provided.
+  /// [goalId] - Optional goal ID to assign the habit to.
+  /// [reminderTime] - Optional reminder time in HH:mm format.
   ///
   /// Throws [ArgumentError] if name is empty or icon is empty.
   Future<void> call({
     required String name,
     required String icon,
     String? color,
+    String? goalId,
+    String? reminderTime,
   }) async {
     // Validate name is not empty
     if (name.trim().isEmpty) {
@@ -48,8 +52,10 @@ class AddHabit {
       id: id,
       name: name.trim(),
       icon: icon.trim(),
+      goalId: goalId,
       color: color?.trim() ?? '#5A7A5C', // Default sage color
       sortOrder: 0, // Will be set properly by repository or reorder use case
+      reminderTime: reminderTime?.trim(),
       createdAt: DateTime.now(),
       isArchived: false,
     );
