@@ -363,9 +363,9 @@ Status key: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 ## Phase 9 — Stats Screen
 
 ### T-048 · Stat tiles
-- [ ] 2-column grid of stat tiles: best streak, completion %, check-in count, best weekday
-- [ ] Data from `statsProvider`
-- [ ] Commit: `feat(stats): StatTile widgets`
+- [x] 2-column grid of stat tiles: best streak, completion %, check-in count, best weekday
+- [x] Data from `statsProvider`
+- [x] Commit: `feat(stats): StatTile widgets`
 
 ### T-049 · MoodWeekChart
 - [ ] 7 vertical bars (Mon–Sun), height proportional to mood value (1–5)
