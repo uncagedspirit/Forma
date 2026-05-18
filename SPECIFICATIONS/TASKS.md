@@ -135,12 +135,12 @@ Status key: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 - [x] Commit: `feat(domain): Habit, Goal, Mood entities and repository interfaces`
 
 ### T-018 · HabitRepository implementation
-- [ ] Implement `HabitRepositoryImpl` backed by Hive `habitsBox` + `logsBox`
-- [ ] `getHabitsForDate` — return habits where date falls within frequency; join with logs to compute `isCompleted`
-- [ ] `complete` — write a `HabitLogModel` to `logsBox`, key `log:{date}:{habitId}`
-- [ ] `save`, `delete`, `reorder` implementations
-- [ ] Unit tests with in-memory Hive (use `Hive.init(tempDirectory)`)
-- [ ] Commit: `feat(habits/data): HabitRepositoryImpl`
+- [x] Implement `HabitRepositoryImpl` backed by Hive `habitsBox` + `logsBox`
+- [x] `getHabitsForDate` — return habits where date falls within frequency; join with logs to compute `isCompleted`
+- [x] `complete` — write a `HabitLogModel` to `logsBox`, key `log:{date}:{habitId}`
+- [x] `save`, `delete`, `reorder` implementations
+- [x] Unit tests with in-memory Hive (use `Hive.init(tempDirectory)`)
+- [x] Commit: `feat(habits/data): HabitRepositoryImpl`
 
 ### T-019 · GoalRepository implementation
 - [ ] `GoalRepositoryImpl` backed by `goalsBox`
