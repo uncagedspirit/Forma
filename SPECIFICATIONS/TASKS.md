@@ -416,11 +416,11 @@ Status key: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 ## Phase 11 — Onboarding
 
 ### T-055 · Onboarding flow (3 screens)
-- [ ] Screen 1: Welcome — headline, Lottie placeholder (use a simple Flutter animation as placeholder until Lottie asset ready)
-- [ ] Screen 2: Add first habit — minimal form (name + emoji), creates first habit on submit
-- [ ] Screen 3: Notifications — permission request button, skip option
-- [ ] On complete: sets `UserPreferences.hasCompletedOnboarding = true`, navigates to home
-- [ ] Commit: `feat(onboarding): 3-screen onboarding flow`
+- [x] Screen 1: Welcome — headline, Lottie placeholder (use a simple Flutter animation as placeholder until Lottie asset ready)
+- [x] Screen 2: Add first habit — minimal form (name + emoji), creates first habit on submit
+- [x] Screen 3: Notifications — permission request button, skip option
+- [x] On complete: sets `UserPreferences.hasCompletedOnboarding = true`, navigates to home
+- [x] Commit: `feat(onboarding): 3-screen onboarding flow`
 
 ---
 
