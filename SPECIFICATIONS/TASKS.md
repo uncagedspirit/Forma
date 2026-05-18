@@ -342,15 +342,15 @@ Status key: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 ## Phase 8 — Activity Graph
 
 ### T-046 · ActivityGraph widget
-- [ ] Grid: 52 columns (weeks) × 7 rows (days), scrollable horizontally
-- [ ] Cell: 10×10 dp rounded square, 2 dp gap
-- [ ] Color per `ActivityLevel` from provider
-- [ ] Month labels above columns (Jan, Feb…)
-- [ ] Day labels left side (M, W, F)
-- [ ] Long-press on cell: tooltip with date + "n/n habits"
-- [ ] Scroll starts at current week (auto-scroll on init)
-- [ ] Free tier: shows full graph but blurs cells older than 30 days with premium CTA
-- [ ] Commit: `feat(activity-graph): ActivityGraph widget`
+- [x] Grid: 52 columns (weeks) × 7 rows (days), scrollable horizontally
+- [x] Cell: 10×10 dp rounded square, 2 dp gap
+- [x] Color per `ActivityLevel` from provider
+- [x] Month labels above columns (Jan, Feb…)
+- [x] Day labels left side (M, W, F)
+- [x] Long-press on cell: tooltip with date + "n/n habits"
+- [x] Scroll starts at current week (auto-scroll on init)
+- [x] Free tier: shows full graph but blurs cells older than 30 days with premium CTA
+- [x] Commit: `feat(activity-graph): ActivityGraph widget`
 
 ### T-047 · ActivityGraph screen section (Stats screen)
 - [ ] Integrate `ActivityGraph` widget in StatsScreen below the stat tiles

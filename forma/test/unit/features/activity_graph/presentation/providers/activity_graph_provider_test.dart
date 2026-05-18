@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:forma/features/activity_graph/domain/entities/activity_graph_data.dart';
 import 'package:forma/features/activity_graph/domain/entities/activity_level.dart';
 import 'package:forma/features/activity_graph/presentation/providers/activity_graph_provider.dart';
 import 'package:forma/features/habits/data/repositories/habit_repository_provider.dart';
@@ -28,13 +29,13 @@ void main() {
   });
 
   group('activityGraphProvider', () {
-    final start = DateTime(2024, 1, 1);
-    final end = DateTime(2024, 1, 1);
+    final DateTime start = DateTime(2024, 1, 1);
+    final DateTime end = DateTime(2024, 1, 1);
 
     List<Habit> generateHabits(int count) {
-      return List.generate(
+      return List<Habit>.generate(
         count,
-        (i) => Habit(
+        (int i) => Habit(
           id: 'habit-$i',
           name: 'Habit $i',
           icon: '✅',
@@ -47,9 +48,9 @@ void main() {
     }
 
     List<HabitLog> generateLogs(int count, DateTime date) {
-      return List.generate(
+      return List<HabitLog>.generate(
         count,
-        (i) => HabitLog(
+        (int i) => HabitLog(
           id: 'log-$i',
           habitId: 'habit-$i',
           date: date,
@@ -63,9 +64,12 @@ void main() {
       when(() => mockRepository.getAll()).thenAnswer((_) async => habits);
       when(() => mockRepository.getAllLogs()).thenAnswer((_) async => []);
 
-      final result =
+      final Map<DateTime, ActivityGraphData> result =
           await container.read(activityGraphProvider(start, end).future);
-      expect(result[DateTime.utc(2024, 1, 1)], ActivityLevel.none);
+      final ActivityGraphData? data = result[DateTime.utc(2024, 1, 1)];
+      expect(data?.level, ActivityLevel.none);
+      expect(data?.completed, 0);
+      expect(data?.total, 1);
     });
 
     test('maps 1% to light', () async {
@@ -74,9 +78,12 @@ void main() {
       when(() => mockRepository.getAll()).thenAnswer((_) async => habits);
       when(() => mockRepository.getAllLogs()).thenAnswer((_) async => logs);
 
-      final result =
+      final Map<DateTime, ActivityGraphData> result =
           await container.read(activityGraphProvider(start, end).future);
-      expect(result[DateTime.utc(2024, 1, 1)], ActivityLevel.light);
+      final ActivityGraphData? data = result[DateTime.utc(2024, 1, 1)];
+      expect(data?.level, ActivityLevel.light);
+      expect(data?.completed, 1);
+      expect(data?.total, 100);
     });
 
     test('maps 25% to light', () async {
@@ -85,9 +92,12 @@ void main() {
       when(() => mockRepository.getAll()).thenAnswer((_) async => habits);
       when(() => mockRepository.getAllLogs()).thenAnswer((_) async => logs);
 
-      final result =
+      final Map<DateTime, ActivityGraphData> result =
           await container.read(activityGraphProvider(start, end).future);
-      expect(result[DateTime.utc(2024, 1, 1)], ActivityLevel.light);
+      final ActivityGraphData? data = result[DateTime.utc(2024, 1, 1)];
+      expect(data?.level, ActivityLevel.light);
+      expect(data?.completed, 1);
+      expect(data?.total, 4);
     });
 
     test('maps 26% to medium', () async {
@@ -96,9 +106,12 @@ void main() {
       when(() => mockRepository.getAll()).thenAnswer((_) async => habits);
       when(() => mockRepository.getAllLogs()).thenAnswer((_) async => logs);
 
-      final result =
+      final Map<DateTime, ActivityGraphData> result =
           await container.read(activityGraphProvider(start, end).future);
-      expect(result[DateTime.utc(2024, 1, 1)], ActivityLevel.medium);
+      final ActivityGraphData? data = result[DateTime.utc(2024, 1, 1)];
+      expect(data?.level, ActivityLevel.medium);
+      expect(data?.completed, 13);
+      expect(data?.total, 50);
     });
 
     test('maps 60% to medium', () async {
@@ -107,9 +120,12 @@ void main() {
       when(() => mockRepository.getAll()).thenAnswer((_) async => habits);
       when(() => mockRepository.getAllLogs()).thenAnswer((_) async => logs);
 
-      final result =
+      final Map<DateTime, ActivityGraphData> result =
           await container.read(activityGraphProvider(start, end).future);
-      expect(result[DateTime.utc(2024, 1, 1)], ActivityLevel.medium);
+      final ActivityGraphData? data = result[DateTime.utc(2024, 1, 1)];
+      expect(data?.level, ActivityLevel.medium);
+      expect(data?.completed, 3);
+      expect(data?.total, 5);
     });
 
     test('maps 61% to dark', () async {
@@ -118,9 +134,12 @@ void main() {
       when(() => mockRepository.getAll()).thenAnswer((_) async => habits);
       when(() => mockRepository.getAllLogs()).thenAnswer((_) async => logs);
 
-      final result =
+      final Map<DateTime, ActivityGraphData> result =
           await container.read(activityGraphProvider(start, end).future);
-      expect(result[DateTime.utc(2024, 1, 1)], ActivityLevel.dark);
+      final ActivityGraphData? data = result[DateTime.utc(2024, 1, 1)];
+      expect(data?.level, ActivityLevel.dark);
+      expect(data?.completed, 61);
+      expect(data?.total, 100);
     });
 
     test('maps 100% to full', () async {
@@ -129,25 +148,28 @@ void main() {
       when(() => mockRepository.getAll()).thenAnswer((_) async => habits);
       when(() => mockRepository.getAllLogs()).thenAnswer((_) async => logs);
 
-      final result =
+      final Map<DateTime, ActivityGraphData> result =
           await container.read(activityGraphProvider(start, end).future);
-      expect(result[DateTime.utc(2024, 1, 1)], ActivityLevel.full);
+      final ActivityGraphData? data = result[DateTime.utc(2024, 1, 1)];
+      expect(data?.level, ActivityLevel.full);
+      expect(data?.completed, 1);
+      expect(data?.total, 1);
     });
 
     test('returns empty map when no active habits exist', () async {
       when(() => mockRepository.getAll()).thenAnswer((_) async => []);
 
-      final result =
+      final Map<DateTime, ActivityGraphData> result =
           await container.read(activityGraphProvider(start, end).future);
       expect(result, isEmpty);
     });
 
     test('maps multiple days in range independently', () async {
-      final startRange = DateTime(2024, 1, 1);
-      final endRange = DateTime(2024, 1, 3);
+      final DateTime startRange = DateTime(2024, 1, 1);
+      final DateTime endRange = DateTime(2024, 1, 3);
       final habits = generateHabits(4);
 
-      final logs = [
+      final logs = <HabitLog>[
         HabitLog(
           id: 'log-1',
           habitId: 'habit-0',
@@ -195,16 +217,22 @@ void main() {
       when(() => mockRepository.getAll()).thenAnswer((_) async => habits);
       when(() => mockRepository.getAllLogs()).thenAnswer((_) async => logs);
 
-      final result = await container.read(
+      final Map<DateTime, ActivityGraphData> result = await container.read(
         activityGraphProvider(startRange, endRange).future,
       );
 
       // Jan 1: 1/4 = 25% → light
-      expect(result[DateTime.utc(2024, 1, 1)], ActivityLevel.light);
+      expect(result[DateTime.utc(2024, 1, 1)]?.level, ActivityLevel.light);
+      expect(result[DateTime.utc(2024, 1, 1)]?.completed, 1);
+      expect(result[DateTime.utc(2024, 1, 1)]?.total, 4);
       // Jan 2: 2/4 = 50% → medium
-      expect(result[DateTime.utc(2024, 1, 2)], ActivityLevel.medium);
+      expect(result[DateTime.utc(2024, 1, 2)]?.level, ActivityLevel.medium);
+      expect(result[DateTime.utc(2024, 1, 2)]?.completed, 2);
+      expect(result[DateTime.utc(2024, 1, 2)]?.total, 4);
       // Jan 3: 4/4 = 100% → full
-      expect(result[DateTime.utc(2024, 1, 3)], ActivityLevel.full);
+      expect(result[DateTime.utc(2024, 1, 3)]?.level, ActivityLevel.full);
+      expect(result[DateTime.utc(2024, 1, 3)]?.completed, 4);
+      expect(result[DateTime.utc(2024, 1, 3)]?.total, 4);
     });
   });
 }

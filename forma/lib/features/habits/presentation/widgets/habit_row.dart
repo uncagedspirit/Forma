@@ -357,7 +357,7 @@ class _CheckButtonState extends State<_CheckButton>
               ? const Icon(
                   Icons.check,
                   size: 16,
-                  color: Colors.white,
+                  color: AppColors.paper,
                 )
               : null,
         ),

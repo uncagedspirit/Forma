@@ -6,7 +6,7 @@ part of 'activity_graph_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$activityGraphHash() => r'538fbd575d45f11ef36f447de652848aca124366';
+String _$activityGraphHash() => r'2b791e839c205dcccfc1cada44ce0c47521d2121';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -29,7 +29,7 @@ class _SystemHash {
   }
 }
 
-/// Maps daily completion scores to [ActivityLevel] for the GitHub-style
+/// Maps daily completion scores to [ActivityGraphData] for the GitHub-style
 /// contribution graph.
 ///
 /// Thresholds per ARCHITECTURE.md §5:
@@ -43,7 +43,7 @@ class _SystemHash {
 @ProviderFor(activityGraph)
 const activityGraphProvider = ActivityGraphFamily();
 
-/// Maps daily completion scores to [ActivityLevel] for the GitHub-style
+/// Maps daily completion scores to [ActivityGraphData] for the GitHub-style
 /// contribution graph.
 ///
 /// Thresholds per ARCHITECTURE.md §5:
@@ -55,8 +55,8 @@ const activityGraphProvider = ActivityGraphFamily();
 ///
 /// Copied from [activityGraph].
 class ActivityGraphFamily
-    extends Family<AsyncValue<Map<DateTime, ActivityLevel>>> {
-  /// Maps daily completion scores to [ActivityLevel] for the GitHub-style
+    extends Family<AsyncValue<Map<DateTime, ActivityGraphData>>> {
+  /// Maps daily completion scores to [ActivityGraphData] for the GitHub-style
   /// contribution graph.
   ///
   /// Thresholds per ARCHITECTURE.md §5:
@@ -69,7 +69,7 @@ class ActivityGraphFamily
   /// Copied from [activityGraph].
   const ActivityGraphFamily();
 
-  /// Maps daily completion scores to [ActivityLevel] for the GitHub-style
+  /// Maps daily completion scores to [ActivityGraphData] for the GitHub-style
   /// contribution graph.
   ///
   /// Thresholds per ARCHITECTURE.md §5:
@@ -115,7 +115,7 @@ class ActivityGraphFamily
   String? get name => r'activityGraphProvider';
 }
 
-/// Maps daily completion scores to [ActivityLevel] for the GitHub-style
+/// Maps daily completion scores to [ActivityGraphData] for the GitHub-style
 /// contribution graph.
 ///
 /// Thresholds per ARCHITECTURE.md §5:
@@ -127,8 +127,8 @@ class ActivityGraphFamily
 ///
 /// Copied from [activityGraph].
 class ActivityGraphProvider
-    extends AutoDisposeFutureProvider<Map<DateTime, ActivityLevel>> {
-  /// Maps daily completion scores to [ActivityLevel] for the GitHub-style
+    extends AutoDisposeFutureProvider<Map<DateTime, ActivityGraphData>> {
+  /// Maps daily completion scores to [ActivityGraphData] for the GitHub-style
   /// contribution graph.
   ///
   /// Thresholds per ARCHITECTURE.md §5:
@@ -177,7 +177,8 @@ class ActivityGraphProvider
 
   @override
   Override overrideWith(
-    FutureOr<Map<DateTime, ActivityLevel>> Function(ActivityGraphRef provider)
+    FutureOr<Map<DateTime, ActivityGraphData>> Function(
+            ActivityGraphRef provider)
         create,
   ) {
     return ProviderOverride(
@@ -196,7 +197,7 @@ class ActivityGraphProvider
   }
 
   @override
-  AutoDisposeFutureProviderElement<Map<DateTime, ActivityLevel>>
+  AutoDisposeFutureProviderElement<Map<DateTime, ActivityGraphData>>
       createElement() {
     return _ActivityGraphProviderElement(this);
   }
@@ -219,7 +220,7 @@ class ActivityGraphProvider
 }
 
 mixin ActivityGraphRef
-    on AutoDisposeFutureProviderRef<Map<DateTime, ActivityLevel>> {
+    on AutoDisposeFutureProviderRef<Map<DateTime, ActivityGraphData>> {
   /// The parameter `start` of this provider.
   DateTime get start;
 
@@ -228,7 +229,7 @@ mixin ActivityGraphRef
 }
 
 class _ActivityGraphProviderElement
-    extends AutoDisposeFutureProviderElement<Map<DateTime, ActivityLevel>>
+    extends AutoDisposeFutureProviderElement<Map<DateTime, ActivityGraphData>>
     with ActivityGraphRef {
   _ActivityGraphProviderElement(super.provider);
 

@@ -315,7 +315,7 @@ class _CompactCheckButton extends StatelessWidget {
           ? const Icon(
               Icons.check,
               size: 14,
-              color: Colors.white,
+              color: AppColors.paper,
             )
           : null,
     );

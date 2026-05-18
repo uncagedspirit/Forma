@@ -137,7 +137,7 @@ class _DateChip extends ConsumerWidget {
                   ),
                 )
               else
-                const SizedBox(height: 4),
+                const SizedBox(height: AppSpacing.xs),
             ],
           ),
         ),
