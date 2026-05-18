@@ -9,6 +9,7 @@ import 'package:forma/features/premium/presentation/providers/premium_status_pro
 import 'package:forma/features/profile/presentation/providers/user_preferences_provider.dart';
 import 'package:forma/features/stats/presentation/providers/stats_provider.dart';
 import 'package:forma/shared/widgets/forma_modal_sheet.dart';
+import 'package:forma/shared/widgets/inline_error.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
@@ -24,6 +25,10 @@ class ProfileScreen extends ConsumerWidget {
     final prefs = ref.watch(userPreferencesProvider);
     final isPremium = ref.watch(premiumStatusProvider);
     final statsAsync = ref.watch(statsProvider);
+
+    final hasStatsError = statsAsync.hasError;
+    final statsErrorMessage =
+        statsAsync.error?.toString() ?? 'Failed to load stats';
 
     final name = prefs?.name ?? '';
     final firstLetter = name.isNotEmpty ? name[0].toUpperCase() : '?';
@@ -51,6 +56,13 @@ class ProfileScreen extends ConsumerWidget {
               const SizedBox(height: AppSpacing.xl),
               isPremium ? const _PremiumBadge() : const _PremiumCard(),
               const SizedBox(height: AppSpacing.xl),
+              if (hasStatsError) ...[
+                InlineError(
+                  message: statsErrorMessage,
+                  onRetry: () => ref.invalidate(statsProvider),
+                ),
+                const SizedBox(height: AppSpacing.lg),
+              ],
               _SettingsSection(
                 onRemindersTap: () => _showNotificationSettingsSheet(context),
                 onAppearanceTap: () {},

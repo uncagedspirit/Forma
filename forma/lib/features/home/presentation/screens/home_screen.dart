@@ -16,6 +16,7 @@ import 'package:forma/features/home/presentation/providers/selected_date_provide
 import 'package:forma/features/home/presentation/widgets/date_strip.dart';
 import 'package:forma/features/home/presentation/widgets/mood_selector.dart';
 import 'package:forma/features/home/presentation/widgets/progress_ring.dart';
+import 'package:forma/shared/widgets/inline_error.dart';
 import 'package:intl/intl.dart';
 
 /// The main home screen for the Forma habit tracker app.
@@ -31,6 +32,11 @@ class HomeScreen extends ConsumerWidget {
     final habitsAsync = ref.watch(habitsForDateProvider(selectedDate));
     final goalsAsync = ref.watch(goalsProvider);
 
+    final hasError = habitsAsync.hasError || goalsAsync.hasError;
+    final errorMessage = habitsAsync.error?.toString() ??
+        goalsAsync.error?.toString() ??
+        'Something went wrong';
+
     final habits = habitsAsync.valueOrNull ?? const <HabitWithStatus>[];
     final goals = goalsAsync.valueOrNull ?? const <Goal>[];
     final generalHabits = habits.where((h) => h.habit.goalId == null).toList();
@@ -43,6 +49,27 @@ class HomeScreen extends ConsumerWidget {
 
     final isLoading = habitsAsync.isLoading || goalsAsync.isLoading;
     final hasNoContent = habits.isEmpty;
+
+    if (hasError) {
+      return Scaffold(
+        body: SafeArea(
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: AppSpacing.screenHorizontal,
+              ),
+              child: InlineError(
+                message: errorMessage,
+                onRetry: () {
+                  ref.invalidate(habitsForDateProvider(selectedDate));
+                  ref.invalidate(goalsProvider);
+                },
+              ),
+            ),
+          ),
+        ),
+      );
+    }
 
     return Scaffold(
       body: SafeArea(

@@ -10,6 +10,7 @@ import 'package:forma/features/stats/presentation/widgets/habit_completion_bars.
 import 'package:forma/features/stats/presentation/widgets/insights_list.dart';
 import 'package:forma/features/stats/presentation/widgets/mood_week_chart.dart';
 import 'package:forma/features/stats/presentation/widgets/stat_tiles.dart';
+import 'package:forma/shared/widgets/inline_error.dart';
 
 /// The stats screen for the Forma habit tracker app.
 ///
@@ -22,8 +23,30 @@ class StatsScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final yearLabel = DateTime.now().year.toString();
     final statsAsync = ref.watch(statsProvider);
-    final bool showEmptyState = statsAsync.hasValue &&
-        statsAsync.value!.checkInCount < 7;
+
+    final hasError = statsAsync.hasError;
+    final errorMessage =
+        statsAsync.error?.toString() ?? 'Failed to load statistics';
+    final showEmptyState =
+        statsAsync.hasValue && statsAsync.value!.checkInCount < 7;
+
+    if (hasError) {
+      return Scaffold(
+        body: SafeArea(
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: AppSpacing.screenHorizontal,
+              ),
+              child: InlineError(
+                message: errorMessage,
+                onRetry: () => ref.invalidate(statsProvider),
+              ),
+            ),
+          ),
+        ),
+      );
+    }
 
     return Scaffold(
       body: SafeArea(
@@ -31,193 +54,193 @@ class StatsScreen extends ConsumerWidget {
             ? const _StatsEmptyState()
             : CustomScrollView(
                 slivers: <Widget>[
-            // Page title
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(
-                  AppSpacing.screenHorizontal,
-                  AppSpacing.contentTop,
-                  AppSpacing.screenHorizontal,
-                  AppSpacing.md,
-                ),
-                child: Text(
-                  'Statistics',
-                  style: AppTextStyles.displayLarge.copyWith(
-                    color: AppColors.ink,
-                  ),
-                ),
-              ),
-            ),
-            // Stat tiles
-            const SliverToBoxAdapter(
-              child: Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: AppSpacing.screenHorizontal,
-                ),
-                child: StatTiles(),
-              ),
-            ),
-            // Section header: Mood this week
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(
-                  AppSpacing.screenHorizontal,
-                  AppSpacing.lg,
-                  AppSpacing.screenHorizontal,
-                  AppSpacing.md,
-                ),
-                child: Text(
-                  'Mood this week',
-                  style: AppTextStyles.titleMedium.copyWith(
-                    color: AppColors.ink,
-                  ),
-                ),
-              ),
-            ),
-            // Mood week chart
-            const SliverToBoxAdapter(
-              child: Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: AppSpacing.screenHorizontal,
-                ),
-                child: MoodWeekChart(),
-              ),
-            ),
-            // Section header: Habit completion
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(
-                  AppSpacing.screenHorizontal,
-                  AppSpacing.lg,
-                  AppSpacing.screenHorizontal,
-                  AppSpacing.md,
-                ),
-                child: Text(
-                  'Habit completion',
-                  style: AppTextStyles.titleMedium.copyWith(
-                    color: AppColors.ink,
-                  ),
-                ),
-              ),
-            ),
-            // Habit completion bars
-            const SliverToBoxAdapter(
-              child: Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: AppSpacing.screenHorizontal,
-                ),
-                child: HabitCompletionBars(),
-              ),
-            ),
-            // Section header: Insights
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(
-                  AppSpacing.screenHorizontal,
-                  AppSpacing.lg,
-                  AppSpacing.screenHorizontal,
-                  AppSpacing.md,
-                ),
-                child: Text(
-                  'Insights',
-                  style: AppTextStyles.titleMedium.copyWith(
-                    color: AppColors.ink,
-                  ),
-                ),
-              ),
-            ),
-            // Insights list
-            const SliverToBoxAdapter(
-              child: Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: AppSpacing.screenHorizontal,
-                ),
-                child: InsightsList(),
-              ),
-            ),
-            // Section header: Your year
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(
-                  AppSpacing.screenHorizontal,
-                  AppSpacing.lg,
-                  AppSpacing.screenHorizontal,
-                  AppSpacing.md,
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      'Your year',
-                      style: AppTextStyles.titleMedium.copyWith(
-                        color: AppColors.ink,
+                  // Page title
+                  SliverToBoxAdapter(
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(
+                        AppSpacing.screenHorizontal,
+                        AppSpacing.contentTop,
+                        AppSpacing.screenHorizontal,
+                        AppSpacing.md,
+                      ),
+                      child: Text(
+                        'Statistics',
+                        style: AppTextStyles.displayLarge.copyWith(
+                          color: AppColors.ink,
+                        ),
                       ),
                     ),
-                    Text(
-                      yearLabel,
-                      style: AppTextStyles.titleMedium.copyWith(
-                        color: AppColors.ink3,
+                  ),
+                  // Stat tiles
+                  const SliverToBoxAdapter(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: AppSpacing.screenHorizontal,
+                      ),
+                      child: StatTiles(),
+                    ),
+                  ),
+                  // Section header: Mood this week
+                  SliverToBoxAdapter(
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(
+                        AppSpacing.screenHorizontal,
+                        AppSpacing.lg,
+                        AppSpacing.screenHorizontal,
+                        AppSpacing.md,
+                      ),
+                      child: Text(
+                        'Mood this week',
+                        style: AppTextStyles.titleMedium.copyWith(
+                          color: AppColors.ink,
+                        ),
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                  // Mood week chart
+                  const SliverToBoxAdapter(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: AppSpacing.screenHorizontal,
+                      ),
+                      child: MoodWeekChart(),
+                    ),
+                  ),
+                  // Section header: Habit completion
+                  SliverToBoxAdapter(
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(
+                        AppSpacing.screenHorizontal,
+                        AppSpacing.lg,
+                        AppSpacing.screenHorizontal,
+                        AppSpacing.md,
+                      ),
+                      child: Text(
+                        'Habit completion',
+                        style: AppTextStyles.titleMedium.copyWith(
+                          color: AppColors.ink,
+                        ),
+                      ),
+                    ),
+                  ),
+                  // Habit completion bars
+                  const SliverToBoxAdapter(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: AppSpacing.screenHorizontal,
+                      ),
+                      child: HabitCompletionBars(),
+                    ),
+                  ),
+                  // Section header: Insights
+                  SliverToBoxAdapter(
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(
+                        AppSpacing.screenHorizontal,
+                        AppSpacing.lg,
+                        AppSpacing.screenHorizontal,
+                        AppSpacing.md,
+                      ),
+                      child: Text(
+                        'Insights',
+                        style: AppTextStyles.titleMedium.copyWith(
+                          color: AppColors.ink,
+                        ),
+                      ),
+                    ),
+                  ),
+                  // Insights list
+                  const SliverToBoxAdapter(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: AppSpacing.screenHorizontal,
+                      ),
+                      child: InsightsList(),
+                    ),
+                  ),
+                  // Section header: Your year
+                  SliverToBoxAdapter(
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(
+                        AppSpacing.screenHorizontal,
+                        AppSpacing.lg,
+                        AppSpacing.screenHorizontal,
+                        AppSpacing.md,
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            'Your year',
+                            style: AppTextStyles.titleMedium.copyWith(
+                              color: AppColors.ink,
+                            ),
+                          ),
+                          Text(
+                            yearLabel,
+                            style: AppTextStyles.titleMedium.copyWith(
+                              color: AppColors.ink3,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  // Activity graph
+                  const SliverToBoxAdapter(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: AppSpacing.screenHorizontal,
+                      ),
+                      child: ActivityGraph(),
+                    ),
+                  ),
+                  // Legend row
+                  const SliverToBoxAdapter(
+                    child: Padding(
+                      padding: EdgeInsets.fromLTRB(
+                        AppSpacing.screenHorizontal,
+                        AppSpacing.md,
+                        AppSpacing.screenHorizontal,
+                        AppSpacing.lg,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          _LegendItem(
+                            color: AppColors.graphNone,
+                            label: 'None',
+                          ),
+                          SizedBox(width: AppSpacing.md),
+                          _LegendItem(
+                            color: AppColors.graphLight,
+                            label: 'Light',
+                          ),
+                          SizedBox(width: AppSpacing.md),
+                          _LegendItem(
+                            color: AppColors.graphMedium,
+                            label: 'Medium',
+                          ),
+                          SizedBox(width: AppSpacing.md),
+                          _LegendItem(
+                            color: AppColors.graphDark,
+                            label: 'Dark',
+                          ),
+                          SizedBox(width: AppSpacing.md),
+                          _LegendItem(
+                            color: AppColors.graphFull,
+                            label: 'Full',
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  // Bottom breathing room
+                  const SliverToBoxAdapter(
+                    child: SizedBox(height: AppSpacing.xl),
+                  ),
+                ],
               ),
-            ),
-            // Activity graph
-            const SliverToBoxAdapter(
-              child: Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: AppSpacing.screenHorizontal,
-                ),
-                child: ActivityGraph(),
-              ),
-            ),
-            // Legend row
-            const SliverToBoxAdapter(
-              child: Padding(
-                padding: EdgeInsets.fromLTRB(
-                  AppSpacing.screenHorizontal,
-                  AppSpacing.md,
-                  AppSpacing.screenHorizontal,
-                  AppSpacing.lg,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    _LegendItem(
-                      color: AppColors.graphNone,
-                      label: 'None',
-                    ),
-                    SizedBox(width: AppSpacing.md),
-                    _LegendItem(
-                      color: AppColors.graphLight,
-                      label: 'Light',
-                    ),
-                    SizedBox(width: AppSpacing.md),
-                    _LegendItem(
-                      color: AppColors.graphMedium,
-                      label: 'Medium',
-                    ),
-                    SizedBox(width: AppSpacing.md),
-                    _LegendItem(
-                      color: AppColors.graphDark,
-                      label: 'Dark',
-                    ),
-                    SizedBox(width: AppSpacing.md),
-                    _LegendItem(
-                      color: AppColors.graphFull,
-                      label: 'Full',
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            // Bottom breathing room
-            const SliverToBoxAdapter(
-              child: SizedBox(height: AppSpacing.xl),
-            ),
-          ],
-        ),
       ),
     );
   }

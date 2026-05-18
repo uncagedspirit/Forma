@@ -468,9 +468,9 @@ Status key: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 - [x] Commit: `feat(ux): empty state screens`
 
 ### T-062 · Error states
-- [ ] Hive open failure on launch: show a "Storage unavailable" full-screen error with retry
-- [ ] Provider `AsyncError` inline error widgets with retry buttons
-- [ ] Commit: `feat(ux): error state handling`
+- [x] Hive open failure on launch: show a "Storage unavailable" full-screen error with retry
+- [x] Provider `AsyncError` inline error widgets with retry buttons
+- [x] Commit: `feat(ux): error state handling`
 
 ---
 
