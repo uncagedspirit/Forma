@@ -153,27 +153,27 @@ Status key: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 - [x] Commit: `feat(mood/data): MoodRepositoryImpl`
 
 ### T-021 · Use-cases
-- [ ] `AddHabit(repo).call(Habit)` — validates name not empty, assigns UUID, saves
-- [ ] `DeleteHabit(repo).call(id)` — soft-deletes (sets `isArchived=true`)
-- [ ] `CompleteHabit(habitRepo, logRepo).call(habitId, date)` — idempotent, returns existing log if already done
-- [ ] `GetHabitsForDate(repo).call(date)` — returns sorted list with completion status
-- [ ] `ReorderHabits(repo).call(List<String> orderedIds)` — updates sortOrder
-- [ ] `ComputeCompletionRatio(logRepo).call(date)` — returns 0.0–1.0
-- [ ] `ComputeDailyCompletionScores(logRepo).call(start, end)` — returns `Map<DateTime, double>`
-- [ ] `LogMood(moodRepo).call(date, value, note)` — upsert
-- [ ] Unit tests for all use-cases (mock repo with `mocktail`)
-- [ ] Commit: `feat(domain): all v1 use-cases`
+- [x] `AddHabit(repo).call(Habit)` — validates name not empty, assigns UUID, saves
+- [x] `DeleteHabit(repo).call(id)` — soft-deletes (sets `isArchived=true`)
+- [x] `CompleteHabit(habitRepo, logRepo).call(habitId, date)` — idempotent, returns existing log if already done
+- [x] `GetHabitsForDate(repo).call(date)` — returns sorted list with completion status
+- [x] `ReorderHabits(repo).call(List<String> orderedIds)` — updates sortOrder
+- [x] `ComputeCompletionRatio(logRepo).call(date)` — returns 0.0–1.0
+- [x] `ComputeDailyCompletionScores(logRepo).call(start, end)` — returns `Map<DateTime, double>`
+- [x] `LogMood(moodRepo).call(date, value, note)` — upsert
+- [x] Unit tests for all use-cases (mock repo with `mocktail`)
+- [x] Commit: `feat(domain): all v1 use-cases`
 
 ---
 
 ## Phase 4 — State (Riverpod Providers)
 
 ### T-022 · Repository providers
-- [ ] `habitRepositoryProvider` — provides `HabitRepositoryImpl`
-- [ ] `goalRepositoryProvider`
-- [ ] `moodRepositoryProvider`
-- [ ] All `@riverpod`, code-gen
-- [ ] Commit: `feat(providers): repository providers`
+- [x] `habitRepositoryProvider` — provides `HabitRepositoryImpl`
+- [x] `goalRepositoryProvider`
+- [x] `moodRepositoryProvider`
+- [x] All `@riverpod`, code-gen
+- [x] Commit: `feat(providers): repository providers`
 
 ### T-023 · Selected date provider
 - [ ] `SelectedDateNotifier` — holds `DateTime`, `select(date)` method
