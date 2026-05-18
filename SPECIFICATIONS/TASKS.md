@@ -368,11 +368,11 @@ Status key: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 - [x] Commit: `feat(stats): StatTile widgets`
 
 ### T-049 · MoodWeekChart
-- [ ] 7 vertical bars (Mon–Sun), height proportional to mood value (1–5)
-- [ ] Color: sage for 4–5, gold for 3, terra for 1–2
-- [ ] Day label below each bar
-- [ ] Data from `moodWeekProvider`
-- [ ] Commit: `feat(stats): MoodWeekChart widget`
+- [x] 7 vertical bars (Mon–Sun), height proportional to mood value (1–5)
+- [x] Color: sage for 4–5, gold for 3, terra for 1–2
+- [x] Day label below each bar
+- [x] Data from `moodWeekProvider`
+- [x] Commit: `feat(stats): MoodWeekChart widget`
 
 ### T-050 · HabitCompletionBars
 - [ ] Vertical list of habit rows: emoji + name, percentage, colored progress bar
