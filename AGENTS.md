@@ -1,5 +1,11 @@
 # Forma — Permanent Agent Rules
 
+## How to invoke agents
+- `@build go` — default for most TASKS.md work
+- `@architect go` — new features, refactors touching 3+ files
+- `@review go` — after completing a phase group
+- `@scout <question>` — quick "does X exist / where is Y" lookups
+
 ## What this project is
 Flutter 3.22+ habit tracker app. 
 Full specs in: SPECIFICATIONS/ARCHITECTURE.md, SPECIFICATIONS/CODING_STYLE.md, 

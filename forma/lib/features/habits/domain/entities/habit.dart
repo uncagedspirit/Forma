@@ -1,10 +1,9 @@
-import 'package:equatable/equatable.dart';
-
-/// Habit entity representing a user's habit.
+/// A habit entity representing a user's habit.
 ///
 /// This is a pure Dart class with no Flutter or Hive dependencies.
-/// Used throughout the domain and presentation layers.
-class Habit extends Equatable {
+/// It represents the domain concept of a habit that a user wants to track.
+class Habit {
+  /// Creates a [Habit] with the given properties.
   const Habit({
     required this.id,
     required this.name,
@@ -18,17 +17,37 @@ class Habit extends Equatable {
     this.isArchived = false,
   });
 
+  /// Unique identifier for the habit.
   final String id;
+
+  /// Display name of the habit.
   final String name;
+
+  /// Emoji icon representing the habit.
   final String icon;
+
+  /// Optional goal ID this habit belongs to.
   final String? goalId;
+
+  /// Hex color string for the habit's visual representation.
   final String color;
+
+  /// Sort order for displaying habits in lists.
   final int sortOrder;
+
+  /// Optional reminder time in HH:mm format.
   final String? reminderTime;
+
+  /// Optional custom reminder message.
   final String? reminderMessage;
+
+  /// When the habit was created.
   final DateTime createdAt;
+
+  /// Whether the habit is archived (soft-deleted).
   final bool isArchived;
 
+  /// Creates a copy of this habit with the given fields replaced.
   Habit copyWith({
     String? id,
     String? name,
@@ -56,16 +75,40 @@ class Habit extends Equatable {
   }
 
   @override
-  List<Object?> get props => [
-    id,
-    name,
-    icon,
-    goalId,
-    color,
-    sortOrder,
-    reminderTime,
-    reminderMessage,
-    createdAt,
-    isArchived,
-  ];
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    return other is Habit &&
+        other.id == id &&
+        other.name == name &&
+        other.icon == icon &&
+        other.goalId == goalId &&
+        other.color == color &&
+        other.sortOrder == sortOrder &&
+        other.reminderTime == reminderTime &&
+        other.reminderMessage == reminderMessage &&
+        other.createdAt == createdAt &&
+        other.isArchived == isArchived;
+  }
+
+  @override
+  int get hashCode {
+    return Object.hash(
+      id,
+      name,
+      icon,
+      goalId,
+      color,
+      sortOrder,
+      reminderTime,
+      reminderMessage,
+      createdAt,
+      isArchived,
+    );
+  }
+
+  @override
+  String toString() {
+    return 'Habit(id: $id, name: $name, icon: $icon, goalId: $goalId, '
+        'color: $color, sortOrder: $sortOrder, isArchived: $isArchived)';
+  }
 }

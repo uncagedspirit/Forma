@@ -1,9 +1,9 @@
-import 'package:equatable/equatable.dart';
-
-/// HabitLog entity representing a habit completion record.
+/// A log entry representing a completed habit instance.
 ///
 /// This is a pure Dart class with no Flutter or Hive dependencies.
-class HabitLog extends Equatable {
+/// It records when a habit was completed and any associated metadata.
+class HabitLog {
+  /// Creates a [HabitLog] with the given properties.
   const HabitLog({
     required this.id,
     required this.habitId,
@@ -13,13 +13,25 @@ class HabitLog extends Equatable {
     this.note,
   });
 
+  /// Unique identifier for the log entry.
   final String id;
+
+  /// ID of the habit that was completed.
   final String habitId;
+
+  /// The date this log represents (normalized to midnight UTC).
   final DateTime date;
+
+  /// Exact timestamp when the habit was marked complete.
   final DateTime completedAt;
+
+  /// Optional path to a photo taken during completion.
   final String? photoPath;
+
+  /// Optional note entered by the user.
   final String? note;
 
+  /// Creates a copy of this log with the given fields replaced.
   HabitLog copyWith({
     String? id,
     String? habitId,
@@ -39,12 +51,32 @@ class HabitLog extends Equatable {
   }
 
   @override
-  List<Object?> get props => [
-    id,
-    habitId,
-    date,
-    completedAt,
-    photoPath,
-    note,
-  ];
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    return other is HabitLog &&
+        other.id == id &&
+        other.habitId == habitId &&
+        other.date == date &&
+        other.completedAt == completedAt &&
+        other.photoPath == photoPath &&
+        other.note == note;
+  }
+
+  @override
+  int get hashCode {
+    return Object.hash(
+      id,
+      habitId,
+      date,
+      completedAt,
+      photoPath,
+      note,
+    );
+  }
+
+  @override
+  String toString() {
+    return 'HabitLog(id: $id, habitId: $habitId, date: $date, '
+        'completedAt: $completedAt)';
+  }
 }

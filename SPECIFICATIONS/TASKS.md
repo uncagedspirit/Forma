@@ -127,12 +127,12 @@ Status key: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 ## Phase 3 — Domain Layer
 
 ### T-017 · Habit entity + domain interfaces
-- [ ] Create `Habit` entity (pure Dart, no Flutter, no Hive)
-- [ ] Create `HabitLog` entity
-- [ ] Create `HabitRepository` abstract interface — full method set per architecture doc
-- [ ] Create `Goal` entity + `GoalRepository` interface
-- [ ] Create `MoodEntry` entity + `MoodRepository` interface
-- [ ] Commit: `feat(domain): Habit, Goal, Mood entities and repository interfaces`
+- [x] Create `Habit` entity (pure Dart, no Flutter, no Hive)
+- [x] Create `HabitLog` entity
+- [x] Create `HabitRepository` abstract interface — full method set per architecture doc
+- [x] Create `Goal` entity + `GoalRepository` interface
+- [x] Create `MoodEntry` entity + `MoodRepository` interface
+- [x] Commit: `feat(domain): Habit, Goal, Mood entities and repository interfaces`
 
 ### T-018 · HabitRepository implementation
 - [ ] Implement `HabitRepositoryImpl` backed by Hive `habitsBox` + `logsBox`
