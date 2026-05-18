@@ -15,4 +15,7 @@ class AppDurations {
 
   /// 800 ms — Spring animations (progress ring, check button)
   static const Duration spring = Duration(milliseconds: 800);
+
+  /// 1500 ms — Shimmer animations, loading placeholders
+  static const Duration shimmer = Duration(milliseconds: 1500);
 }

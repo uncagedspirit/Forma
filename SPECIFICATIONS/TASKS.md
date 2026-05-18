@@ -253,9 +253,9 @@ Status key: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 - [x] Commit: `feat(shared): EmojiPicker widget`
 
 ### T-035 · SkeletonLoader
-- [ ] Shimmering placeholder matching HabitRow dimensions
-- [ ] Used while `habitsForDateProvider` is loading
-- [ ] Commit: `feat(shared): SkeletonLoader`
+- [x] Shimmering placeholder matching HabitRow dimensions
+- [x] Used while `habitsForDateProvider` is loading
+- [x] Commit: `feat(shared): SkeletonLoader`
 
 ### T-036 · ConfettiOverlay
 - [ ] Positioned confetti burst at a given screen coordinate
