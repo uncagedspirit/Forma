@@ -243,9 +243,9 @@ Status key: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 - [x] Commit: `feat(shared): FormaModalSheet`
 
 ### T-033 · FormaTextField
-- [ ] Styled text input matching design system
-- [ ] Supports `error` state (terra border), `placeholder`, `onChanged`
-- [ ] Commit: `feat(shared): FormaTextField`
+- [x] Styled text input matching design system
+- [x] Supports `error` state (terra border), `placeholder`, `onChanged`
+- [x] Commit: `feat(shared): FormaTextField`
 
 ### T-034 · EmojiPicker
 - [ ] Grid of emoji options, single selection, animated selection state
