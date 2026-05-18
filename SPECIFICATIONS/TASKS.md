@@ -176,9 +176,9 @@ Status key: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 - [x] Commit: `feat(providers): repository providers`
 
 ### T-023 · Selected date provider
-- [ ] `SelectedDateNotifier` — holds `DateTime`, `select(date)` method
-- [ ] Default: `DateTime.now()`
-- [ ] Commit: `feat(providers): selected date provider`
+- [x] `SelectedDateNotifier` — holds `DateTime`, `select(date)` method
+- [x] Default: `DateTime.now()`
+- [x] Commit: `feat(providers): selected date provider`
 
 ### T-024 · Habits providers
 - [ ] `habitsForDateProvider(DateTime date)` — async, watches `habitRepositoryProvider`
