@@ -248,9 +248,9 @@ Status key: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 - [x] Commit: `feat(shared): FormaTextField`
 
 ### T-034 · EmojiPicker
-- [ ] Grid of emoji options, single selection, animated selection state
-- [ ] `EMOJIS` list from prototype (20 emojis, expandable)
-- [ ] Commit: `feat(shared): EmojiPicker widget`
+- [x] Grid of emoji options, single selection, animated selection state
+- [x] `EMOJIS` list from prototype (20 emojis, expandable)
+- [x] Commit: `feat(shared): EmojiPicker widget`
 
 ### T-035 · SkeletonLoader
 - [ ] Shimmering placeholder matching HabitRow dimensions
