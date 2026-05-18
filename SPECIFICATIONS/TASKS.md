@@ -487,10 +487,10 @@ Status key: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 - [x] Commit: `feat(assets): splash screen`
 
 ### T-065 · Build & sign
-- [ ] iOS: create provisioning profile, configure `ExportOptions.plist`
-- [ ] Android: create keystore, configure `key.properties`, sign release build
-- [ ] Test release build on physical device (debug flags off)
-- [ ] Commit: `chore: release signing configuration`
+- [x] iOS: create provisioning profile, configure `ExportOptions.plist`
+- [x] Android: create keystore, configure `key.properties`, sign release build
+- [x] Test release build on physical device (debug flags off)
+- [x] Commit: `chore: release signing configuration`
 
 ### T-066 · Store metadata
 - [ ] App Store: title, subtitle, description, keywords, screenshots (6.5", 5.5")
