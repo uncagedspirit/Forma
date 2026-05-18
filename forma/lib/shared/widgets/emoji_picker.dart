@@ -60,31 +60,41 @@ class _EmojiCell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cell = Container(
+      width: 48,
+      height: 48,
+      decoration: BoxDecoration(
+        color: isSelected ? AppColors.ink : Colors.transparent,
+        shape: BoxShape.circle,
+      ),
+      child: Center(
+        child: Text(
+          emoji,
+          style: const TextStyle(fontSize: 24),
+          textAlign: TextAlign.center,
+        ),
+      ),
+    );
+
+    if (!MediaQuery.of(context).disableAnimations) {
+      return GestureDetector(
+        onTap: onTap,
+        behavior: HitTestBehavior.opaque,
+        child: cell
+            .animate(target: isSelected ? 1 : 0)
+            .scale(
+              begin: const Offset(1, 1),
+              end: const Offset(1.2, 1.2),
+              duration: AppDurations.normal,
+              curve: Curves.easeOut,
+            ),
+      );
+    }
+
     return GestureDetector(
       onTap: onTap,
       behavior: HitTestBehavior.opaque,
-      child: Container(
-        width: 48,
-        height: 48,
-        decoration: BoxDecoration(
-          color: isSelected ? AppColors.ink : Colors.transparent,
-          shape: BoxShape.circle,
-        ),
-        child: Center(
-          child: Text(
-            emoji,
-            style: const TextStyle(fontSize: 24),
-            textAlign: TextAlign.center,
-          ),
-        ),
-      )
-          .animate(target: isSelected ? 1 : 0)
-          .scale(
-            begin: const Offset(1, 1),
-            end: const Offset(1.2, 1.2),
-            duration: AppDurations.normal,
-            curve: Curves.easeOut,
-          ),
+      child: cell,
     );
   }
 }

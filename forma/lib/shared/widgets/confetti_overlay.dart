@@ -56,6 +56,7 @@ class ConfettiOverlay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final random = Random(position.hashCode);
+    final disableAnimations = MediaQuery.of(context).disableAnimations;
     final particles = List<Widget>.generate(particleCount, (index) {
       final size = 4.0 + random.nextDouble() * 4.0;
       final color = _colors[random.nextInt(_colors.length)];
@@ -65,7 +66,7 @@ class ConfettiOverlay extends StatelessWidget {
       final dy = sin(angle) * distance - 40.0;
       final rotation = random.nextDouble() * 4 * pi;
 
-      return Positioned(
+      final particle = Positioned(
         left: position.dx - size / 2,
         top: position.dy - size / 2,
         child: Container(
@@ -75,7 +76,11 @@ class ConfettiOverlay extends StatelessWidget {
             color: color,
             shape: BoxShape.circle,
           ),
-        )
+        ),
+      );
+
+      if (!disableAnimations) {
+        return particle
             .animate()
             .moveX(
               end: dx,
@@ -99,8 +104,10 @@ class ConfettiOverlay extends StatelessWidget {
               end: const Offset(0, 0),
               duration: AppDurations.slow,
               curve: Curves.easeIn,
-            ),
-      );
+            );
+      }
+
+      return particle;
     });
 
     return Stack(children: particles);

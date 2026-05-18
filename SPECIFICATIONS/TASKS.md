@@ -440,9 +440,9 @@ Status key: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 ## Phase 13 — Polish & QA
 
 ### T-057 · Reduced motion support
-- [ ] Wrap all `flutter_animate` calls with `MediaQuery.of(context).disableAnimations` check
-- [ ] Test on iOS Reduce Motion setting and Android Remove animations setting
-- [ ] Commit: `fix(a11y): respect reduce motion preference`
+- [x] Wrap all `flutter_animate` calls with `MediaQuery.of(context).disableAnimations` check
+- [x] Test on iOS Reduce Motion setting and Android Remove animations setting
+- [x] Commit: `fix(a11y): respect reduce motion preference`
 
 ### T-058 · Accessibility audit
 - [ ] Add `Semantics` labels to all custom check buttons, mood dots, activity graph cells

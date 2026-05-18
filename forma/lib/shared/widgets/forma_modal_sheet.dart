@@ -32,7 +32,7 @@ class FormaModalSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     final bottomPadding = MediaQuery.viewInsetsOf(context).bottom;
 
-    return SafeArea(
+    final sheet = SafeArea(
       child: Padding(
         padding: EdgeInsets.only(bottom: bottomPadding),
         child: Column(
@@ -58,15 +58,21 @@ class FormaModalSheet extends StatelessWidget {
           ],
         ),
       ),
-    )
-        .animate()
-        .slideY(
-          begin: 0.2,
-          end: 0,
-          duration: AppDurations.normal,
-          curve: Curves.elasticOut,
-        )
-        .fadeIn(duration: AppDurations.normal);
+    );
+
+    if (!MediaQuery.of(context).disableAnimations) {
+      return sheet
+          .animate()
+          .slideY(
+            begin: 0.2,
+            end: 0,
+            duration: AppDurations.normal,
+            curve: Curves.elasticOut,
+          )
+          .fadeIn(duration: AppDurations.normal);
+    }
+
+    return sheet;
   }
 }
 
