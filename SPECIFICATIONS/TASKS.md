@@ -302,19 +302,19 @@ Status key: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 - [x] Commit: `feat(habits): HabitRow widget`
 
 ### T-041 · MiniHeatRow widget
-- [ ] 7 cells (last 7 days), 5×5 dp each, 2 dp gap
-- [ ] Sage fill for done, `paper3` for not done
-- [ ] Data from `HabitLog` history joined per habit
-- [ ] Commit: `feat(habits): MiniHeatRow widget`
+- [x] 7 cells (last 7 days), 5×5 dp each, 2 dp gap
+- [x] Sage fill for done, `paper3` for not done
+- [x] Data from `HabitLog` history joined per habit
+- [x] Commit: `feat(habits): MiniHeatRow widget`
 
 ### T-042 · GoalBlock widget
-- [ ] Goal header (color bar, title, done/total, pct)
-- [ ] Progress bar (thin, fills to goal color)
-- [ ] Collapsible habit list
-- [ ] Each habit row: `goal-habit-row` variant (compact)
-- [ ] "Add habit to this goal" row at bottom
-- [ ] Watches `goalsProvider`
-- [ ] Commit: `feat(goals): GoalBlock widget`
+- [x] Goal header (color bar, title, done/total, pct)
+- [x] Progress bar (thin, fills to goal color)
+- [x] Collapsible habit list
+- [x] Each habit row: `goal-habit-row` variant (compact)
+- [x] "Add habit to this goal" row at bottom
+- [x] Watches `goalsProvider`
+- [x] Commit: `feat(goals): GoalBlock widget`
 
 ### T-043 · AddHabitSheet
 - [ ] FormaModalSheet wrapper
