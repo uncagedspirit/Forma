@@ -268,13 +268,13 @@ Status key: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 ## Phase 7 — Home Screen
 
 ### T-037 · DateStrip widget
-- [ ] 7 chips: 3 past + today + 3 future
-- [ ] Today chip: ink background, paper text
-- [ ] Past chips with data: `paper2` background, `line2` border
-- [ ] Future chips: transparent
-- [ ] Tapping a past/future chip updates `selectedDateProvider`
-- [ ] Chip dot shows if that day has any completions
-- [ ] Commit: `feat(home): DateStrip widget`
+- [x] 7 chips: 3 past + today + 3 future
+- [x] Today chip: ink background, paper text
+- [x] Past chips with data: `paper2` background, `line2` border
+- [x] Future chips: transparent
+- [x] Tapping a past/future chip updates `selectedDateProvider`
+- [x] Chip dot shows if that day has any completions
+- [x] Commit: `feat(home): DateStrip widget`
 
 ### T-038 · MoodSelector widget
 - [ ] 5 emoji dots, single selection
