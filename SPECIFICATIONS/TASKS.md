@@ -396,12 +396,12 @@ Status key: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 ## Phase 10 — Profile Screen
 
 ### T-053 · ProfileScreen
-- [ ] Avatar ring (first letter of name, ink bg)
-- [ ] Name, member-since date, streak display
-- [ ] Premium block (upgrade CTA if not premium)
-- [ ] Settings rows (Reminders, Appearance, Export, Backup)
-- [ ] Reminders row → opens NotificationSettingsSheet (v2)
-- [ ] Commit: `feat(profile): ProfileScreen`
+- [x] Avatar ring (first letter of name, ink bg)
+- [x] Name, member-since date, streak display
+- [x] Premium block (upgrade CTA if not premium)
+- [x] Settings rows (Reminders, Appearance, Export, Backup)
+- [x] Reminders row → opens NotificationSettingsSheet (v2)
+- [x] Commit: `feat(profile): ProfileScreen`
 
 ### T-054 · Paywall screen
 - [ ] Full-screen sheet from `paywallRoute`
