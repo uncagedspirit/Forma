@@ -231,11 +231,11 @@ Status key: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 ## Phase 6 — Shared Widgets
 
 ### T-031 · FormaBottomNav
-- [ ] Implements the bottom nav from the prototype exactly
-- [ ] `ShellRoute`-aware (uses `GoRouter.of(context).location`)
-- [ ] FAB triggers `AddHabitSheet`
-- [ ] Correct safe-area bottom padding
-- [ ] Commit: `feat(shared): FormaBottomNav`
+- [x] Implements the bottom nav from the prototype exactly
+- [x] `ShellRoute`-aware (uses `GoRouter.of(context).location`)
+- [x] FAB triggers `AddHabitSheet`
+- [x] Correct safe-area bottom padding
+- [x] Commit: `feat(shared): FormaBottomNav`
 
 ### T-032 · FormaModalSheet
 - [ ] Reusable bottom sheet wrapper (handle bar, padding, spring animation)

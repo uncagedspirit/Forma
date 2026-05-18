@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:forma/core/router/scaffold_with_nav.dart';
 import 'package:forma/core/storage/hive_service.dart';
 import 'package:forma/features/goals/presentation/screens/add_goal_screen.dart';
 import 'package:forma/features/goals/presentation/screens/goal_detail_screen.dart';
@@ -10,6 +9,7 @@ import 'package:forma/features/onboarding/presentation/screens/onboarding_screen
 import 'package:forma/features/premium/presentation/screens/paywall_screen.dart';
 import 'package:forma/features/profile/presentation/screens/profile_screen.dart';
 import 'package:forma/features/stats/presentation/screens/stats_screen.dart';
+import 'package:forma/shared/widgets/forma_bottom_nav.dart';
 import 'package:go_router/go_router.dart';
 
 // ---------------------------------------------------------------------------
@@ -50,9 +50,9 @@ const String paywallRoute = '/premium';
 /// The global GoRouter instance for Forma.
 ///
 /// Redirects un-onboarded users to `onboardingRoute` regardless of the
-/// requested location. The shell routes (home, stats, profile) are wrapped
-/// in a ShellRoute that provides the persistent bottom navigation via
-/// ScaffoldWithNav.
+  /// requested location. The shell routes (home, stats, profile) are wrapped
+  /// in a ShellRoute that provides the persistent bottom navigation via
+  /// FormaBottomNav.
 final GoRouter appRouter = GoRouter(
   initialLocation: homeRoute,
   redirect: (BuildContext context, GoRouterState state) {
@@ -77,7 +77,7 @@ final GoRouter appRouter = GoRouter(
         GoRouterState state,
         Widget child,
       ) {
-        return ScaffoldWithNav(child: child);
+        return FormaBottomNav(child: child);
       },
       routes: <RouteBase>[
         GoRoute(
