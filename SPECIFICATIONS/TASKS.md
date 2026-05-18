@@ -148,9 +148,9 @@ Status key: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 - [x] Commit: `feat(goals/data): GoalRepositoryImpl`
 
 ### T-020 · MoodRepository implementation
-- [ ] `MoodRepositoryImpl` backed by `moodBox` — one entry per date
-- [ ] Unit tests
-- [ ] Commit: `feat(mood/data): MoodRepositoryImpl`
+- [x] `MoodRepositoryImpl` backed by `moodBox` — one entry per date
+- [x] Unit tests
+- [x] Commit: `feat(mood/data): MoodRepositoryImpl`
 
 ### T-021 · Use-cases
 - [ ] `AddHabit(repo).call(Habit)` — validates name not empty, assigns UUID, saves
