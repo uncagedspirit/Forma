@@ -211,9 +211,9 @@ Status key: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 - [x] Commit: `feat(stats/providers): stats providers`
 
 ### T-029 · Premium status provider
-- [ ] `premiumStatusProvider` — reads `UserPreferencesModel.isPremium` from Hive
-- [ ] Returns bool — no async needed (Hive is sync after open)
-- [ ] Commit: `feat(premium): premium status provider`
+- [x] `premiumStatusProvider` — reads `UserPreferencesModel.isPremium` from Hive
+- [x] Returns bool — no async needed (Hive is sync after open)
+- [x] Commit: `feat(premium): premium status provider`
 
 ---
 
