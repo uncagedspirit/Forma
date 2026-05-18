@@ -258,10 +258,10 @@ Status key: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 - [x] Commit: `feat(shared): SkeletonLoader`
 
 ### T-036 · ConfettiOverlay
-- [ ] Positioned confetti burst at a given screen coordinate
-- [ ] Uses `flutter_animate` with random trajectories
-- [ ] Colors from `AppColors` accent set
-- [ ] Commit: `feat(shared): ConfettiOverlay`
+- [x] Positioned confetti burst at a given screen coordinate
+- [x] Uses `flutter_animate` with random trajectories
+- [x] Colors from `AppColors` accent set
+- [x] Commit: `feat(shared): ConfettiOverlay`
 
 ---
 
