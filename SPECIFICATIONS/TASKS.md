@@ -285,13 +285,13 @@ Status key: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 - [x] Commit: `feat(home): MoodSelector widget`
 
 ### T-039 · ProgressRing widget
-- [ ] Animated SVG-equivalent in Flutter (`CustomPainter`)
-- [ ] Stroke: sage color, round cap
-- [ ] Spring animation on value change (800 ms)
-- [ ] Center: Fraunces number + "OF N" label
-- [ ] Side: title, remaining caption, streak line
-- [ ] Watches `habitsForDateProvider(selectedDate)` for done/total count
-- [ ] Commit: `feat(home): ProgressRing widget`
+- [x] Animated SVG-equivalent in Flutter (`CustomPainter`)
+- [x] Stroke: sage color, round cap
+- [x] Spring animation on value change (800 ms)
+- [x] Center: Fraunces number + "OF N" label
+- [x] Side: title, remaining caption, streak line
+- [x] Watches `habitsForDateProvider(selectedDate)` for done/total count
+- [x] Commit: `feat(home): ProgressRing widget`
 
 ### T-040 · HabitRow widget
 - [ ] Icon (emoji), name, streak + heat-row, check button
