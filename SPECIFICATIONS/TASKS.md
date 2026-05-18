@@ -294,12 +294,12 @@ Status key: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 - [x] Commit: `feat(home): ProgressRing widget`
 
 ### T-040 · HabitRow widget
-- [ ] Icon (emoji), name, streak + heat-row, check button
-- [ ] Check button: tap → scale animation + confetti + completion provider call
-- [ ] Idempotent: already-done check button is visually locked, no re-trigger
-- [ ] `void` tag shown for habits that haven't been done in 3+ days
-- [ ] Long-press → options bottom sheet (skip today, edit, delete)
-- [ ] Commit: `feat(habits): HabitRow widget`
+- [x] Icon (emoji), name, streak + heat-row, check button
+- [x] Check button: tap → scale animation + confetti + completion provider call
+- [x] Idempotent: already-done check button is visually locked, no re-trigger
+- [x] `void` tag shown for habits that haven't been done in 3+ days
+- [x] Long-press → options bottom sheet (skip today, edit, delete)
+- [x] Commit: `feat(habits): HabitRow widget`
 
 ### T-041 · MiniHeatRow widget
 - [ ] 7 cells (last 7 days), 5×5 dp each, 2 dp gap
