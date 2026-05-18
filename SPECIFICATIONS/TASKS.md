@@ -353,10 +353,10 @@ Status key: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 - [x] Commit: `feat(activity-graph): ActivityGraph widget`
 
 ### T-047 · ActivityGraph screen section (Stats screen)
-- [ ] Integrate `ActivityGraph` widget in StatsScreen below the stat tiles
-- [ ] Section header: "Your year" with year label
-- [ ] Legend row: empty → light → medium → dark → full (5 cells + labels)
-- [ ] Commit: `feat(stats): integrate ActivityGraph in StatsScreen`
+- [x] Integrate `ActivityGraph` widget in StatsScreen below the stat tiles
+- [x] Section header: "Your year" with year label
+- [x] Legend row: empty → light → medium → dark → full (5 cells + labels)
+- [x] Commit: `feat(stats): integrate ActivityGraph in StatsScreen`
 
 ---
 
