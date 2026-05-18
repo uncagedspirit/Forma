@@ -4,11 +4,35 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'habit_completion_rates_provider.g.dart';
 
+/// Per-habit completion rate over the last 30 days.
+class HabitCompletionRate {
+  /// Creates a [HabitCompletionRate] with the given properties.
+  const HabitCompletionRate({
+    required this.id,
+    required this.name,
+    required this.icon,
+    required this.rate,
+  });
+
+  /// Unique identifier for the habit.
+  final String id;
+
+  /// Display name of the habit.
+  final String name;
+
+  /// Emoji icon representing the habit.
+  final String icon;
+
+  /// Completion percentage over the last 30 days (0.0 to 1.0).
+  final double rate;
+}
+
 /// Computes per-habit completion percentage over the last 30 days.
 ///
-/// Returns a map of habitId -> percentage (0.0 to 1.0).
+/// Returns a list of [HabitCompletionRate] sorted by rate descending,
+/// then by habit name alphabetically.
 @riverpod
-Future<Map<String, double>> habitCompletionRates(
+Future<List<HabitCompletionRate>> habitCompletionRates(
   HabitCompletionRatesRef ref,
 ) async {
   final HabitRepository repo = ref.watch(habitRepositoryProvider);
@@ -33,11 +57,24 @@ Future<Map<String, double>> habitCompletionRates(
     logsByHabit[log.habitId]!.add(logDate);
   }
 
-  final result = <String, double>{};
+  final result = <HabitCompletionRate>[];
   for (final habit in activeHabits) {
     final completedDays = logsByHabit[habit.id]?.length ?? 0;
-    result[habit.id] = (completedDays / 30).clamp(0.0, 1.0);
+    result.add(
+      HabitCompletionRate(
+        id: habit.id,
+        name: habit.name,
+        icon: habit.icon,
+        rate: (completedDays / 30).clamp(0.0, 1.0),
+      ),
+    );
   }
+
+  result.sort((a, b) {
+    final rateCompare = b.rate.compareTo(a.rate);
+    if (rateCompare != 0) return rateCompare;
+    return a.name.compareTo(b.name);
+  });
 
   return result;
 }

@@ -375,10 +375,10 @@ Status key: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 - [x] Commit: `feat(stats): MoodWeekChart widget`
 
 ### T-050 · HabitCompletionBars
-- [ ] Vertical list of habit rows: emoji + name, percentage, colored progress bar
-- [ ] Sorted by completion % descending
-- [ ] Data from `habitCompletionRatesProvider`
-- [ ] Commit: `feat(stats): HabitCompletionBars widget`
+- [x] Vertical list of habit rows: emoji + name, percentage, colored progress bar
+- [x] Sorted by completion % descending
+- [x] Data from `habitCompletionRatesProvider`
+- [x] Commit: `feat(stats): HabitCompletionBars widget`
 
 ### T-051 · InsightsList
 - [ ] 3–5 insight cards (sage/terra/gold dots, text)
