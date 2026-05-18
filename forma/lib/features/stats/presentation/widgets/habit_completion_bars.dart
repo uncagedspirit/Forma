@@ -120,7 +120,7 @@ class _AnimatedProgressBar extends StatelessWidget {
       height: 4,
       decoration: BoxDecoration(
         color: AppColors.paper2,
-        borderRadius: BorderRadius.circular(AppBorderRadius.rFull),
+        borderRadius: AppBorderRadius.full,
       ),
       child: Align(
         alignment: Alignment.centerLeft,
@@ -134,7 +134,7 @@ class _AnimatedProgressBar extends StatelessWidget {
                 height: 4,
                 decoration: BoxDecoration(
                   color: AppColors.sage,
-                  borderRadius: BorderRadius.circular(AppBorderRadius.rFull),
+                  borderRadius: AppBorderRadius.full,
                 ),
               ),
             );

@@ -24,8 +24,10 @@ class InsightsList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final now = DateTime.now();
+    final today = DateTime.utc(now.year, now.month, now.day);
     final statsAsync = ref.watch(statsProvider);
-    final habitsAsync = ref.watch(habitsForDateProvider(DateTime.now()));
+    final habitsAsync = ref.watch(habitsForDateProvider(today));
     final moodWeekAsync = ref.watch(moodWeekProvider);
     final completionRatesAsync = ref.watch(habitCompletionRatesProvider);
     final goalsAsync = ref.watch(goalsProvider);
@@ -38,6 +40,16 @@ class InsightsList extends ConsumerWidget {
 
     if (isLoading) {
       return const _LoadingInsightsList();
+    }
+
+    final hasError = statsAsync.hasError ||
+        habitsAsync.hasError ||
+        moodWeekAsync.hasError ||
+        completionRatesAsync.hasError ||
+        goalsAsync.hasError;
+
+    if (hasError) {
+      return const _InsightsError();
     }
 
     final stats = statsAsync.valueOrNull;
@@ -253,6 +265,39 @@ class _LoadingInsightsList extends StatelessWidget {
           borderRadius: AppBorderRadius.regular,
         ),
       ],
+    );
+  }
+}
+
+class _InsightsError extends StatelessWidget {
+  const _InsightsError();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: AppColors.paper2,
+        borderRadius: AppBorderRadius.regular,
+      ),
+      padding: const EdgeInsets.all(AppSpacing.md),
+      child: Row(
+        children: [
+          const Icon(
+            Icons.error_outline,
+            color: AppColors.terra,
+            size: 20,
+          ),
+          const SizedBox(width: AppSpacing.sm),
+          Expanded(
+            child: Text(
+              'Unable to load insights',
+              style: AppTextStyles.bodyMedium.copyWith(
+                color: AppColors.ink2,
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

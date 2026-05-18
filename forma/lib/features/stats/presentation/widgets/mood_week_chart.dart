@@ -103,7 +103,7 @@ class _MoodBar extends StatelessWidget {
           height: 100,
           decoration: BoxDecoration(
             color: AppColors.paper2,
-            borderRadius: BorderRadius.circular(AppBorderRadius.rSm),
+            borderRadius: AppBorderRadius.small,
           ),
           child: Align(
             alignment: Alignment.bottomCenter,
@@ -193,7 +193,7 @@ class _MoodWeekChartError extends StatelessWidget {
               height: 100,
               decoration: BoxDecoration(
                 color: AppColors.paper2,
-                borderRadius: BorderRadius.circular(AppBorderRadius.rSm),
+                borderRadius: AppBorderRadius.small,
               ),
             ),
             const SizedBox(height: AppSpacing.sm),
