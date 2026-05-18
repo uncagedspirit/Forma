@@ -181,11 +181,11 @@ Status key: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 - [x] Commit: `feat(providers): selected date provider`
 
 ### T-024 · Habits providers
-- [ ] `habitsForDateProvider(DateTime date)` — async, watches `habitRepositoryProvider`
-- [ ] `habitCompletionProvider` — `AsyncNotifier`, exposes `complete(habitId, date)` with optimistic update
-- [ ] Invalidates `habitsForDateProvider` on completion
-- [ ] Unit tests using `ProviderContainer`
-- [ ] Commit: `feat(habits/providers): habits for date + completion`
+- [x] `habitsForDateProvider(DateTime date)` — async, watches `habitRepositoryProvider`
+- [x] `habitCompletionProvider` — `AsyncNotifier`, exposes `complete(habitId, date)` with optimistic update
+- [x] Invalidates `habitsForDateProvider` on completion
+- [x] Unit tests using `ProviderContainer`
+- [x] Commit: `feat(habits/providers): habits for date + completion`
 
 ### T-025 · Goals provider
 - [ ] `goalsProvider` — list of goals with their habits
