@@ -101,7 +101,10 @@ class HomeScreen extends ConsumerWidget {
                                 padding: const EdgeInsets.only(
                                   bottom: AppSpacing.md,
                                 ),
-                                child: GoalBlock(goal: goal),
+                                child: GoalBlock(
+                                  key: ValueKey(goal.id),
+                                  goal: goal,
+                                ),
                               );
                             }).toList(),
                           ),
@@ -111,7 +114,10 @@ class HomeScreen extends ConsumerWidget {
                           delegate: SliverChildBuilderDelegate(
                             (context, index) {
                               final habit = generalHabits[index];
-                              return HabitRow(habitWithStatus: habit);
+                              return HabitRow(
+                                key: ValueKey(habit.habit.id),
+                                habitWithStatus: habit,
+                              );
                             },
                             childCount: generalHabits.length,
                           ),

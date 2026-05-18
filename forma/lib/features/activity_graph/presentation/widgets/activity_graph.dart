@@ -172,19 +172,20 @@ class _ActivityGraphState extends ConsumerState<ActivityGraph> {
                               final bool isBlurred =
                                   !isPremium && daysOld > 30;
 
-                              return Padding(
-                                padding: EdgeInsets.only(
-                                  bottom: dayIndex < 6 ? gap : 0,
-                                ),
-                                child: _ActivityCell(
-                                  date: date,
-                                  level: level,
-                                  completed: completed,
-                                  total: total,
-                                  isBlurred: isBlurred,
-                                  dateFormat: dateFormat,
-                                ),
-                              );
+                                return Padding(
+                                  padding: EdgeInsets.only(
+                                    bottom: dayIndex < 6 ? gap : 0,
+                                  ),
+                                  child: _ActivityCell(
+                                    key: ValueKey(date),
+                                    date: date,
+                                    level: level,
+                                    completed: completed,
+                                    total: total,
+                                    isBlurred: isBlurred,
+                                    dateFormat: dateFormat,
+                                  ),
+                                );
                             }),
                           ),
                         );
@@ -279,6 +280,7 @@ class _MonthLabels extends StatelessWidget {
 
 class _ActivityCell extends StatelessWidget {
   const _ActivityCell({
+    super.key,
     required this.date,
     required this.level,
     required this.completed,

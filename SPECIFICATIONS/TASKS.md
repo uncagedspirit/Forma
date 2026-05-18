@@ -456,10 +456,10 @@ Status key: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 - [x] Commit: `fix(a11y): text scaling fixes`
 
 ### T-060 · Performance profiling
-- [ ] Profile home screen with 20 habits on a mid-range Android device
-- [ ] Verify < 16 ms frame budget — fix any jank in list rendering
-- [ ] Add `const` constructors to all stateless widgets that allow it
-- [ ] Commit: `perf: const constructors and list performance`
+- [x] Profile home screen with 20 habits on a mid-range Android device
+- [x] Verify < 16 ms frame budget — fix any jank in list rendering
+- [x] Add `const` constructors to all stateless widgets that allow it
+- [x] Commit: `perf: const constructors and list performance`
 
 ### T-061 · Empty states
 - [ ] Home screen, no habits: ink illustration (simple SVG line art) + prompt

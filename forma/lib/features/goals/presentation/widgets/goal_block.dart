@@ -7,7 +7,6 @@ import 'package:forma/core/constants/app_spacing.dart';
 import 'package:forma/core/constants/app_text_styles.dart';
 import 'package:forma/core/router/app_router.dart';
 import 'package:forma/features/goals/domain/entities/goal.dart';
-import 'package:forma/features/goals/presentation/providers/goals_provider.dart';
 import 'package:forma/features/habits/domain/usecases/get_habits_for_date.dart';
 import 'package:forma/features/habits/presentation/providers/habit_completion_provider.dart';
 import 'package:forma/features/habits/presentation/providers/habits_provider.dart';
@@ -55,7 +54,6 @@ class GoalBlock extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedDate = ref.watch(selectedDateProvider);
     final habitsAsync = ref.watch(habitsForDateProvider(selectedDate));
-    ref.watch(goalsProvider);
 
     final goalColor = _parseHexColor(goal.color);
 
@@ -226,7 +224,10 @@ class _GoalBlockBodyState extends State<_GoalBlockBody> {
                           color: AppColors.line,
                         ),
                         ...widget.goalHabits.map(
-                          (h) => _GoalHabitRow(habitWithStatus: h),
+                          (h) => _GoalHabitRow(
+                            key: ValueKey(h.habit.id),
+                            habitWithStatus: h,
+                          ),
                         ),
                         _AddHabitRow(goalId: widget.goal.id),
                         const SizedBox(height: AppSpacing.sm),
@@ -246,7 +247,7 @@ class _GoalBlockBodyState extends State<_GoalBlockBody> {
 // ---------------------------------------------------------------------------
 
 class _GoalHabitRow extends ConsumerWidget {
-  const _GoalHabitRow({required this.habitWithStatus});
+  const _GoalHabitRow({super.key, required this.habitWithStatus});
 
   final HabitWithStatus habitWithStatus;
 
