@@ -387,9 +387,9 @@ Status key: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 - [x] Commit: `feat(stats): InsightsList widget`
 
 ### T-052 · StatsScreen assembly
-- [ ] Assemble all stat widgets in scroll view
-- [ ] Loading skeleton while providers load
-- [ ] Commit: `feat(stats): StatsScreen assembled`
+- [x] Assemble all stat widgets in scroll view
+- [x] Loading skeleton while providers load
+- [x] Commit: `feat(stats): StatsScreen assembled`
 
 ---
 
