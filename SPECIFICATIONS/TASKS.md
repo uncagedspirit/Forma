@@ -331,11 +331,11 @@ Status key: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 - [x] Commit: `feat(goals): AddGoalSheet`
 
 ### T-045 · HomeScreen assembly
-- [ ] Assemble: statusbar-style top padding, page title (with name from prefs), page sub (formatted date)
-- [ ] DateStrip → MoodSelector → ProgressRing → GoalBlocks list → GeneralHabits list
-- [ ] SliverList for habit rows (performance for long lists)
-- [ ] Empty state: friendly prompt when no habits added yet
-- [ ] Commit: `feat(home): HomeScreen assembled`
+- [x] Assemble: statusbar-style top padding, page title (with name from prefs), page sub (formatted date)
+- [x] DateStrip → MoodSelector → ProgressRing → GoalBlocks list → GeneralHabits list
+- [x] SliverList for habit rows (performance for long lists)
+- [x] Empty state: friendly prompt when no habits added yet
+- [x] Commit: `feat(home): HomeScreen assembled`
 
 ---
 
