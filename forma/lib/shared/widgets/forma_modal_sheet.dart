@@ -47,7 +47,12 @@ class FormaModalSheet extends StatelessWidget {
                   topRight: Radius.circular(AppBorderRadius.rLg),
                 ),
               ),
-              padding: const EdgeInsets.all(AppSpacing.lg),
+              padding: const EdgeInsets.fromLTRB(
+                AppSpacing.screenHorizontal,
+                20,
+                AppSpacing.screenHorizontal,
+                40,
+              ),
               child: child,
             ),
           ],
@@ -58,7 +63,7 @@ class FormaModalSheet extends StatelessWidget {
         .slideY(
           begin: 0.2,
           end: 0,
-          duration: AppDurations.spring,
+          duration: AppDurations.normal,
           curve: Curves.elasticOut,
         )
         .fadeIn(duration: AppDurations.normal);
@@ -74,10 +79,10 @@ class _HandleBar extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: AppSpacing.sm),
       child: Center(
         child: Container(
-          width: 36,
-          height: 4,
+          width: 32,
+          height: 3,
           decoration: BoxDecoration(
-            color: AppColors.ink3,
+            color: AppColors.line2,
             borderRadius: BorderRadius.circular(AppBorderRadius.rFull),
           ),
         ),

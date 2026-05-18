@@ -48,7 +48,7 @@ class ConfettiOverlay extends StatelessWidget {
     );
     overlay.insert(entry);
     Future.delayed(
-      AppDurations.slow + const Duration(milliseconds: 100),
+      AppDurations.slow,
       entry.remove,
     );
   }

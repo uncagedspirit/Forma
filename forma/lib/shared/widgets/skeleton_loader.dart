@@ -23,7 +23,7 @@ class SkeletonLoader extends StatelessWidget {
   Widget build(BuildContext context) {
     return _SkeletonShimmer(
       width: width ?? double.infinity,
-      height: height ?? 56,
+      height: height ?? 54,
       borderRadius: borderRadius ?? AppBorderRadius.small,
     );
   }
