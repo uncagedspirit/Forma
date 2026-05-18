@@ -325,10 +325,10 @@ Status key: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 - [x] Commit: `feat(habits): AddHabitSheet`
 
 ### T-044 · AddGoalSheet
-- [ ] FormaModalSheet wrapper
-- [ ] Fields: goal name, color picker (6 swatches)
-- [ ] Submit: `GoalRepository.save`, invalidates `goalsProvider`
-- [ ] Commit: `feat(goals): AddGoalSheet`
+- [x] FormaModalSheet wrapper
+- [x] Fields: goal name, color picker (6 swatches)
+- [x] Submit: `GoalRepository.save`, invalidates `goalsProvider`
+- [x] Commit: `feat(goals): AddGoalSheet`
 
 ### T-045 · HomeScreen assembly
 - [ ] Assemble: statusbar-style top padding, page title (with name from prefs), page sub (formatted date)
