@@ -427,13 +427,13 @@ Status key: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 ## Phase 12 — Notifications
 
 ### T-056 · NotificationService
-- [ ] Create `lib/core/notifications/notification_service.dart`
-- [ ] `init()` — request permission, initialize channels
-- [ ] `scheduleHabitReminder(habit)` — schedule daily exact alarm at habit's `reminderTime`
-- [ ] `cancelHabitReminder(habitId)` — cancel by notification ID
-- [ ] `scheduleStreakAtRisk()` — daily 8 PM check: if any habit not done and has streak > 0 → notify
-- [ ] Test on device (exact alarms require physical device on Android 12+)
-- [ ] Commit: `feat(notifications): NotificationService`
+- [x] Create `lib/core/notifications/notification_service.dart`
+- [x] `init()` — request permission, initialize channels
+- [x] `scheduleHabitReminder(habit)` — schedule daily exact alarm at habit's `reminderTime`
+- [x] `cancelHabitReminder(habitId)` — cancel by notification ID
+- [x] `scheduleStreakAtRisk()` — daily 8 PM check: if any habit not done and has streak > 0 → notify
+- [x] Test on device (exact alarms require physical device on Android 12+)
+- [x] Commit: `feat(notifications): NotificationService`
 
 ---
 
