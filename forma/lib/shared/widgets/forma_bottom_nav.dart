@@ -7,11 +7,63 @@ import 'package:forma/core/constants/app_text_styles.dart';
 import 'package:forma/shared/widgets/add_flow_sheet.dart';
 import 'package:go_router/go_router.dart';
 
-/// Bottom navigation bar for the Forma app.
-///
-/// Works with GoRouter's [ShellRoute] to provide persistent navigation
-/// across the Home, Stats, and Profile tabs. Includes a center FAB that
-/// opens the goal-first add flow.
+// ---------------------------------------------------------------------------
+// Tab definitions
+// ---------------------------------------------------------------------------
+
+class _Tab {
+  const _Tab({
+    required this.label,
+    required this.route,
+    required this.icon,
+    required this.activeIcon,
+  });
+
+  final String label;
+  final String route;
+  final IconData icon;
+  final IconData activeIcon;
+}
+
+const List<_Tab> _tabs = [
+  _Tab(
+    label: 'Today',
+    route: '/',
+    icon: Icons.wb_sunny_outlined,
+    activeIcon: Icons.wb_sunny,
+  ),
+  _Tab(
+    label: 'Goals',
+    route: '/goals',
+    icon: Icons.flag_outlined,
+    activeIcon: Icons.flag,
+  ),
+  _Tab(
+    label: 'Calendar',
+    route: '/calendar',
+    icon: Icons.calendar_month_outlined,
+    activeIcon: Icons.calendar_month,
+  ),
+  _Tab(
+    label: 'Insights',
+    route: '/insights',
+    icon: Icons.bar_chart_outlined,
+    activeIcon: Icons.bar_chart,
+  ),
+  _Tab(
+    label: 'Profile',
+    route: '/profile',
+    icon: Icons.person_outline,
+    activeIcon: Icons.person,
+  ),
+];
+
+// ---------------------------------------------------------------------------
+// FormaBottomNav
+// ---------------------------------------------------------------------------
+
+/// Persistent 5-tab shell navigation bar.
+/// Wraps [ShellRoute] child. FAB is owned here so it stays above the nav bar.
 class FormaBottomNav extends StatelessWidget {
   const FormaBottomNav({super.key, required this.child});
 
@@ -20,12 +72,18 @@ class FormaBottomNav extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final location = GoRouterState.of(context).uri.toString();
-    final isHomeActive = location == '/' || location.startsWith('/?');
-    final isStatsActive = location.startsWith('/stats');
-    final isProfileActive = location.startsWith('/profile');
     final isKeyboardOpen = MediaQuery.viewInsetsOf(context).bottom > 0;
 
-    const double navBarContentHeight = 56;
+    int activeIndex = 0;
+    if (location.startsWith('/goals')) {
+      activeIndex = 1;
+    } else if (location.startsWith('/calendar')) {
+      activeIndex = 2;
+    } else if (location.startsWith('/insights')) {
+      activeIndex = 3;
+    } else if (location.startsWith('/profile')) {
+      activeIndex = 4;
+    }
 
     return Scaffold(
       extendBody: true,
@@ -35,7 +93,7 @@ class FormaBottomNav extends StatelessWidget {
           : SafeArea(
               top: false,
               child: SizedBox(
-                height: navBarContentHeight,
+                height: 56,
                 child: ClipRect(
                   child: BackdropFilter(
                     filter: ImageFilter.blur(sigmaX: 16, sigmaY: 16),
@@ -48,32 +106,18 @@ class FormaBottomNav extends StatelessWidget {
                       ),
                       child: Row(
                         children: [
-                          Expanded(
-                            child: _NavItem(
-                              icon: '\u25A3',
-                              label: 'Home',
-                              isActive: isHomeActive,
-                              onTap: () => context.go('/'),
+                          for (int i = 0; i < _tabs.length; i++)
+                            Expanded(
+                              child: _NavItem(
+                                tab: _tabs[i],
+                                isActive: activeIndex == i,
+                                onTap: () {
+                                  if (activeIndex != i) {
+                                    context.go(_tabs[i].route);
+                                  }
+                                },
+                              ),
                             ),
-                          ),
-                          Expanded(
-                            child: _NavItem(
-                              icon: '\u25C8',
-                              label: 'Stats',
-                              isActive: isStatsActive,
-                              onTap: () => context.go('/stats'),
-                            ),
-                          ),
-                          const SizedBox(width: 64),
-                          Expanded(
-                            child: _NavItem(
-                              icon: '\u25CB',
-                              label: 'Profile',
-                              isActive: isProfileActive,
-                              onTap: () => context.go('/profile'),
-                            ),
-                          ),
-                          const Expanded(child: SizedBox.shrink()),
                         ],
                       ),
                     ),
@@ -81,50 +125,34 @@ class FormaBottomNav extends StatelessWidget {
                 ),
               ),
             ),
-      floatingActionButton: isKeyboardOpen ? null : const _AddFab(),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: isKeyboardOpen
+          ? null
+          : FloatingActionButton(
+              heroTag: 'forma_add_fab',
+              onPressed: () => showAddFlowSheet(context),
+              backgroundColor: AppColors.ink,
+              foregroundColor: AppColors.paper,
+              elevation: 2,
+              shape: const CircleBorder(),
+              child: const Icon(Icons.add, size: 24),
+            ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }
 }
 
-class _AddFab extends StatelessWidget {
-  const _AddFab();
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: 50,
-      height: 50,
-      child: FloatingActionButton(
-        heroTag: 'add_habit_fab',
-        onPressed: () => showAddFlowSheet(context),
-        backgroundColor: AppColors.ink,
-        foregroundColor: AppColors.paper,
-        elevation: 2,
-        shape: const CircleBorder(),
-        child: const Text(
-          '\u271A',
-          style: TextStyle(
-            color: AppColors.paper,
-            fontSize: 22,
-            height: 1,
-          ),
-        ),
-      ),
-    );
-  }
-}
+// ---------------------------------------------------------------------------
+// Nav item
+// ---------------------------------------------------------------------------
 
 class _NavItem extends StatelessWidget {
   const _NavItem({
-    required this.icon,
-    required this.label,
+    required this.tab,
     required this.isActive,
     required this.onTap,
   });
 
-  final String icon;
-  final String label;
+  final _Tab tab;
   final bool isActive;
   final VoidCallback onTap;
 
@@ -140,16 +168,18 @@ class _NavItem extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              icon,
-              style: TextStyle(
+            AnimatedSwitcher(
+              duration: const Duration(milliseconds: 150),
+              child: Icon(
+                isActive ? tab.activeIcon : tab.icon,
+                key: ValueKey(isActive),
+                size: 22,
                 color: color,
-                fontSize: 20,
               ),
             ),
             const SizedBox(height: AppSpacing.xs),
             Text(
-              label,
+              tab.label,
               style: AppTextStyles.labelSmall.copyWith(color: color),
             ),
           ],

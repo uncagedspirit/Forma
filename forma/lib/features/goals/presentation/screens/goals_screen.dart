@@ -3,10 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:forma/core/constants/app_colors.dart';
 import 'package:forma/core/constants/app_spacing.dart';
 import 'package:forma/core/constants/app_text_styles.dart';
-import 'package:forma/features/goals/domain/entities/goal.dart';
 import 'package:forma/features/goals/presentation/providers/goals_provider.dart';
 import 'package:forma/features/goals/presentation/widgets/goal_block.dart';
-import 'package:forma/features/home/presentation/providers/selected_date_provider.dart';
 import 'package:forma/shared/widgets/add_flow_sheet.dart';
 
 /// Goals tab — shows all goals with their grouped habits.
@@ -16,7 +14,6 @@ class GoalsScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final goalsAsync = ref.watch(goalsProvider);
-    final selectedDate = ref.watch(selectedDateProvider);
 
     return Scaffold(
       body: SafeArea(
@@ -60,7 +57,8 @@ class GoalsScreen extends ConsumerWidget {
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                const Icon(Icons.add, size: 16, color: AppColors.paper),
+                                const Icon(Icons.add,
+                                    size: 16, color: AppColors.paper),
                                 const SizedBox(width: 4),
                                 Text(
                                   'Add',
@@ -85,8 +83,10 @@ class GoalsScreen extends ConsumerWidget {
                     child: Column(
                       children: [
                         ...active.map((goal) => Padding(
-                              padding: const EdgeInsets.only(bottom: AppSpacing.md),
-                              child: GoalBlock(key: ValueKey(goal.id), goal: goal),
+                              padding:
+                                  const EdgeInsets.only(bottom: AppSpacing.md),
+                              child:
+                                  GoalBlock(key: ValueKey(goal.id), goal: goal),
                             )),
                         const SizedBox(height: AppSpacing.xxl),
                       ],
@@ -139,7 +139,8 @@ class _EmptyGoals extends StatelessWidget {
                 ),
                 child: Text(
                   'Add your first goal',
-                  style: AppTextStyles.labelLarge.copyWith(color: AppColors.paper),
+                  style:
+                      AppTextStyles.labelLarge.copyWith(color: AppColors.paper),
                 ),
               ),
             ),

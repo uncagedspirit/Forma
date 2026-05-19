@@ -107,20 +107,23 @@ class HomeScreen extends ConsumerWidget {
                       ),
 
                       // ── Date strip ──
-                      const SliverToBoxAdapter(child: SizedBox(height: AppSpacing.sm)),
+                      const SliverToBoxAdapter(
+                          child: SizedBox(height: AppSpacing.sm)),
                       const SliverToBoxAdapter(child: DateStrip()),
-                      const SliverToBoxAdapter(child: SizedBox(height: AppSpacing.md)),
+                      const SliverToBoxAdapter(
+                          child: SizedBox(height: AppSpacing.md)),
 
                       // ── Mood selector ──
-                      SliverToBoxAdapter(
+                      const SliverToBoxAdapter(
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(
+                          padding: EdgeInsets.symmetric(
                             horizontal: AppSpacing.screenHorizontal,
                           ),
-                          child: const MoodSelector(),
+                          child: MoodSelector(),
                         ),
                       ),
-                      const SliverToBoxAdapter(child: SizedBox(height: AppSpacing.lg)),
+                      const SliverToBoxAdapter(
+                          child: SizedBox(height: AppSpacing.lg)),
 
                       // ── Goals with habits ──
                       if (activeGoals.isNotEmpty)
@@ -129,8 +132,10 @@ class HomeScreen extends ConsumerWidget {
                             mainAxisSize: MainAxisSize.min,
                             children: activeGoals.map((goal) {
                               return Padding(
-                                padding: const EdgeInsets.only(bottom: AppSpacing.md),
-                                child: GoalBlock(key: ValueKey(goal.id), goal: goal),
+                                padding: const EdgeInsets.only(
+                                    bottom: AppSpacing.md),
+                                child: GoalBlock(
+                                    key: ValueKey(goal.id), goal: goal),
                               );
                             }).toList(),
                           ),
@@ -192,17 +197,6 @@ class HomeScreen extends ConsumerWidget {
                   ),
       ),
       // Floating add button
-      floatingActionButton: hasNoContent || isLoading
-          ? null
-          : FloatingActionButton(
-              heroTag: 'home_add_fab',
-              onPressed: () => showAddFlowSheet(context),
-              backgroundColor: AppColors.ink,
-              foregroundColor: AppColors.paper,
-              elevation: 2,
-              shape: const CircleBorder(),
-              child: const Icon(Icons.add, size: 24),
-            ),
     );
   }
 
@@ -319,11 +313,13 @@ class _AddGoalNudge extends StatelessWidget {
                 children: [
                   Text(
                     'Give your habits a purpose',
-                    style: AppTextStyles.titleMedium.copyWith(color: AppColors.ink),
+                    style: AppTextStyles.titleMedium
+                        .copyWith(color: AppColors.ink),
                   ),
                   Text(
                     'Group them under a goal',
-                    style: AppTextStyles.bodyMedium.copyWith(color: AppColors.ink3),
+                    style: AppTextStyles.bodyMedium
+                        .copyWith(color: AppColors.ink3),
                   ),
                 ],
               ),

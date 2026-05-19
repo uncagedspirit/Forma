@@ -55,14 +55,15 @@ class ProfileScreen extends ConsumerWidget {
               // ── Stats error (non-fatal) ──
               if (statsAsync.hasError) ...[
                 InlineError(
-                  message: statsAsync.error?.toString() ?? 'Failed to load stats',
+                  message:
+                      statsAsync.error?.toString() ?? 'Failed to load stats',
                   onRetry: () => ref.invalidate(statsProvider),
                 ),
                 const SizedBox(height: AppSpacing.lg),
               ],
 
               // ── Settings ──
-              _SectionLabel(label: 'Settings'),
+              const _SectionLabel(label: 'Settings'),
               const SizedBox(height: AppSpacing.sm),
               _SettingsRow(
                 icon: Icons.person_outline,
@@ -83,7 +84,8 @@ class ProfileScreen extends ConsumerWidget {
     );
   }
 
-  void _showEditNameSheet(BuildContext context, WidgetRef ref, String currentName) {
+  void _showEditNameSheet(
+      BuildContext context, WidgetRef ref, String currentName) {
     showFormaModalSheet<void>(
       context: context,
       builder: (context) => _EditNameSheet(currentName: currentName, ref: ref),
@@ -252,7 +254,8 @@ class _EditNameSheetState extends State<_EditNameSheet> {
   @override
   void initState() {
     super.initState();
-    _ctrl = TextEditingController(text: widget.currentName == 'You' ? '' : widget.currentName);
+    _ctrl = TextEditingController(
+        text: widget.currentName == 'You' ? '' : widget.currentName);
   }
 
   @override
@@ -319,7 +322,8 @@ class _EditNameSheetState extends State<_EditNameSheet> {
                 )
               : Text(
                   'Save',
-                  style: AppTextStyles.labelLarge.copyWith(color: AppColors.paper),
+                  style:
+                      AppTextStyles.labelLarge.copyWith(color: AppColors.paper),
                 ),
         ),
       ],
