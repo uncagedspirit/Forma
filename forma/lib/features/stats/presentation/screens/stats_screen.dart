@@ -27,8 +27,9 @@ class StatsScreen extends ConsumerWidget {
     final hasError = statsAsync.hasError;
     final errorMessage =
         statsAsync.error?.toString() ?? 'Failed to load statistics';
-    final showEmptyState =
-        statsAsync.hasValue && statsAsync.value!.checkInCount < 7;
+    final stats = statsAsync.valueOrNull;
+    final daysWithData = stats?.checkInCount ?? 0;
+    final showEmptyState = statsAsync.hasValue && daysWithData < 7;
 
     if (hasError) {
       return Scaffold(

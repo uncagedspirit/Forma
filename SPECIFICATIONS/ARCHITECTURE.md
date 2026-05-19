@@ -304,8 +304,7 @@ Every Hive adapter needs a unique `typeId`. Reserved IDs:
 | 2 | GoalModel |
 | 3 | MoodModel |
 | 4 | UserPreferencesModel |
-| 5 | HabitFrequencyModel |
-| 6–19 | Reserved for v2 |
+| 5–19 | Reserved for v2 |
 
 ---
 

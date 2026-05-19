@@ -27,7 +27,9 @@ class MoodSelector extends ConsumerWidget {
       selectedDate: selectedDate,
       moodEntry: moodEntry,
       onLogMood: (int value, String? note) {
-        ref.read(logMoodNotifierProvider.notifier).log(selectedDate, value, note);
+        ref
+            .read(logMoodNotifierProvider.notifier)
+            .log(selectedDate, value, note);
       },
     );
   }
@@ -78,7 +80,14 @@ class _MoodSelectorBodyState extends State<_MoodSelectorBody> {
 
   void _onFocusChange() {
     if (!_noteFocusNode.hasFocus && _showNoteInput && mounted) {
-      _submitMood();
+      // Only submit if the note field has actual content
+      final trimmedNote = _noteController.text.trim();
+      if (trimmedNote.isNotEmpty) {
+        _submitMood();
+      } else {
+        // Clear the input without submitting if note is empty
+        _showNoteInput = false;
+      }
     }
   }
 
@@ -217,9 +226,7 @@ class _MoodDot extends StatelessWidget {
           decoration: BoxDecoration(
             color: isSelected ? AppColors.paper : AppColors.paper2,
             shape: BoxShape.circle,
-            border: isSelected
-                ? Border.all(color: AppColors.ink)
-                : null,
+            border: isSelected ? Border.all(color: AppColors.ink) : null,
             boxShadow: isSelected
                 ? [
                     BoxShadow(

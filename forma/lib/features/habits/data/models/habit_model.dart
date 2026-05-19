@@ -84,29 +84,37 @@ class HabitModel extends HiveObject {
     );
   }
 
+  static const Object _sentinel = Object();
+
   HabitModel copyWith({
-    String? id,
-    String? name,
-    String? icon,
-    String? goalId,
-    String? color,
-    int? sortOrder,
-    String? reminderTime,
-    String? reminderMessage,
-    DateTime? createdAt,
-    bool? isArchived,
+    Object? id = _sentinel,
+    Object? name = _sentinel,
+    Object? icon = _sentinel,
+    Object? goalId = _sentinel,
+    Object? color = _sentinel,
+    Object? sortOrder = _sentinel,
+    Object? reminderTime = _sentinel,
+    Object? reminderMessage = _sentinel,
+    Object? createdAt = _sentinel,
+    Object? isArchived = _sentinel,
   }) {
     return HabitModel(
-      id: id ?? this.id,
-      name: name ?? this.name,
-      icon: icon ?? this.icon,
-      goalId: goalId ?? this.goalId,
-      color: color ?? this.color,
-      sortOrder: sortOrder ?? this.sortOrder,
-      reminderTime: reminderTime ?? this.reminderTime,
-      reminderMessage: reminderMessage ?? this.reminderMessage,
-      createdAt: createdAt ?? this.createdAt,
-      isArchived: isArchived ?? this.isArchived,
+      id: id == _sentinel ? this.id : id as String,
+      name: name == _sentinel ? this.name : name as String,
+      icon: icon == _sentinel ? this.icon : icon as String,
+      goalId: goalId == _sentinel ? this.goalId : goalId as String?,
+      color: color == _sentinel ? this.color : color as String,
+      sortOrder: sortOrder == _sentinel ? this.sortOrder : sortOrder as int,
+      reminderTime: reminderTime == _sentinel
+          ? this.reminderTime
+          : reminderTime as String?,
+      reminderMessage: reminderMessage == _sentinel
+          ? this.reminderMessage
+          : reminderMessage as String?,
+      createdAt:
+          createdAt == _sentinel ? this.createdAt : createdAt as DateTime,
+      isArchived:
+          isArchived == _sentinel ? this.isArchived : isArchived as bool,
     );
   }
 }

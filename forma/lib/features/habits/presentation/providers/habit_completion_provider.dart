@@ -14,7 +14,7 @@ class HabitCompletion extends _$HabitCompletion {
     state = const AsyncLoading();
     state = await AsyncValue.guard(() async {
       final habitRepo = ref.read(habitRepositoryProvider);
-      final useCase = CompleteHabit(habitRepo, habitRepo);
+      final useCase = CompleteHabit(habitRepo);
       await useCase.call(habitId: habitId, date: date);
       ref.invalidate(habitsForDateProvider(date));
     });

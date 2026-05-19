@@ -296,50 +296,69 @@ class _GoalDropdown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DropdownButtonFormField<String?>(
-      initialValue: selectedGoalId,
-      decoration: InputDecoration(
-        filled: true,
-        fillColor: AppColors.paper,
-        contentPadding: const EdgeInsets.symmetric(
+    return GestureDetector(
+      onTap: () => _openDropdown(context),
+      child: Container(
+        padding: const EdgeInsets.symmetric(
           horizontal: AppSpacing.md,
           vertical: AppSpacing.sm,
         ),
-        border: OutlineInputBorder(
+        decoration: BoxDecoration(
+          color: AppColors.paper,
+          border: Border.all(color: AppColors.line2, width: 1),
           borderRadius: AppBorderRadius.small,
-          borderSide: const BorderSide(color: AppColors.line2, width: 1),
         ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: AppBorderRadius.small,
-          borderSide: const BorderSide(color: AppColors.line2, width: 1),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: AppBorderRadius.small,
-          borderSide: const BorderSide(color: AppColors.ink2, width: 1),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              _getDisplayLabel(),
+              style: AppTextStyles.bodyLarge.copyWith(
+                color: selectedGoalId == null ? AppColors.ink3 : AppColors.ink,
+              ),
+            ),
+            const Icon(Icons.keyboard_arrow_down, color: AppColors.ink3),
+          ],
         ),
       ),
-      hint: Text(
-        'Assign to goal (optional)',
-        style: AppTextStyles.bodyLarge.copyWith(
-          color: AppColors.ink3,
-        ),
+    );
+  }
+
+  String _getDisplayLabel() {
+    if (selectedGoalId == null) return 'Assign to goal (optional)';
+    return goals.firstWhere((g) => g.id == selectedGoalId).name;
+  }
+
+  void _openDropdown(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) => Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          ListTile(
+            title: Text(
+              'No goal',
+              style: AppTextStyles.bodyLarge.copyWith(color: AppColors.ink),
+            ),
+            onTap: () {
+              onChanged(null);
+              Navigator.pop(context);
+            },
+          ),
+          ...goals.map((goal) {
+            return ListTile(
+              title: Text(
+                goal.name,
+                style: AppTextStyles.bodyLarge.copyWith(color: AppColors.ink),
+              ),
+              onTap: () {
+                onChanged(goal.id);
+                Navigator.pop(context);
+              },
+            );
+          }),
+        ],
       ),
-      icon: const Icon(Icons.keyboard_arrow_down, color: AppColors.ink3),
-      items: [
-        const DropdownMenuItem<String?>(
-          value: null,
-          child: Text('No goal'),
-        ),
-        ...goals.map((goal) {
-          return DropdownMenuItem<String?>(
-            value: goal.id,
-            child: Text(goal.name),
-          );
-        }),
-      ],
-      onChanged: onChanged,
-      style: AppTextStyles.bodyLarge.copyWith(color: AppColors.ink),
-      dropdownColor: AppColors.paper,
     );
   }
 }

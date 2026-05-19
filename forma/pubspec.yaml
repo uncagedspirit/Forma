@@ -73,7 +73,9 @@ flutter_launcher_icons:
   adaptive_icon_foreground: "assets/images/app_icon_foreground.png"
 
 flutter:
-  uses-material-design: false
+  # Required for Material icons (Icons.check, Icons.chevron_right, etc.)
+  # used throughout the widget tree. Must be true.
+  uses-material-design: true
 
   assets:
     - assets/images/

@@ -54,7 +54,6 @@ class GoalBlock extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedDate = ref.watch(selectedDateProvider);
     final habitsAsync = ref.watch(habitsForDateProvider(selectedDate));
-
     final goalColor = _parseHexColor(goal.color);
 
     final goalHabits = habitsAsync.when(
@@ -136,8 +135,7 @@ class _GoalBlockBodyState extends State<_GoalBlockBody> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Semantics(
-            label:
-                'Goal ${widget.goal.name}, ${widget.percentage}% complete',
+            label: 'Goal ${widget.goal.name}, ${widget.percentage}% complete',
             header: true,
             button: true,
             child: InkWell(

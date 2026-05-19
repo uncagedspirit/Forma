@@ -15,12 +15,10 @@ void main() {
   });
   late CompleteHabit useCase;
   late MockHabitRepository mockHabitRepository;
-  late MockHabitRepository mockLogRepository;
 
   setUp(() {
     mockHabitRepository = MockHabitRepository();
-    mockLogRepository = MockHabitRepository();
-    useCase = CompleteHabit(mockHabitRepository, mockLogRepository);
+    useCase = CompleteHabit(mockHabitRepository);
   });
 
   group('CompleteHabit', () {
@@ -43,9 +41,9 @@ void main() {
       // Arrange
       when(() => mockHabitRepository.getById(testHabitId))
           .thenAnswer((_) async => testHabit);
-      when(() => mockLogRepository.getLogsForDate(normalizedDate))
+      when(() => mockHabitRepository.getLogsForDate(normalizedDate))
           .thenAnswer((_) async => []);
-      when(() => mockLogRepository.saveLog(any())).thenAnswer((_) async {});
+      when(() => mockHabitRepository.saveLog(any())).thenAnswer((_) async {});
 
       // Act
       final result = await useCase.call(habitId: testHabitId, date: testDate);
@@ -53,7 +51,7 @@ void main() {
       // Assert
       expect(result.habitId, equals(testHabitId));
       expect(result.date, equals(normalizedDate));
-      verify(() => mockLogRepository.saveLog(any())).called(1);
+      verify(() => mockHabitRepository.saveLog(any())).called(1);
     });
 
     test('should return existing log when habit already completed for date',
@@ -68,7 +66,7 @@ void main() {
 
       when(() => mockHabitRepository.getById(testHabitId))
           .thenAnswer((_) async => testHabit);
-      when(() => mockLogRepository.getLogsForDate(normalizedDate))
+      when(() => mockHabitRepository.getLogsForDate(normalizedDate))
           .thenAnswer((_) async => [existingLog]);
 
       // Act
@@ -76,7 +74,7 @@ void main() {
 
       // Assert
       expect(result.id, equals('existing-log-id'));
-      verifyNever(() => mockLogRepository.saveLog(any()));
+      verifyNever(() => mockHabitRepository.saveLog(any()));
     });
 
     test('should throw ArgumentError when habit does not exist', () async {
@@ -121,9 +119,9 @@ void main() {
       final dateWithTime = DateTime(2024, 1, 15, 14, 30, 45);
       when(() => mockHabitRepository.getById(testHabitId))
           .thenAnswer((_) async => testHabit);
-      when(() => mockLogRepository.getLogsForDate(normalizedDate))
+      when(() => mockHabitRepository.getLogsForDate(normalizedDate))
           .thenAnswer((_) async => []);
-      when(() => mockLogRepository.saveLog(any())).thenAnswer((_) async {});
+      when(() => mockHabitRepository.saveLog(any())).thenAnswer((_) async {});
 
       // Act
       final result = await useCase.call(
@@ -143,9 +141,9 @@ void main() {
       // Arrange
       when(() => mockHabitRepository.getById(testHabitId))
           .thenAnswer((_) async => testHabit);
-      when(() => mockLogRepository.getLogsForDate(normalizedDate))
+      when(() => mockHabitRepository.getLogsForDate(normalizedDate))
           .thenAnswer((_) async => []);
-      when(() => mockLogRepository.saveLog(any())).thenAnswer((_) async {});
+      when(() => mockHabitRepository.saveLog(any())).thenAnswer((_) async {});
 
       // Act
       final result = await useCase.call(habitId: testHabitId, date: testDate);
@@ -160,9 +158,9 @@ void main() {
       final before = DateTime.now();
       when(() => mockHabitRepository.getById(testHabitId))
           .thenAnswer((_) async => testHabit);
-      when(() => mockLogRepository.getLogsForDate(normalizedDate))
+      when(() => mockHabitRepository.getLogsForDate(normalizedDate))
           .thenAnswer((_) async => []);
-      when(() => mockLogRepository.saveLog(any())).thenAnswer((_) async {});
+      when(() => mockHabitRepository.saveLog(any())).thenAnswer((_) async {});
 
       // Act
       final result = await useCase.call(habitId: testHabitId, date: testDate);
@@ -181,7 +179,8 @@ void main() {
       );
     });
 
-    test('should differentiate between different habits on same date', () async {
+    test('should differentiate between different habits on same date',
+        () async {
       // Arrange
       const otherHabitId = 'other-habit-id';
       final otherLog = HabitLog(
@@ -193,16 +192,16 @@ void main() {
 
       when(() => mockHabitRepository.getById(testHabitId))
           .thenAnswer((_) async => testHabit);
-      when(() => mockLogRepository.getLogsForDate(normalizedDate))
+      when(() => mockHabitRepository.getLogsForDate(normalizedDate))
           .thenAnswer((_) async => [otherLog]);
-      when(() => mockLogRepository.saveLog(any())).thenAnswer((_) async {});
+      when(() => mockHabitRepository.saveLog(any())).thenAnswer((_) async {});
 
       // Act
       final result = await useCase.call(habitId: testHabitId, date: testDate);
 
       // Assert - Should create new log since it's a different habit
       expect(result.habitId, equals(testHabitId));
-      verify(() => mockLogRepository.saveLog(any())).called(1);
+      verify(() => mockHabitRepository.saveLog(any())).called(1);
     });
 
     test('should propagate repository errors', () async {

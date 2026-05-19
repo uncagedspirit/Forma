@@ -17,7 +17,6 @@ class AppTextStyles {
     fontWeight: FontWeight.w300,
     fontSize: 32,
     height: 1.15,
-    color: Colors.black, // Will be overridden by theme
   );
 
   /// Highlight text — Fraunces 300 italic, 26sp
@@ -27,7 +26,6 @@ class AppTextStyles {
     fontStyle: FontStyle.italic,
     fontSize: 26,
     height: 1.15,
-    color: Colors.black,
   );
 
   /// Modal titles, section headers — Fraunces 400, 22sp
@@ -36,7 +34,6 @@ class AppTextStyles {
     fontWeight: FontWeight.w400,
     fontSize: 22,
     height: 1.15,
-    color: Colors.black,
   );
 
   /// Card titles — Fraunces 400, 18sp
@@ -45,7 +42,6 @@ class AppTextStyles {
     fontWeight: FontWeight.w400,
     fontSize: 18,
     height: 1.15,
-    color: Colors.black,
   );
 
   // Title styles (Instrument Sans)
@@ -55,7 +51,6 @@ class AppTextStyles {
     fontWeight: FontWeight.w600,
     fontSize: 16,
     height: 1.5,
-    color: Colors.black,
   );
 
   /// Settings rows, subtitles — Instrument Sans 500, 14sp
@@ -64,7 +59,6 @@ class AppTextStyles {
     fontWeight: FontWeight.w500,
     fontSize: 14,
     height: 1.5,
-    color: Colors.black,
   );
 
   // Body styles (Instrument Sans)
@@ -74,7 +68,6 @@ class AppTextStyles {
     fontWeight: FontWeight.w400,
     fontSize: 15,
     height: 1.5,
-    color: Colors.black,
   );
 
   /// Secondary body — Instrument Sans 400, 13sp
@@ -83,7 +76,6 @@ class AppTextStyles {
     fontWeight: FontWeight.w400,
     fontSize: 13,
     height: 1.5,
-    color: Colors.black,
   );
 
   // Label styles (Instrument Sans)
@@ -93,7 +85,6 @@ class AppTextStyles {
     fontWeight: FontWeight.w600,
     fontSize: 12,
     height: 1.5,
-    color: Colors.black,
   );
 
   /// Eyebrows, badges, caps labels — Instrument Sans 600, 10sp
@@ -104,6 +95,5 @@ class AppTextStyles {
     fontSize: 10,
     height: 1.5,
     letterSpacing: 0.5, // ~0.05 em at 10sp
-    color: Colors.black,
   );
 }

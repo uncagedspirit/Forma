@@ -55,7 +55,7 @@ class ConfettiOverlay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final random = Random(position.hashCode);
+    final random = Random();
     final disableAnimations = MediaQuery.of(context).disableAnimations;
     final particles = List<Widget>.generate(particleCount, (index) {
       final size = 4.0 + random.nextDouble() * 4.0;

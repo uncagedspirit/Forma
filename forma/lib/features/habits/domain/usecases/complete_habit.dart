@@ -8,10 +8,9 @@ import 'package:uuid/uuid.dart';
 /// This is idempotent: if a log already exists for the given habit and date,
 /// it returns the existing log instead of creating a new one.
 class CompleteHabit {
-  const CompleteHabit(this._habitRepository, this._logRepository);
+  const CompleteHabit(this._habitRepository);
 
   final HabitRepository _habitRepository;
-  final HabitRepository _logRepository;
 
   static final _logger = Logger('CompleteHabit');
   static const _uuid = Uuid();
@@ -48,7 +47,7 @@ class CompleteHabit {
     final normalizedDate = DateTime.utc(date.year, date.month, date.day);
 
     // Check if log already exists for this habit and date (idempotent)
-    final existingLogs = await _logRepository.getLogsForDate(normalizedDate);
+    final existingLogs = await _habitRepository.getLogsForDate(normalizedDate);
     final existingLog = existingLogs.where((log) => log.habitId == habitId);
 
     if (existingLog.isNotEmpty) {
@@ -67,7 +66,7 @@ class CompleteHabit {
     );
 
     // Save the log
-    await _logRepository.saveLog(log);
+    await _habitRepository.saveLog(log);
     _logger.info(
       'Successfully completed habit: ${habit.name} (id: $habitId) for date: $normalizedDate',
     );

@@ -10,7 +10,7 @@ import 'package:logging/logging.dart';
 /// Hive-backed implementation of [HabitRepository].
 class HabitRepositoryImpl implements HabitRepository {
   HabitRepositoryImpl(this._habitsBox, this._logsBox)
-    : _logger = Logger('HabitRepositoryImpl');
+      : _logger = Logger('HabitRepositoryImpl');
 
   final Box<HabitModel> _habitsBox;
   final Box<HabitLogModel> _logsBox;
@@ -19,7 +19,10 @@ class HabitRepositoryImpl implements HabitRepository {
   @override
   Future<List<Habit>> getAll() async {
     try {
-      return _habitsBox.values.map((model) => model.toEntity()).toList();
+      return _habitsBox.values
+          .where((model) => !model.isArchived)
+          .map((model) => model.toEntity())
+          .toList();
     } catch (e, st) {
       _logger.severe('Failed to get all habits', e, st);
       throw HabitStorageFailure(e.toString());
@@ -144,9 +147,9 @@ class HabitRepositoryImpl implements HabitRepository {
     try {
       // Find the log with the matching ID
       final entry = _logsBox.toMap().entries.firstWhere(
-        (entry) => entry.value.id == id,
-        orElse: () => throw HabitNotFoundFailure(id),
-      );
+            (entry) => entry.value.id == id,
+            orElse: () => throw HabitNotFoundFailure(id),
+          );
       await _logsBox.delete(entry.key);
     } on HabitNotFoundFailure {
       rethrow;

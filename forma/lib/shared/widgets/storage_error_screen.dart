@@ -11,7 +11,7 @@ import 'package:forma/core/constants/app_text_styles.dart';
 class StorageErrorScreen extends StatelessWidget {
   const StorageErrorScreen({super.key, this.onRetry});
 
-  final VoidCallback? onRetry;
+  final Future<void> Function()? onRetry;
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +56,7 @@ class StorageErrorScreen extends StatelessWidget {
               const SizedBox(height: AppSpacing.lg),
               if (onRetry != null)
                 GestureDetector(
-                  onTap: onRetry,
+                  onTap: () => onRetry?.call(),
                   child: Container(
                     padding: const EdgeInsets.symmetric(
                       horizontal: AppSpacing.lg,

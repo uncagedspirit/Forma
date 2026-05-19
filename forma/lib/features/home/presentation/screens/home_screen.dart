@@ -4,7 +4,6 @@ import 'package:forma/core/constants/app_border_radius.dart';
 import 'package:forma/core/constants/app_colors.dart';
 import 'package:forma/core/constants/app_spacing.dart';
 import 'package:forma/core/constants/app_text_styles.dart';
-import 'package:forma/core/storage/hive_service.dart';
 import 'package:forma/features/goals/domain/entities/goal.dart';
 import 'package:forma/features/goals/presentation/providers/goals_provider.dart';
 import 'package:forma/features/goals/presentation/widgets/goal_block.dart';
@@ -16,6 +15,7 @@ import 'package:forma/features/home/presentation/providers/selected_date_provide
 import 'package:forma/features/home/presentation/widgets/date_strip.dart';
 import 'package:forma/features/home/presentation/widgets/mood_selector.dart';
 import 'package:forma/features/home/presentation/widgets/progress_ring.dart';
+import 'package:forma/features/profile/presentation/providers/user_preferences_provider.dart';
 import 'package:forma/shared/widgets/inline_error.dart';
 import 'package:intl/intl.dart';
 
@@ -31,6 +31,7 @@ class HomeScreen extends ConsumerWidget {
     final selectedDate = ref.watch(selectedDateProvider);
     final habitsAsync = ref.watch(habitsForDateProvider(selectedDate));
     final goalsAsync = ref.watch(goalsProvider);
+    final prefs = ref.watch(userPreferencesProvider);
 
     final hasError = habitsAsync.hasError || goalsAsync.hasError;
     final errorMessage = habitsAsync.error?.toString() ??
@@ -41,7 +42,6 @@ class HomeScreen extends ConsumerWidget {
     final goals = goalsAsync.valueOrNull ?? const <Goal>[];
     final generalHabits = habits.where((h) => h.habit.goalId == null).toList();
 
-    final prefs = HiveService.prefsBox.get('user');
     final userName = prefs?.name ?? '';
     final greeting = _computeGreeting();
     final pageTitle = userName.isEmpty ? greeting : '$greeting, $userName';

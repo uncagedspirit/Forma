@@ -4,6 +4,7 @@ import 'package:forma/core/constants/app_colors.dart';
 import 'package:forma/core/constants/app_durations.dart';
 import 'package:forma/core/constants/app_spacing.dart';
 import 'package:forma/core/constants/app_text_styles.dart';
+import 'package:forma/core/notifications/notification_service.dart';
 import 'package:forma/core/router/app_router.dart';
 import 'package:forma/core/storage/hive_service.dart';
 import 'package:forma/core/storage/user_preferences_model.dart';
@@ -137,7 +138,33 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       case 1:
         _createHabit();
       case 2:
-        _finishOnboarding();
+        _initializeNotificationsAndFinish();
+    }
+  }
+
+  Future<void> _initializeNotificationsAndFinish() async {
+    setState(() {
+      _isSubmitting = true;
+    });
+
+    try {
+      final repository = HabitRepositoryImpl(
+        HiveService.habitsBox,
+        HiveService.logsBox,
+      );
+      final notificationService = NotificationService(repository: repository);
+      await notificationService.init();
+      _finishOnboarding();
+    } catch (e, st) {
+      _logger.severe('Failed to initialize notifications', e, st);
+      // Continue to finish onboarding even if notifications fail
+      _finishOnboarding();
+    } finally {
+      if (mounted) {
+        setState(() {
+          _isSubmitting = false;
+        });
+      }
     }
   }
 

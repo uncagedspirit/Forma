@@ -280,7 +280,7 @@ class _PriceDisplay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final price = isAnnual ? '£39.99/year' : '£4.99/month';
+    final price = isAnnual ? '₹999/year' : '₹199/month';
 
     return Center(
       child: Text(

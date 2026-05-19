@@ -35,21 +35,27 @@ class UserPreferencesModel extends HiveObject {
   @HiveField(5)
   final DateTime joinDate;
 
+  static const Object _sentinel = Object();
+
   UserPreferencesModel copyWith({
-    bool? isPremium,
-    String? premiumReceiptData,
-    bool? hasCompletedOnboarding,
-    int? themeIndex,
-    String? name,
-    DateTime? joinDate,
+    Object? isPremium = _sentinel,
+    Object? premiumReceiptData = _sentinel,
+    Object? hasCompletedOnboarding = _sentinel,
+    Object? themeIndex = _sentinel,
+    Object? name = _sentinel,
+    Object? joinDate = _sentinel,
   }) {
     return UserPreferencesModel(
-      isPremium: isPremium ?? this.isPremium,
-      premiumReceiptData: premiumReceiptData ?? this.premiumReceiptData,
-      hasCompletedOnboarding: hasCompletedOnboarding ?? this.hasCompletedOnboarding,
-      themeIndex: themeIndex ?? this.themeIndex,
-      name: name ?? this.name,
-      joinDate: joinDate ?? this.joinDate,
+      isPremium: isPremium == _sentinel ? this.isPremium : isPremium as bool,
+      premiumReceiptData: premiumReceiptData == _sentinel
+          ? this.premiumReceiptData
+          : premiumReceiptData as String?,
+      hasCompletedOnboarding: hasCompletedOnboarding == _sentinel
+          ? this.hasCompletedOnboarding
+          : hasCompletedOnboarding as bool,
+      themeIndex: themeIndex == _sentinel ? this.themeIndex : themeIndex as int,
+      name: name == _sentinel ? this.name : name as String,
+      joinDate: joinDate == _sentinel ? this.joinDate : joinDate as DateTime,
     );
   }
 }

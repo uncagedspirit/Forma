@@ -428,10 +428,12 @@ class _HabitOptionsSheet extends ConsumerWidget {
           onTap: () async {
             final repo = ref.read(habitRepositoryProvider);
             final selectedDate = ref.read(selectedDateProvider);
-            Navigator.of(context).pop();
             await DeleteHabit(repo).call(habitId);
-            ref.invalidate(habitsForDateProvider(selectedDate));
-            ref.invalidate(habitLogsProvider(habitId));
+            if (context.mounted) {
+              Navigator.of(context).pop();
+              ref.invalidate(habitsForDateProvider(selectedDate));
+              ref.invalidate(habitLogsProvider(habitId));
+            }
           },
         ),
       ],

@@ -35,15 +35,22 @@ class _ActivityGraphState extends ConsumerState<ActivityGraph> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (mounted && _scrollController.hasClients) {
-        if (!MediaQuery.of(context).disableAnimations) {
-          _scrollController.animateTo(
-            _scrollController.position.maxScrollExtent,
-            duration: AppDurations.normal,
-            curve: Curves.easeOut,
-          );
-        } else {
-          _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
+      if (mounted &&
+          _scrollController.hasClients &&
+          _scrollController.positions.isNotEmpty) {
+        try {
+          final maxExtent = _scrollController.position.maxScrollExtent;
+          if (!MediaQuery.of(context).disableAnimations) {
+            _scrollController.animateTo(
+              maxExtent,
+              duration: AppDurations.normal,
+              curve: Curves.easeOut,
+            );
+          } else {
+            _scrollController.jumpTo(maxExtent);
+          }
+        } catch (e) {
+          _logger.warning('Failed to auto-scroll activity graph', e);
         }
       }
     });
@@ -75,7 +82,8 @@ class _ActivityGraphState extends ConsumerState<ActivityGraph> {
         _logger.warning('Failed to load activity graph', error, stackTrace);
         return InlineError(
           message: 'Failed to load activity graph',
-          onRetry: () => ref.invalidate(activityGraphProvider(gridStart, gridEnd)),
+          onRetry: () =>
+              ref.invalidate(activityGraphProvider(gridStart, gridEnd)),
         );
       },
       data: (Map<DateTime, ActivityGraphData> graphData) => _buildContent(
@@ -180,23 +188,22 @@ class _ActivityGraphState extends ConsumerState<ActivityGraph> {
                               final int daysOld = normalizedNow
                                   .difference(normalizedDate)
                                   .inDays;
-                              final bool isBlurred =
-                                  !isPremium && daysOld > 30;
+                              final bool isBlurred = !isPremium && daysOld > 30;
 
-                                return Padding(
-                                  padding: EdgeInsets.only(
-                                    bottom: dayIndex < 6 ? gap : 0,
-                                  ),
-                                  child: _ActivityCell(
-                                    key: ValueKey(date),
-                                    date: date,
-                                    level: level,
-                                    completed: completed,
-                                    total: total,
-                                    isBlurred: isBlurred,
-                                    dateFormat: dateFormat,
-                                  ),
-                                );
+                              return Padding(
+                                padding: EdgeInsets.only(
+                                  bottom: dayIndex < 6 ? gap : 0,
+                                ),
+                                child: _ActivityCell(
+                                  key: ValueKey(date),
+                                  date: date,
+                                  level: level,
+                                  completed: completed,
+                                  total: total,
+                                  isBlurred: isBlurred,
+                                  dateFormat: dateFormat,
+                                ),
+                              );
                             }),
                           ),
                         );
@@ -364,7 +371,7 @@ class _ActivityCell extends StatelessWidget {
       height: 10.0,
       decoration: BoxDecoration(
         color: _color,
-        borderRadius: BorderRadius.circular(AppBorderRadius.rSm),
+        borderRadius: BorderRadius.circular(2),
       ),
     );
 
@@ -380,7 +387,7 @@ class _ActivityCell extends StatelessWidget {
               height: 10.0,
               decoration: BoxDecoration(
                 color: AppColors.paper.withValues(alpha: 0.5),
-                borderRadius: BorderRadius.circular(AppBorderRadius.rSm),
+                borderRadius: BorderRadius.circular(2),
               ),
             ),
           ],
@@ -492,5 +499,3 @@ class _ActivityGraphSkeleton extends StatelessWidget {
     );
   }
 }
-
-

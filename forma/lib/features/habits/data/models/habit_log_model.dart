@@ -60,21 +60,24 @@ class HabitLogModel extends HiveObject {
     );
   }
 
+  static const Object _sentinel = Object();
+
   HabitLogModel copyWith({
-    String? id,
-    String? habitId,
-    DateTime? date,
-    DateTime? completedAt,
-    String? photoPath,
-    String? note,
+    Object? id = _sentinel,
+    Object? habitId = _sentinel,
+    Object? date = _sentinel,
+    Object? completedAt = _sentinel,
+    Object? photoPath = _sentinel,
+    Object? note = _sentinel,
   }) {
     return HabitLogModel(
-      id: id ?? this.id,
-      habitId: habitId ?? this.habitId,
-      date: date ?? this.date,
-      completedAt: completedAt ?? this.completedAt,
-      photoPath: photoPath ?? this.photoPath,
-      note: note ?? this.note,
+      id: id == _sentinel ? this.id : id as String,
+      habitId: habitId == _sentinel ? this.habitId : habitId as String,
+      date: date == _sentinel ? this.date : date as DateTime,
+      completedAt:
+          completedAt == _sentinel ? this.completedAt : completedAt as DateTime,
+      photoPath: photoPath == _sentinel ? this.photoPath : photoPath as String?,
+      note: note == _sentinel ? this.note : note as String?,
     );
   }
 }
