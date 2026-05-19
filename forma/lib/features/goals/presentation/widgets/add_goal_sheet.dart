@@ -43,6 +43,8 @@ const List<_ColorOption> _colorOptions = [
 /// Wraps its content in [FormaModalSheet] and provides fields for goal name
 /// and color selection.
 ///
+/// Pops with the created [Goal] so callers can continue into a follow-up flow.
+///
 /// Call via [showModalBottomSheet] or [showFormaModalSheet]:
 /// ```dart
 /// showModalBottomSheet(
@@ -119,7 +121,7 @@ class _AddGoalSheetState extends ConsumerState<AddGoalSheet> {
       ref.invalidate(goalsProvider);
 
       if (mounted) {
-        Navigator.of(context).pop();
+        Navigator.of(context).pop(goal);
       }
     } catch (e) {
       _logger.warning('Failed to add goal', e);

@@ -12,7 +12,6 @@ import 'package:forma/features/habits/domain/usecases/add_habit.dart';
 import 'package:forma/features/habits/presentation/providers/habits_provider.dart';
 import 'package:forma/features/home/presentation/providers/selected_date_provider.dart';
 import 'package:forma/shared/widgets/emoji_picker.dart';
-import 'package:forma/shared/widgets/forma_modal_sheet.dart';
 import 'package:forma/shared/widgets/forma_text_field.dart';
 import 'package:logging/logging.dart';
 
@@ -22,18 +21,7 @@ import 'package:logging/logging.dart';
 
 /// A bottom sheet for adding a new habit.
 ///
-/// Wraps its content in [FormaModalSheet] and provides fields for habit name,
-/// emoji icon, time-of-day reminder, and optional goal assignment.
-///
-/// Call via [showModalBottomSheet] or [showFormaModalSheet]:
-/// ```dart
-/// showModalBottomSheet(
-///   context: context,
-///   backgroundColor: Colors.transparent,
-///   isScrollControlled: true,
-///   builder: (_) => const AddHabitSheet(),
-/// );
-/// ```
+/// Fully scrollable so it doesn't overflow when the keyboard is open.
 class AddHabitSheet extends ConsumerStatefulWidget {
   const AddHabitSheet({super.key, this.goalId});
 
@@ -48,6 +36,7 @@ class _AddHabitSheetState extends ConsumerState<AddHabitSheet> {
   static final _logger = Logger('AddHabitSheet');
 
   final TextEditingController _nameController = TextEditingController();
+  final FocusNode _nameFocusNode = FocusNode();
   String? _selectedEmoji;
   String _selectedTimeOfDay = 'Anytime';
   String? _selectedGoalId;
@@ -70,6 +59,7 @@ class _AddHabitSheetState extends ConsumerState<AddHabitSheet> {
   @override
   void dispose() {
     _nameController.dispose();
+    _nameFocusNode.dispose();
     super.dispose();
   }
 
@@ -92,6 +82,9 @@ class _AddHabitSheetState extends ConsumerState<AddHabitSheet> {
   }
 
   Future<void> _onSubmit() async {
+    // Dismiss keyboard first
+    FocusScope.of(context).unfocus();
+
     final name = _nameController.text.trim();
 
     if (name.isEmpty) {
@@ -147,56 +140,92 @@ class _AddHabitSheetState extends ConsumerState<AddHabitSheet> {
       },
     );
 
-    return FormaModalSheet(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Text(
-            'New Habit',
-            style: AppTextStyles.headlineLarge.copyWith(
-              color: AppColors.ink,
-            ),
-            textAlign: TextAlign.center,
+    final bottomInset = MediaQuery.viewInsetsOf(context).bottom;
+
+    return Container(
+      decoration: const BoxDecoration(
+        color: AppColors.paper,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(AppBorderRadius.rLg),
+          topRight: Radius.circular(AppBorderRadius.rLg),
+        ),
+      ),
+      child: SafeArea(
+        top: false,
+        child: SingleChildScrollView(
+          padding: EdgeInsets.fromLTRB(
+            AppSpacing.screenHorizontal,
+            20,
+            AppSpacing.screenHorizontal,
+            bottomInset + 32,
           ),
-          const SizedBox(height: AppSpacing.lg),
-          FormaTextField(
-            controller: _nameController,
-            placeholder: 'Habit name',
-            error: _nameError,
-            onChanged: _onNameChanged,
-            autofocus: true,
-            textInputAction: TextInputAction.next,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              // Handle bar
+              Center(
+                child: Container(
+                  width: 32,
+                  height: 3,
+                  margin: const EdgeInsets.only(bottom: AppSpacing.lg),
+                  decoration: BoxDecoration(
+                    color: AppColors.line2,
+                    borderRadius: BorderRadius.circular(AppBorderRadius.rFull),
+                  ),
+                ),
+              ),
+              Text(
+                'New Habit',
+                style: AppTextStyles.headlineLarge.copyWith(
+                  color: AppColors.ink,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: AppSpacing.lg),
+              FormaTextField(
+                controller: _nameController,
+                focusNode: _nameFocusNode,
+                placeholder: 'e.g. Drink 8 glasses of water',
+                error: _nameError,
+                onChanged: _onNameChanged,
+                autofocus: true,
+                textInputAction: TextInputAction.done,
+                onSubmitted: (_) => _onSubmit(),
+              ),
+              const SizedBox(height: AppSpacing.md),
+              EmojiPicker(
+                selectedEmoji: _selectedEmoji,
+                onEmojiSelected: _onEmojiSelected,
+              ),
+              const SizedBox(height: AppSpacing.md),
+              Text(
+                'Time of day',
+                style: AppTextStyles.titleMedium.copyWith(
+                  color: AppColors.ink2,
+                ),
+              ),
+              const SizedBox(height: AppSpacing.sm),
+              _TimeOfDayChips(
+                selectedTime: _selectedTimeOfDay,
+                onSelected: _onTimeSelected,
+              ),
+              if (goals.isNotEmpty) ...[
+                const SizedBox(height: AppSpacing.md),
+                _GoalDropdown(
+                  goals: goals,
+                  selectedGoalId: _selectedGoalId,
+                  onChanged: _onGoalSelected,
+                ),
+              ],
+              const SizedBox(height: AppSpacing.lg),
+              _SubmitButton(
+                isSubmitting: _isSubmitting,
+                onPressed: _isSubmitting ? null : _onSubmit,
+              ),
+            ],
           ),
-          const SizedBox(height: AppSpacing.md),
-          EmojiPicker(
-            selectedEmoji: _selectedEmoji,
-            onEmojiSelected: _onEmojiSelected,
-          ),
-          const SizedBox(height: AppSpacing.md),
-          Text(
-            'Time of day',
-            style: AppTextStyles.titleMedium.copyWith(
-              color: AppColors.ink2,
-            ),
-          ),
-          const SizedBox(height: AppSpacing.sm),
-          _TimeOfDayChips(
-            selectedTime: _selectedTimeOfDay,
-            onSelected: _onTimeSelected,
-          ),
-          const SizedBox(height: AppSpacing.md),
-          if (goals.isNotEmpty)
-            _GoalDropdown(
-              goals: goals,
-              selectedGoalId: _selectedGoalId,
-              onChanged: _onGoalSelected,
-            ),
-          if (goals.isNotEmpty) const SizedBox(height: AppSpacing.lg),
-          _SubmitButton(
-            onPressed: _isSubmitting ? null : _onSubmit,
-          ),
-        ],
+        ),
       ),
     );
   }
@@ -332,32 +361,50 @@ class _GoalDropdown extends StatelessWidget {
   void _openDropdown(BuildContext context) {
     showModalBottomSheet(
       context: context,
-      builder: (context) => Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          ListTile(
-            title: Text(
-              'No goal',
-              style: AppTextStyles.bodyLarge.copyWith(color: AppColors.ink),
+      backgroundColor: AppColors.paper,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(AppBorderRadius.rLg),
+        ),
+      ),
+      builder: (context) => SafeArea(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              width: 32,
+              height: 3,
+              margin: const EdgeInsets.symmetric(vertical: AppSpacing.md),
+              decoration: BoxDecoration(
+                color: AppColors.line2,
+                borderRadius: BorderRadius.circular(AppBorderRadius.rFull),
+              ),
             ),
-            onTap: () {
-              onChanged(null);
-              Navigator.pop(context);
-            },
-          ),
-          ...goals.map((goal) {
-            return ListTile(
+            ListTile(
               title: Text(
-                goal.name,
-                style: AppTextStyles.bodyLarge.copyWith(color: AppColors.ink),
+                'No goal',
+                style: AppTextStyles.bodyLarge.copyWith(color: AppColors.ink3),
               ),
               onTap: () {
-                onChanged(goal.id);
+                onChanged(null);
                 Navigator.pop(context);
               },
-            );
-          }),
-        ],
+            ),
+            ...goals.map((goal) {
+              return ListTile(
+                title: Text(
+                  goal.name,
+                  style: AppTextStyles.bodyLarge.copyWith(color: AppColors.ink),
+                ),
+                onTap: () {
+                  onChanged(goal.id);
+                  Navigator.pop(context);
+                },
+              );
+            }),
+            const SizedBox(height: AppSpacing.md),
+          ],
+        ),
       ),
     );
   }
@@ -368,9 +415,13 @@ class _GoalDropdown extends StatelessWidget {
 // ---------------------------------------------------------------------------
 
 class _SubmitButton extends StatelessWidget {
-  const _SubmitButton({required this.onPressed});
+  const _SubmitButton({
+    required this.onPressed,
+    this.isSubmitting = false,
+  });
 
   final VoidCallback? onPressed;
+  final bool isSubmitting;
 
   @override
   Widget build(BuildContext context) {
@@ -384,13 +435,24 @@ class _SubmitButton extends StatelessWidget {
           color: onPressed == null ? AppColors.ink4 : AppColors.ink,
           borderRadius: AppBorderRadius.small,
         ),
-        child: Text(
-          'Create Habit',
-          style: AppTextStyles.labelLarge.copyWith(
-            color: AppColors.paper,
-          ),
-          textAlign: TextAlign.center,
-        ),
+        child: isSubmitting
+            ? const Center(
+                child: SizedBox(
+                  width: 20,
+                  height: 20,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 2,
+                    color: AppColors.paper,
+                  ),
+                ),
+              )
+            : Text(
+                'Create Habit',
+                style: AppTextStyles.labelLarge.copyWith(
+                  color: AppColors.paper,
+                ),
+                textAlign: TextAlign.center,
+              ),
       ),
     );
   }

@@ -19,15 +19,6 @@ class AppTextStyles {
     height: 1.15,
   );
 
-  /// Highlight text — Fraunces 300 italic, 26sp
-  static const TextStyle displayMedium = TextStyle(
-    fontFamily: _fraunces,
-    fontWeight: FontWeight.w300,
-    fontStyle: FontStyle.italic,
-    fontSize: 26,
-    height: 1.15,
-  );
-
   /// Modal titles, section headers — Fraunces 400, 22sp
   static const TextStyle headlineLarge = TextStyle(
     fontFamily: _fraunces,

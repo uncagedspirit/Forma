@@ -124,15 +124,16 @@ class HabitRow extends ConsumerWidget {
       streak: streak,
       isVoid: isVoid,
       heatMap: heatMap,
-      onComplete: () => _handleComplete(ref, selectedDate),
+      onToggle: () => _handleToggle(ref, selectedDate),
       onLongPress: () => _showOptionsBottomSheet(context, ref),
     );
   }
 
-  void _handleComplete(WidgetRef ref, DateTime selectedDate) {
-    ref.read(habitCompletionProvider.notifier).complete(
+  void _handleToggle(WidgetRef ref, DateTime selectedDate) {
+    ref.read(habitCompletionProvider.notifier).toggle(
           habitWithStatus.habit.id,
           selectedDate,
+          isCompleted: habitWithStatus.isCompleted,
         );
   }
 
@@ -156,7 +157,7 @@ class _HabitRowBody extends StatelessWidget {
     required this.streak,
     required this.isVoid,
     required this.heatMap,
-    required this.onComplete,
+    required this.onToggle,
     required this.onLongPress,
   });
 
@@ -164,7 +165,7 @@ class _HabitRowBody extends StatelessWidget {
   final int streak;
   final bool isVoid;
   final List<bool> heatMap;
-  final VoidCallback onComplete;
+  final VoidCallback onToggle;
   final VoidCallback onLongPress;
 
   @override
@@ -258,12 +259,12 @@ class _HabitRowBody extends StatelessWidget {
             const SizedBox(width: AppSpacing.sm),
             Semantics(
               label: isCompleted
-                  ? 'Habit ${habit.name} completed'
+                  ? 'Tap to uncheck habit ${habit.name}'
                   : 'Complete habit ${habit.name}',
               button: true,
               child: _CheckButton(
                 isCompleted: isCompleted,
-                onTap: isCompleted ? null : onComplete,
+                onTap: onToggle,
               ),
             ),
           ],
@@ -322,14 +323,17 @@ class _CheckButtonState extends State<_CheckButton>
   void _onTap() {
     if (widget.onTap == null) return;
 
-    final renderBox = context.findRenderObject() as RenderBox?;
-    if (renderBox != null && renderBox.hasSize) {
-      final offset = renderBox.localToGlobal(Offset.zero);
-      final center = offset.translate(
-        renderBox.size.width / 2,
-        renderBox.size.height / 2,
-      );
-      ConfettiOverlay.show(context, position: center);
+    // Only show confetti when completing (not unchecking)
+    if (!widget.isCompleted) {
+      final renderBox = context.findRenderObject() as RenderBox?;
+      if (renderBox != null && renderBox.hasSize) {
+        final offset = renderBox.localToGlobal(Offset.zero);
+        final center = offset.translate(
+          renderBox.size.width / 2,
+          renderBox.size.height / 2,
+        );
+        ConfettiOverlay.show(context, position: center);
+      }
     }
 
     _controller.forward(from: 0).then((_) {

@@ -1,9 +1,7 @@
-import 'package:equatable/equatable.dart';
-
 /// Goal entity representing a user's goal.
 ///
 /// This is a pure Dart class with no Flutter or Hive dependencies.
-class Goal extends Equatable {
+class Goal {
   const Goal({
     required this.id,
     required this.name,
@@ -39,12 +37,17 @@ class Goal extends Equatable {
   }
 
   @override
-  List<Object?> get props => [
-    id,
-    name,
-    color,
-    sortOrder,
-    createdAt,
-    isArchived,
-  ];
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Goal &&
+          runtimeType == other.runtimeType &&
+          id == other.id &&
+          name == other.name &&
+          color == other.color &&
+          sortOrder == other.sortOrder &&
+          createdAt == other.createdAt &&
+          isArchived == other.isArchived;
+
+  @override
+  int get hashCode => Object.hash(id, name, color, sortOrder, createdAt, isArchived);
 }

@@ -5,13 +5,12 @@ import 'package:forma/core/constants/app_colors.dart';
 import 'package:forma/core/constants/app_durations.dart';
 import 'package:forma/core/constants/app_spacing.dart';
 import 'package:forma/core/constants/app_text_styles.dart';
-import 'package:forma/core/router/app_router.dart';
 import 'package:forma/features/goals/domain/entities/goal.dart';
 import 'package:forma/features/habits/domain/usecases/get_habits_for_date.dart';
 import 'package:forma/features/habits/presentation/providers/habit_completion_provider.dart';
 import 'package:forma/features/habits/presentation/providers/habits_provider.dart';
 import 'package:forma/features/home/presentation/providers/selected_date_provider.dart';
-import 'package:go_router/go_router.dart';
+import 'package:forma/shared/widgets/add_flow_sheet.dart';
 import 'package:logging/logging.dart';
 
 // ---------------------------------------------------------------------------
@@ -256,14 +255,13 @@ class _GoalHabitRow extends ConsumerWidget {
     final selectedDate = ref.watch(selectedDateProvider);
 
     return InkWell(
-      onTap: isCompleted
-          ? null
-          : () {
-              ref.read(habitCompletionProvider.notifier).complete(
-                    habit.id,
-                    selectedDate,
-                  );
-            },
+      onTap: () {
+        ref.read(habitCompletionProvider.notifier).toggle(
+              habit.id,
+              selectedDate,
+              isCompleted: isCompleted,
+            );
+      },
       child: Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: AppSpacing.md,
@@ -352,7 +350,7 @@ class _AddHabitRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => context.push(addHabitRoute),
+      onTap: () => showAddHabitSheet(context, goalId: goalId),
       child: Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: AppSpacing.md,

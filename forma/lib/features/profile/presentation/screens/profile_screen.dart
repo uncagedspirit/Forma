@@ -4,38 +4,32 @@ import 'package:forma/core/constants/app_border_radius.dart';
 import 'package:forma/core/constants/app_colors.dart';
 import 'package:forma/core/constants/app_spacing.dart';
 import 'package:forma/core/constants/app_text_styles.dart';
-import 'package:forma/core/router/app_router.dart';
-import 'package:forma/features/premium/presentation/providers/premium_status_provider.dart';
+import 'package:forma/core/storage/hive_service.dart';
+import 'package:forma/core/storage/user_preferences_model.dart';
 import 'package:forma/features/profile/presentation/providers/user_preferences_provider.dart';
 import 'package:forma/features/stats/presentation/providers/stats_provider.dart';
 import 'package:forma/shared/widgets/forma_modal_sheet.dart';
+import 'package:forma/shared/widgets/forma_text_field.dart';
 import 'package:forma/shared/widgets/inline_error.dart';
-import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+import 'package:logging/logging.dart';
 
-/// The profile screen for the Forma habit tracker app.
-///
-/// Displays the user's avatar, name, membership date, streak,
-/// a premium upsell block, and settings rows.
+/// Clean profile screen — name, streak, member since, reminders toggle.
+/// Premium and other clutter removed.
 class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final prefs = ref.watch(userPreferencesProvider);
-    final isPremium = ref.watch(premiumStatusProvider);
     final statsAsync = ref.watch(statsProvider);
-
-    final hasStatsError = statsAsync.hasError;
-    final statsErrorMessage =
-        statsAsync.error?.toString() ?? 'Failed to load stats';
 
     final name = prefs?.name ?? '';
     final firstLetter = name.isNotEmpty ? name[0].toUpperCase() : '?';
     final joinDate = prefs?.joinDate;
     final memberSince = joinDate != null
         ? 'Member since ${DateFormat('MMMM yyyy').format(joinDate)}'
-        : 'Member since recently';
+        : '';
     final streak = statsAsync.valueOrNull?.bestStreak ?? 0;
 
     return Scaffold(
@@ -45,31 +39,43 @@ class ProfileScreen extends ConsumerWidget {
             horizontal: AppSpacing.screenHorizontal,
           ),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const SizedBox(height: AppSpacing.contentTop),
+
+              // ── Header ──
               _ProfileHeader(
                 firstLetter: firstLetter,
-                name: name,
+                name: name.isEmpty ? 'You' : name,
                 memberSince: memberSince,
                 streak: streak,
               ),
               const SizedBox(height: AppSpacing.xl),
-              isPremium ? const _PremiumBadge() : const _PremiumCard(),
-              const SizedBox(height: AppSpacing.xl),
-              if (hasStatsError) ...[
+
+              // ── Stats error (non-fatal) ──
+              if (statsAsync.hasError) ...[
                 InlineError(
-                  message: statsErrorMessage,
+                  message: statsAsync.error?.toString() ?? 'Failed to load stats',
                   onRetry: () => ref.invalidate(statsProvider),
                 ),
                 const SizedBox(height: AppSpacing.lg),
               ],
-              _SettingsSection(
-                onRemindersTap: () => _showNotificationSettingsSheet(context),
-                onAppearanceTap: () {},
-                onExportTap: () {},
-                onBackupTap: () {},
+
+              // ── Settings ──
+              _SectionLabel(label: 'Settings'),
+              const SizedBox(height: AppSpacing.sm),
+              _SettingsRow(
+                icon: Icons.person_outline,
+                title: 'Edit name',
+                onTap: () => _showEditNameSheet(context, ref, name),
               ),
-              const SizedBox(height: AppSpacing.xl),
+              const Divider(height: 1, color: AppColors.line),
+              _SettingsRow(
+                icon: Icons.notifications_none,
+                title: 'Reminders',
+                onTap: () => _showRemindersSheet(context),
+              ),
+              const SizedBox(height: AppSpacing.xxl),
             ],
           ),
         ),
@@ -77,12 +83,17 @@ class ProfileScreen extends ConsumerWidget {
     );
   }
 
-  void _showNotificationSettingsSheet(BuildContext context) {
+  void _showEditNameSheet(BuildContext context, WidgetRef ref, String currentName) {
     showFormaModalSheet<void>(
       context: context,
-      builder: (BuildContext context) {
-        return const _NotificationSettingsSheet();
-      },
+      builder: (context) => _EditNameSheet(currentName: currentName, ref: ref),
+    );
+  }
+
+  void _showRemindersSheet(BuildContext context) {
+    showFormaModalSheet<void>(
+      context: context,
+      builder: (context) => const _RemindersSheet(),
     );
   }
 }
@@ -129,165 +140,54 @@ class _ProfileHeader extends StatelessWidget {
         ),
         const SizedBox(height: AppSpacing.md),
         Text(
-          name.isEmpty ? 'Guest' : name,
+          name,
           style: AppTextStyles.titleLarge.copyWith(color: AppColors.ink),
         ),
-        const SizedBox(height: AppSpacing.xs),
-        Text(
-          memberSince,
-          style: AppTextStyles.bodyMedium.copyWith(color: AppColors.ink3),
-        ),
-        const SizedBox(height: AppSpacing.sm),
-        Text(
-          '$streak day streak 🔥',
-          style: AppTextStyles.titleMedium.copyWith(color: AppColors.ink2),
-        ),
-      ],
-    );
-  }
-}
-
-// ---------------------------------------------------------------------------
-// Premium card (non-premium)
-// ---------------------------------------------------------------------------
-
-class _PremiumCard extends StatelessWidget {
-  const _PremiumCard();
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(AppSpacing.lg),
-      decoration: BoxDecoration(
-        color: AppColors.paper2,
-        borderRadius: AppBorderRadius.regular,
-        border: Border.all(color: AppColors.gold),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Unlock premium features',
-            style: AppTextStyles.headlineMedium.copyWith(color: AppColors.ink),
-          ),
+        if (memberSince.isNotEmpty) ...[
           const SizedBox(height: AppSpacing.xs),
           Text(
-            'Get insights, backups, and more',
-            style: AppTextStyles.bodyMedium.copyWith(color: AppColors.ink2),
+            memberSince,
+            style: AppTextStyles.bodyMedium.copyWith(color: AppColors.ink3),
           ),
-          const SizedBox(height: AppSpacing.md),
-          GestureDetector(
-            onTap: () => context.push(paywallRoute),
-            child: Container(
-              width: double.infinity,
-              padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
-              decoration: BoxDecoration(
-                color: AppColors.terra,
-                borderRadius: AppBorderRadius.small,
-              ),
-              child: Center(
-                child: Text(
-                  'Upgrade',
-                  style: AppTextStyles.labelLarge.copyWith(
-                    color: AppColors.paper,
-                  ),
-                ),
-              ),
+        ],
+        if (streak > 0) ...[
+          const SizedBox(height: AppSpacing.sm),
+          Container(
+            padding: const EdgeInsets.symmetric(
+              horizontal: AppSpacing.md,
+              vertical: AppSpacing.xs,
+            ),
+            decoration: BoxDecoration(
+              color: AppColors.sageDim,
+              borderRadius: AppBorderRadius.full,
+            ),
+            child: Text(
+              '🔥 $streak day streak',
+              style: AppTextStyles.labelLarge.copyWith(color: AppColors.sage),
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-// ---------------------------------------------------------------------------
-// Premium badge (premium)
-// ---------------------------------------------------------------------------
-
-class _PremiumBadge extends StatelessWidget {
-  const _PremiumBadge();
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.symmetric(
-        vertical: AppSpacing.md,
-        horizontal: AppSpacing.lg,
-      ),
-      decoration: BoxDecoration(
-        color: AppColors.sageDim,
-        borderRadius: AppBorderRadius.regular,
-        border: Border.all(color: AppColors.sageMid),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Text(
-            '◈',
-            style: TextStyle(
-              fontSize: 14,
-              color: AppColors.sage,
-            ),
-          ),
-          const SizedBox(width: AppSpacing.sm),
-          Text(
-            'Premium member',
-            style: AppTextStyles.titleMedium.copyWith(color: AppColors.sage),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-// ---------------------------------------------------------------------------
-// Settings section
-// ---------------------------------------------------------------------------
-
-class _SettingsSection extends StatelessWidget {
-  const _SettingsSection({
-    required this.onRemindersTap,
-    required this.onAppearanceTap,
-    required this.onExportTap,
-    required this.onBackupTap,
-  });
-
-  final VoidCallback onRemindersTap;
-  final VoidCallback onAppearanceTap;
-  final VoidCallback onExportTap;
-  final VoidCallback onBackupTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        _SettingsRow(
-          icon: '⏰',
-          title: 'Reminders',
-          onTap: onRemindersTap,
-        ),
-        const Divider(height: 1, color: AppColors.line),
-        _SettingsRow(
-          icon: '◈',
-          title: 'Appearance',
-          onTap: onAppearanceTap,
-        ),
-        const Divider(height: 1, color: AppColors.line),
-        _SettingsRow(
-          icon: '⤓',
-          title: 'Export',
-          onTap: onExportTap,
-        ),
-        const Divider(height: 1, color: AppColors.line),
-        _SettingsRow(
-          icon: '▣',
-          title: 'Backup',
-          onTap: onBackupTap,
-        ),
       ],
+    );
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Section label
+// ---------------------------------------------------------------------------
+
+class _SectionLabel extends StatelessWidget {
+  const _SectionLabel({required this.label});
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      label.toUpperCase(),
+      style: AppTextStyles.labelSmall.copyWith(
+        color: AppColors.ink3,
+        letterSpacing: 1.2,
+      ),
     );
   }
 }
@@ -303,39 +203,27 @@ class _SettingsRow extends StatelessWidget {
     required this.onTap,
   });
 
-  final String icon;
+  final IconData icon;
   final String title;
   final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
       onTap: onTap,
-      behavior: HitTestBehavior.opaque,
-      child: Container(
+      child: Padding(
         padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
         child: Row(
           children: [
-            Text(
-              icon,
-              style: const TextStyle(fontSize: 18),
-            ),
+            Icon(icon, size: 20, color: AppColors.ink2),
             const SizedBox(width: AppSpacing.sm),
             Expanded(
               child: Text(
                 title,
-                style: AppTextStyles.titleMedium.copyWith(
-                  color: AppColors.ink,
-                ),
+                style: AppTextStyles.titleMedium.copyWith(color: AppColors.ink),
               ),
             ),
-            const Text(
-              '›',
-              style: TextStyle(
-                fontSize: 18,
-                color: AppColors.ink3,
-              ),
-            ),
+            const Icon(Icons.chevron_right, size: 20, color: AppColors.ink3),
           ],
         ),
       ),
@@ -344,11 +232,107 @@ class _SettingsRow extends StatelessWidget {
 }
 
 // ---------------------------------------------------------------------------
-// Notification settings sheet (v2 placeholder)
+// Edit name sheet
 // ---------------------------------------------------------------------------
 
-class _NotificationSettingsSheet extends StatelessWidget {
-  const _NotificationSettingsSheet();
+class _EditNameSheet extends StatefulWidget {
+  const _EditNameSheet({required this.currentName, required this.ref});
+  final String currentName;
+  final WidgetRef ref;
+
+  @override
+  State<_EditNameSheet> createState() => _EditNameSheetState();
+}
+
+class _EditNameSheetState extends State<_EditNameSheet> {
+  static final _logger = Logger('_EditNameSheet');
+  late final TextEditingController _ctrl;
+  bool _saving = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _ctrl = TextEditingController(text: widget.currentName == 'You' ? '' : widget.currentName);
+  }
+
+  @override
+  void dispose() {
+    _ctrl.dispose();
+    super.dispose();
+  }
+
+  Future<void> _save() async {
+    FocusScope.of(context).unfocus();
+    setState(() => _saving = true);
+    try {
+      final prefs = HiveService.prefsBox.get('user');
+      final updated = (prefs ?? UserPreferencesModel(joinDate: DateTime.now()))
+          .copyWith(name: _ctrl.text.trim());
+      await HiveService.prefsBox.put('user', updated);
+      widget.ref.invalidate(userPreferencesProvider);
+      if (mounted) Navigator.of(context).pop();
+    } catch (e, st) {
+      _logger.severe('Failed to save name', e, st);
+    } finally {
+      if (mounted) setState(() => _saving = false);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Text(
+          'Your name',
+          style: AppTextStyles.headlineLarge.copyWith(color: AppColors.ink),
+        ),
+        const SizedBox(height: AppSpacing.lg),
+        FormaTextField(
+          controller: _ctrl,
+          placeholder: 'Enter your name',
+          autofocus: true,
+          textInputAction: TextInputAction.done,
+          onSubmitted: (_) => _save(),
+        ),
+        const SizedBox(height: AppSpacing.lg),
+        ElevatedButton(
+          onPressed: _saving ? null : _save,
+          style: ElevatedButton.styleFrom(
+            backgroundColor: AppColors.ink,
+            foregroundColor: AppColors.paper,
+            shape: RoundedRectangleBorder(
+              borderRadius: AppBorderRadius.small,
+            ),
+            elevation: 0,
+            padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
+          ),
+          child: _saving
+              ? const SizedBox(
+                  width: 18,
+                  height: 18,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 2,
+                    color: AppColors.paper,
+                  ),
+                )
+              : Text(
+                  'Save',
+                  style: AppTextStyles.labelLarge.copyWith(color: AppColors.paper),
+                ),
+        ),
+      ],
+    );
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Reminders sheet (placeholder for v2)
+// ---------------------------------------------------------------------------
+
+class _RemindersSheet extends StatelessWidget {
+  const _RemindersSheet();
 
   @override
   Widget build(BuildContext context) {
@@ -357,13 +341,13 @@ class _NotificationSettingsSheet extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Notification Settings',
+          'Reminders',
           style: AppTextStyles.headlineLarge.copyWith(color: AppColors.ink),
         ),
-        const SizedBox(height: AppSpacing.lg),
+        const SizedBox(height: AppSpacing.md),
         Text(
-          'Coming in v2',
-          style: AppTextStyles.bodyMedium.copyWith(color: AppColors.ink3),
+          'Per-habit reminder times can be set when creating or editing each habit.',
+          style: AppTextStyles.bodyLarge.copyWith(color: AppColors.ink2),
         ),
         const SizedBox(height: AppSpacing.lg),
       ],

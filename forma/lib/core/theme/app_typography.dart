@@ -11,7 +11,6 @@ class AppTypography {
   /// Returns the light theme TextTheme.
   static TextTheme get textTheme => const TextTheme(
     displayLarge: AppTextStyles.displayLarge,
-    displayMedium: AppTextStyles.displayMedium,
     headlineLarge: AppTextStyles.headlineLarge,
     headlineMedium: AppTextStyles.headlineMedium,
     titleLarge: AppTextStyles.titleLarge,

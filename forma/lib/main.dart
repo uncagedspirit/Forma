@@ -115,7 +115,10 @@ class FormaApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: AppTheme.light,
       darkTheme: AppTheme.dark,
-      themeMode: ThemeMode.system,
+      // Most surfaces are authored against the light paper palette.
+      // Keep the UI in the intended theme until dark-mode screens are
+      // fully tokenized and contrast-safe.
+      themeMode: ThemeMode.light,
       routerConfig: appRouter,
     );
   }

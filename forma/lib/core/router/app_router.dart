@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:forma/core/storage/hive_service.dart';
+import 'package:forma/features/calendar/presentation/screens/calendar_screen.dart';
 import 'package:forma/features/goals/presentation/screens/add_goal_screen.dart';
 import 'package:forma/features/goals/presentation/screens/goal_detail_screen.dart';
+import 'package:forma/features/goals/presentation/screens/goals_screen.dart';
 import 'package:forma/features/habits/presentation/screens/add_habit_screen.dart';
 import 'package:forma/features/habits/presentation/screens/habit_detail_screen.dart';
 import 'package:forma/features/home/presentation/screens/home_screen.dart';
+import 'package:forma/features/insights/presentation/screens/insights_screen.dart';
 import 'package:forma/features/onboarding/presentation/screens/onboarding_screen.dart';
-import 'package:forma/features/premium/presentation/screens/paywall_screen.dart';
 import 'package:forma/features/profile/presentation/screens/profile_screen.dart';
-import 'package:forma/features/stats/presentation/screens/stats_screen.dart';
 import 'package:forma/shared/widgets/forma_bottom_nav.dart';
 import 'package:go_router/go_router.dart';
 
@@ -16,113 +17,69 @@ import 'package:go_router/go_router.dart';
 // Route constants
 // ---------------------------------------------------------------------------
 
-/// Home tab route.
-const String homeRoute = '/';
-
-/// Stats tab route.
-const String statsRoute = '/stats';
-
-/// Profile tab route.
-const String profileRoute = '/profile';
-
-/// Add habit route.
-const String addHabitRoute = '/habits/add';
-
-/// Add goal route.
-const String addGoalRoute = '/goals/add';
-
-/// Habit detail route with path parameter `id`.
+const String homeRoute        = '/';
+const String goalsRoute       = '/goals';
+const String calendarRoute    = '/calendar';
+const String insightsRoute    = '/insights';
+const String profileRoute     = '/profile';
+const String addHabitRoute    = '/habits/add';
+const String addGoalRoute     = '/goals/add';
 const String habitDetailRoute = '/habits/:id';
-
-/// Goal detail route with path parameter `id`.
-const String goalDetailRoute = '/goals/:id';
-
-/// Onboarding route.
-const String onboardingRoute = '/onboarding';
-
-/// Premium / paywall route.
-const String paywallRoute = '/premium';
+const String goalDetailRoute  = '/goals/:id';
+const String onboardingRoute  = '/onboarding';
 
 // ---------------------------------------------------------------------------
 // Router
 // ---------------------------------------------------------------------------
 
-/// The global GoRouter instance for Forma.
-///
-/// Redirects un-onboarded users to `onboardingRoute` regardless of the
-  /// requested location. The shell routes (home, stats, profile) are wrapped
-  /// in a ShellRoute that provides the persistent bottom navigation via
-  /// FormaBottomNav.
 final GoRouter appRouter = GoRouter(
   initialLocation: homeRoute,
   redirect: (BuildContext context, GoRouterState state) {
-    // Avoid infinite redirect loops when already on onboarding.
-    if (state.uri.path == onboardingRoute) {
-      return null;
-    }
-
+    if (state.uri.path == onboardingRoute) return null;
     final prefs = HiveService.prefsBox.get('user');
     final hasCompletedOnboarding = prefs?.hasCompletedOnboarding ?? false;
-
-    if (!hasCompletedOnboarding) {
-      return onboardingRoute;
-    }
-
+    if (!hasCompletedOnboarding) return onboardingRoute;
     return null;
   },
   routes: <RouteBase>[
     ShellRoute(
-      builder: (
-        BuildContext context,
-        GoRouterState state,
-        Widget child,
-      ) {
+      builder: (BuildContext context, GoRouterState state, Widget child) {
         return FormaBottomNav(child: child);
       },
       routes: <RouteBase>[
         GoRoute(
           path: homeRoute,
-          builder: (BuildContext context, GoRouterState state) {
-            return const HomeScreen();
-          },
+          builder: (_, __) => const HomeScreen(),
         ),
         GoRoute(
-          path: statsRoute,
-          builder: (BuildContext context, GoRouterState state) {
-            return const StatsScreen();
-          },
+          path: goalsRoute,
+          builder: (_, __) => const GoalsScreen(),
+        ),
+        GoRoute(
+          path: calendarRoute,
+          builder: (_, __) => const CalendarScreen(),
+        ),
+        GoRoute(
+          path: insightsRoute,
+          builder: (_, __) => const InsightsScreen(),
         ),
         GoRoute(
           path: profileRoute,
-          builder: (BuildContext context, GoRouterState state) {
-            return const ProfileScreen();
-          },
+          builder: (_, __) => const ProfileScreen(),
         ),
       ],
     ),
     GoRoute(
       path: onboardingRoute,
-      builder: (BuildContext context, GoRouterState state) {
-        return const OnboardingScreen();
-      },
-    ),
-    GoRoute(
-      path: paywallRoute,
-      builder: (BuildContext context, GoRouterState state) {
-        return const PaywallScreen();
-      },
+      builder: (_, __) => const OnboardingScreen(),
     ),
     GoRoute(
       path: addHabitRoute,
-      builder: (BuildContext context, GoRouterState state) {
-        return const AddHabitScreen();
-      },
+      builder: (_, __) => const AddHabitScreen(),
     ),
     GoRoute(
       path: addGoalRoute,
-      builder: (BuildContext context, GoRouterState state) {
-        return const AddGoalScreen();
-      },
+      builder: (_, __) => const AddGoalScreen(),
     ),
     GoRoute(
       path: habitDetailRoute,
